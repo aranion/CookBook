@@ -4,6 +4,7 @@
   "private": true,
   "main": "src/index.tsx",
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
     "@mui/icons-material": "^5.2.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^11.2.7",
