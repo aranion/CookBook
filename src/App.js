@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Сделайте свою тестовую ветку: <code>git branch testing_ИМЯ</code>
         </p>
