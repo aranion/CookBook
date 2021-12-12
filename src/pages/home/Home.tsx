@@ -1,5 +1,5 @@
 import { Header } from "../../components/Header";
-import { Recipe } from "../../components/RandomRecipe";
+import { Recipe } from "../../components/Recipe";
 import { SmallRecipe } from "../../components/smallRecipe";
 import "./home.scss";
 
