@@ -1,14 +1,14 @@
-import "./random-recipe.scss";
+import "./recipe.scss";
 import image from "../../assets/image2.png";
 import PrintIcon from "@mui/icons-material/Print";
 
-export const RandomRecipe = () => {
+export const Recipe = () => {
   const author = "Cooker";
 
   return (
-    <div className="random-recipe-block">
-      <h3 className="random-recipe-block__header">Случайный рецепт</h3>
-      <div className="random-recipe-block__info">
+    <div className="recipe-block">
+      <h3 className="recipe-block__header">Случайный рецепт</h3>
+      <div className="recipe-block__info">
         <img src={image} alt="" />
         <div className="info-container">
           <div className="info-container__list">

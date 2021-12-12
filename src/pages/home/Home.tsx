@@ -1,6 +1,6 @@
 import { Header } from "../../components/Header";
-import { RandomRecipe } from "../../components/RandomRecipe";
-import { Recipe } from "../../components/Recipe";
+import { Recipe } from "../../components/RandomRecipe";
+import { SmallRecipe } from "../../components/smallRecipe";
 import "./home.scss";
 
 const Home = () => {
@@ -24,13 +24,13 @@ const Home = () => {
         </ul>
       </nav>
       <div className="center">
-        <RandomRecipe />
+        <Recipe />
         <div className="home__last-recipes">
           <h2>Последние рецепты</h2>
           <div className="last-recipes__container">
-            <Recipe />
-            <Recipe />
-            <Recipe />
+            <SmallRecipe />
+            <SmallRecipe />
+            <SmallRecipe />
           </div>
         </div>
       </div>

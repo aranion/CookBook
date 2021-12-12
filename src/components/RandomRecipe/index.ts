@@ -1,1 +1,1 @@
-export { RandomRecipe } from "./RandomRecipe";
+export { Recipe } from "./Recipe";
