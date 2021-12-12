@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import Home from "../pages/home/Home";
+import Home from "../pages/Home/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 

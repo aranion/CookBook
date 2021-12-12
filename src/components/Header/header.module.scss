@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eaa31a;
+  height: 84px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.headerName {
+  width: 165px;
+  height: 42px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 42px;
+  color: #000000;
+  padding-left: 53px;
+}

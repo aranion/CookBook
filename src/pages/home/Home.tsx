@@ -1,33 +1,49 @@
-import { Header } from "../../components/Header";
-import { Recipe } from "../../components/Recipe";
-import { SmallRecipe } from "../../components/smallRecipe";
-import "./home.scss";
+import { Link } from "react-router-dom";
+import { Header } from "../../components";
+import { Recipe } from "../../components";
+import { SmallRecipe } from "../../components";
+import styles from "./home.module.scss";
+
+// Временный массив для отрисовки навигации
+const links = [
+  {
+    title: 'Главная',
+    URL: '/'
+  },
+  {
+    title: 'Все рецепты',
+    URL: '/Recipes'
+  },
+  {
+    title: 'Моя кулинарная книга',
+    URL: '/MyCookBook'
+  },
+  {
+    title: 'Добавить рецепт',
+    URL: '/AddRecipe'
+  },
+];
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className={styles.home}>
       <Header />
-      <nav className="menu">
+      <nav className={styles.menu}>
         <ul>
-          <li>
-            <a href="#">Главная</a>
-          </li>
-          <li>
-            <a href="#">Все рецепты</a>
-          </li>
-          <li>
-            <a href="#">Моя кулинарная книга</a>
-          </li>
-          <li>
-            <a href="#">Добавить рецепт</a>
-          </li>
+          {links.map((el) => {
+            return (
+              <li key={el.URL}>
+                <Link  to={el.URL}>{el.title}</Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
-      <div className="center">
+      <div className={styles.center}>
         <Recipe />
-        <div className="home__last-recipes">
+        <div className={styles['home__last-recipes']}>
           <h2>Последние рецепты</h2>
-          <div className="last-recipes__container">
+          <div className={styles['last-recipes__container']}>
             <SmallRecipe />
             <SmallRecipe />
             <SmallRecipe />
