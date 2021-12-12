@@ -2,6 +2,7 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
@@ -10,6 +11,10 @@ a {
   cursor: pointer;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
+}
+button {
+  cursor: pointer;
 }
