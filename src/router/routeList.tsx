@@ -2,6 +2,8 @@ import { ReactElement } from "react";
 import Home from "../pages/Home/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
+import MyCookbook from "pages/Cookbook";
+import RecipeAddForm from "pages/RecipeAddForm";
 
 export interface IRoute {
   title: string;
@@ -32,6 +34,20 @@ export const routes: IRoute[] = [
     component: <NotFound />,
     private: false,
     menu: false,
+  },
+  {
+    title: "Моя кулинарная книга",
+    path: "/cookbook",
+    component: <MyCookbook />,
+    private: true,
+    menu: true,
+  },
+  {
+    title: "Создать рецепт",
+    path: "/recipeaddform",
+    component: <RecipeAddForm />,
+    private: true,
+    menu: true,
   },
   // {
   //     title: "Авторизация",

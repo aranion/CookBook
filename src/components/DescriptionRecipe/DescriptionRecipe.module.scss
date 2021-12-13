@@ -1,0 +1,160 @@
+@import '../../constants/_vars.scss';
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.35);
+  animation-name: appear;
+  animation-duration: 300ms;
+
+  &_dialog {
+    width: 100%;
+    max-width: 839px;
+    min-height: 718px;
+    background: $backgroundDefault;
+    position: relative;
+    margin: 0 20px;
+    padding: 16px;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: $boxShadovDefault, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slide-in;
+    animation-duration: 0.5s;
+    border-radius: $borderRadiusDefault;
+  }
+
+  &_header,
+  &_footer {
+    display: flex;
+    align-items: center;
+  }
+
+  &_header {
+    justify-content: space-between;
+  }
+
+  &_footer {
+    justify-content: flex-end;
+    & button {
+      padding: 10px 60px;
+      height: 40px;
+      background: #6E5530;
+      border: none;
+      border-radius: 4px; 
+      color: white;
+    }
+  }
+
+  &_close {
+    cursor: pointer;
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    z-index: 9999;
+  }
+
+  &_body {
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+  }
+
+  &_body__left {
+    width: calc(100% - 580px);
+    padding-left: 44px;
+
+    &-img {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    &-title {
+      margin: 10px 0;
+    }
+  }
+
+  &_body__right{
+    width: 540px;
+    
+    &-title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      & h3 {
+        margin: 0px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 28px;
+      }
+    }
+
+    &-line {
+      width: 100%;
+      margin: 10px 0;
+      border-top: 1px solid #A1A1A1;
+    }
+
+    &-author {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      color: #6E5530;
+    }
+
+    &-process {
+      background-color: white;
+      border: 1px solid black;
+      margin-top: 10px;
+      width: 100%;
+      min-height: 447px;
+      box-sizing: border-box;
+    }
+  }
+  
+  &_title {
+    width: 100%;
+    margin-top: 25px;
+    font-style: normal;
+    font-weight: normal;  
+    position: absolute;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #644838;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slide-in {
+  from {
+    transform: translateY(-150px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

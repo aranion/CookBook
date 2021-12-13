@@ -1,14 +1,16 @@
+@import '../../constants/_vars.scss';
+
 .home {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background: url("../../assets/bg.jpg") repeat center center fixed;
   background-size: cover;
 
   &__last-recipes {
-    background: #f4f4f4;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    height: 320px;
+    background: $backgroundDefault;
+    box-shadow: $boxShadovDefault;
+    border-radius: $borderRadiusDefault;
+    min-height: 320px;
     margin: 0px, auto;
     h2 {
       font-size: 20px;
@@ -28,6 +30,8 @@
   background: #d56600;
   ul {
     padding-top: 6px;
+    display: flex;
+    justify-content: space-evenly;  
   }
   li {
     font-size: 16px;
