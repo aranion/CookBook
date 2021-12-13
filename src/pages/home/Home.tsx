@@ -16,11 +16,11 @@ const links = [
   },
   {
     title: 'Моя кулинарная книга',
-    URL: '/MyCookBook'
+    URL: '/cookbook'
   },
   {
     title: 'Добавить рецепт',
-    URL: '/AddRecipe'
+    URL: '/RecipeAddForm'
   },
 ];
 
