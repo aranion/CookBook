@@ -23,8 +23,8 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
               <PrintIcon />
             </div>
             <ul>
-              {recipe.ingredients.map((item: Ingredients) => (
-                <li>
+              {recipe.ingredients.map((item: Ingredients, index) => (
+                <li key={index}>
                   {item.ingredient} - {item.amount}
                 </li>
               ))}

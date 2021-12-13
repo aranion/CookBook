@@ -77,11 +77,13 @@ export const DescriptionRecipe = (props: DescriptionRecipeProps) => {
             <div>
               <h4 className={styles["modal_body__left-title"]}>Ингридиенты:</h4>
               <ul>
-                {RECIPES_LIST[0].ingredients.map((item: Ingredients) => (
-                  <li>
-                    {item.ingredient} - {item.amount}
-                  </li>
-                ))}
+                {RECIPES_LIST[0].ingredients.map(
+                  (item: Ingredients, index: number) => (
+                    <li key={index}>
+                      {item.ingredient} - {item.amount}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
             <div>
