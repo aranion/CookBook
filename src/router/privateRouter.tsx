@@ -1,6 +1,6 @@
 import {Routes, Route} from "react-router";
 import {routes, IRoute} from './routeList'
-import {LazyComponent} from './lazyComponent'
+// import {LazyComponent} from './lazyComponent'
 
 export const PrivateRouter = () => {
     return (

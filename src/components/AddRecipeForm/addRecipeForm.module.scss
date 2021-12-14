@@ -1,12 +1,15 @@
+@import '../../constants/_vars.scss';
+
 .form {
   margin: 12px auto 0 auto;
   max-width: 839px;
   display: flex;
   flex-direction: column;
-  background-color: #f4f4f4;
-  border-radius: 12px;
+  background-color: $backgroundDefault;
+  border-radius: $borderRadiusDefault;
   padding: 16px;
   position: relative;
+  box-shadow: $boxShadovDefault;
   &__send {
     display: flex;
     justify-content: center;
@@ -49,6 +52,10 @@
    width: 64px;
    height: 64px;
    background-color: #c4c4c4;
+   & img {
+    width: 64px;
+    height: 64px;
+   }
 
   &__container {
     position: absolute;

@@ -3,6 +3,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
 
+interface State {
+  name: string 
+  placeholder: string 
+}
+
 export const IngredientList = () => {
   const [ingredients, setIngredients] = useState([
     { name: "Макароны", placeholder: "Ингредиент 1" },
@@ -14,14 +19,14 @@ export const IngredientList = () => {
       { name: "", placeholder: `Ингредиент ${ingredients.length + 1}` },
     ]);
   };
-  const handleInput = (e) => {
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>)  => {
     const curItem = ingredients.find(
-      (item) => item.placeholder === e.target.placeholder
-    );
-    curItem.name = e.target.value;
+      (item) => item.placeholder === (e.target as HTMLInputElement).placeholder
+    ) as State;
+    curItem.name = (e.target as HTMLInputElement).value;
     setIngredients([...ingredients]);
   };
-  const deleteItem = (val) => {
+  const deleteItem = (val: string) => {
     const arr = ingredients;
     arr.splice(
       arr.findIndex((item) => item.placeholder === val),

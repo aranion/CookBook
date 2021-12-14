@@ -3,7 +3,7 @@ import Home from "../pages/Home/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import MyCookbook from "pages/Cookbook";
-import { AddRecipe } from "pages/AddRecipe/AddRecipe";
+import AddRecipe  from "pages/AddRecipe/AddRecipe";
 
 export interface IRoute {
   title: string;
