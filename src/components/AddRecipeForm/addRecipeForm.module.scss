@@ -1,0 +1,58 @@
+.form {
+  margin: 12px auto 0 auto;
+  max-width: 839px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  &__send {
+    display: flex;
+    justify-content: center;
+  }
+  &__confirm{
+    margin-right: 12px;
+  }
+}
+.title {
+  text-align: center;
+}
+.cooking{
+  display: flex;
+  margin-top: 12px;
+  &__left{
+    flex-basis: 40%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px;
+  }
+  &__right{
+    flex-basis: 60%;
+    padding: 0 12px;
+  }
+  &__heading {
+    margin: 0 0 12px 0;
+    text-align: center;
+  }
+  &__steps {
+    display: flex;
+    flex-direction: column;
+  }
+  &__stepDescription {
+    flex: 2;
+    margin: 0 12px;
+  }
+
+}
+.photoRecipe {
+   width: 64px;
+   height: 64px;
+   background-color: #c4c4c4;
+
+  &__container {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+  }
+ }
