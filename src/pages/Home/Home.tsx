@@ -21,7 +21,7 @@ const links = [
   },
   {
     title: "Добавить рецепт",
-    URL: "/RecipeAddForm",
+    URL: "/AddRecipe",
   },
 ];
 

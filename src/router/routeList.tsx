@@ -3,7 +3,7 @@ import Home from "../pages/Home/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import MyCookbook from "pages/Cookbook";
-import RecipeAddForm from "pages/RecipeAddForm";
+import { AddRecipe } from "pages/AddRecipe/AddRecipe";
 
 export interface IRoute {
   title: string;
@@ -44,8 +44,8 @@ export const routes: IRoute[] = [
   },
   {
     title: "Создать рецепт",
-    path: "/recipeaddform",
-    component: <RecipeAddForm />,
+    path: "/addRecipe",
+    component: <AddRecipe />,
     private: true,
     menu: true,
   },
