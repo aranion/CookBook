@@ -6,3 +6,4 @@ export * from "./Search";
 export * from "./SmallRecipe";
 export * from "./DescriptionRecipe";
 export * from "./StepRecipe";
+export * from "./AddRecipeForm";

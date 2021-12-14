@@ -3,11 +3,12 @@ import style from "./addRecipeForm.module.scss";
 import { StepsList } from "./StepsList";
 import { IngredientList } from "./IngredientList";
 import { useState } from "react";
+import img from "../../assets/recipeImgId00001.jpg";
 
 export const AddRecipeForm = () => {
   const [nameRecipe, setNameRecipe] = useState("");
-  const handleNameRecipe = (e) => {
-    setNameRecipe(e.target.value);
+  const handleNameRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNameRecipe((e.target as HTMLDataElement).value);
   };
   return (
     <div className={style.form}>
@@ -16,7 +17,7 @@ export const AddRecipeForm = () => {
         <Input
           placeholder={"Название рецепта"}
           value={nameRecipe}
-          onChange={(e) => handleNameRecipe(e)}
+          onChange={handleNameRecipe}
           fullWidth={true}
           inputProps={{ "aria-label": "description" }}
         />
@@ -33,7 +34,7 @@ export const AddRecipeForm = () => {
         </div>
         <div className={style.photoRecipe__container}>
           <div className={style.photoRecipe}>
-            <img src="*" alt="recipe" />
+            <img src={img} alt="recipe" />
           </div>
         </div>
         <div className={style.form__send}>

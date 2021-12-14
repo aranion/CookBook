@@ -4,6 +4,11 @@ import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { useState } from "react";
 
+interface State {
+  number: number,
+  text: string,
+};
+
 export const StepsList = () => {
   const [steps, setSteps] = useState([
     { number: 1, text: "" },
@@ -13,7 +18,7 @@ export const StepsList = () => {
   const addStep = () => {
     setSteps([...steps, { number: steps.length + 1, text: "" }]);
   };
-  const deleteStep = (val) => {
+  const deleteStep = (val: number) => {
     const arr = steps;
 
     arr.splice(
@@ -25,10 +30,10 @@ export const StepsList = () => {
     });
     setSteps([...arr]);
   };
-  const handleInput = (e, number) => {
+  const handleInput = (e: Event, number: number) => {
     const arr = steps;
-    const curItem = arr.find((item) => item.number === number);
-    curItem.text = e.target.value;
+    const curItem = arr.find((item) => item.number === number) as State;
+    curItem.text = (e.target as HTMLDataElement).value;
     setSteps([...steps]);
   };
   return (
@@ -49,7 +54,7 @@ export const StepsList = () => {
             <Input
               className={style.cooking__stepDescription}
               value={step.text}
-              onChange={(e) => handleInput(e, step.number)}
+              onChange={((e: Event) => handleInput(e, step.number)) as never }
               placeholder={"Описание"}
               inputProps={{ "aria-label": "description" }}
             />

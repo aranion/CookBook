@@ -1,12 +1,11 @@
-import { Header } from "../../components";
-import { AddRecipeForm } from "../../components/AddRecipeForm";
-import styles from "../Home/home.module.scss";
+import { AddRecipeForm } from "../../components";
 
-export const AddRecipe = () => {
+const AddRecipe = () => {
   return (
-    <div className={styles.home}>
-      <Header />
-      <AddRecipeForm></AddRecipeForm>
+    <div>
+      <AddRecipeForm />
     </div>
   );
 };
+
+export default AddRecipe;
