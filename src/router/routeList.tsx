@@ -2,6 +2,8 @@ import { ReactElement } from "react";
 import Home from "../pages/Home/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
 import MyCookbook from "pages/Cookbook";
 import AddRecipe  from "pages/AddRecipe/AddRecipe";
 
@@ -13,7 +15,7 @@ export interface IRoute {
   menu: boolean;
 }
 
-export const routes: IRoute[] = [
+export const routeList: IRoute[] = [
   {
     title: "Главная",
     path: "/",
@@ -29,13 +31,6 @@ export const routes: IRoute[] = [
     menu: true,
   },
   {
-    title: "Страница не найдена",
-    path: "/*",
-    component: <NotFound />,
-    private: false,
-    menu: false,
-  },
-  {
     title: "Моя кулинарная книга",
     path: "/cookbook",
     component: <MyCookbook />,
@@ -49,18 +44,27 @@ export const routes: IRoute[] = [
     private: true,
     menu: true,
   },
-  // {
-  //     title: "Авторизация",
-  //     path: "/login",
-  //     component: "../pages/Login",
-  //     private: false,
-  //     menu: false,
-  // },
-  // {
-  //     title: "Регистрация",
-  //     path: "/register",
-  //     component: "../pages/Register",
-  //     private: false,
-  //     menu: false,
-  // },
+  {
+      title: "Авторизация",
+      path: "/login",
+      component: <Login />,
+      private: false,
+      menu: false,
+  },
+  {
+      title: "Регистрация",
+      path: "/register",
+      component: <Register />,
+      private: false,
+      menu: false,
+  },
+  {
+    title: "Страница не найдена",
+    path: "/*",
+    component: <NotFound />,
+    private: false,
+    menu: false,
+  },
 ];
+
+export const menuList = routeList.filter(item => item.menu === true)

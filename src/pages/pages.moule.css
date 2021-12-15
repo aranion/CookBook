@@ -1,0 +1,24 @@
+.pages__container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.pages_h1,
+.pages_h2,
+.pages_h2 {
+    font-family: "Roboto Thin", sans-serif;
+}
+
+.pages__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: 20px;
+    /*width: 100%;*/
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 3px 3px 15px #444444;
+}
