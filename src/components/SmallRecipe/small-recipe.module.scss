@@ -1,9 +1,13 @@
 .small-recipe {
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
   h3 {
     font-weight: normal;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 23px;
     text-align: center;
+    margin: 10px auto;
   }
   &__info {
     display: flex;

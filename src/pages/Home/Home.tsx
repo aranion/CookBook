@@ -1,32 +1,32 @@
 import { Recipe } from "../../components";
-import { SmallRecipe } from "../../components";
 import styles from "./home.module.scss";
-import { RECIPES_LIST } from "../../constants/recipesList";
+import { IRecipe } from "models/Recipe";
+import { RootState, useAppSelector } from "store";
+import { LastRecipes } from "components/LastRecipes";
 
 const Home = () => {
+  const {data} = useAppSelector((state:RootState) => state.recipes);
+  
+  function getRandomInt(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+  function lastElement() {
+    let newArr:IRecipe[] = [];
+
+    for (let i = data['length'] - 1; i > data['length'] - 4; i--) {
+      newArr.push(data[i]);
+    }
+    return newArr;
+  }
+
+  const randomRecipe = data[getRandomInt(0, data['length'])];
+  const lastRecipe = lastElement();
   return (
       <div className={styles.center}>
-        <Recipe recipe={RECIPES_LIST[0]} />
-        <div className={styles["home__last-recipes"]}>
-          <h2>Последние рецепты</h2>
-          <div className={styles["last-recipes__container"]}>
-            <SmallRecipe
-              title={"Макарон"}
-              author={"Cooker"}
-              date={"30.11.2021"}
-            />
-            <SmallRecipe
-              title={"Макарон"}
-              author={"Cooker"}
-              date={"30.11.2021"}
-            />
-            <SmallRecipe
-              title={"Макарон"}
-              author={"Cooker"}
-              date={"30.11.2021"}
-            />
-          </div>
-        </div>
+        <Recipe recipe={randomRecipe} />
+        <LastRecipes recipes={lastRecipe}/>
       </div>
   );
 };

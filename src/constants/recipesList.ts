@@ -24,6 +24,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
     author: "Cooker",
     typeOfMeal: "обед",
     cost: 15,
+    dateCreation: '31.11.21'
   },
   {
     id: "01fe",
@@ -47,6 +48,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
     author: "Cooker",
     typeOfMeal: "обед",
     cost: 49,
+    dateCreation: '31.11.21'
   },
   {
     id: "02fe",
@@ -66,5 +68,26 @@ export const RECIPES_LIST: Array<IRecipe> = [
     author: "Cooker",
     typeOfMeal: "обед",
     cost: 22,
+    dateCreation: '31.11.21'
+  },
+  {
+    id: "03fe",
+    title: "Омлет2",
+    ingredients: [
+      {
+        ingredient: "Яйца",
+        amount: "3шт",
+      },
+      {
+        ingredient: "Молоко",
+        amount: "300г",
+      },
+    ],
+    description: "Просто жарить",
+    time: 48,
+    author: "Cooker",
+    typeOfMeal: "обед",
+    cost: 22,
+    dateCreation: '31.11.21'
   },
 ];

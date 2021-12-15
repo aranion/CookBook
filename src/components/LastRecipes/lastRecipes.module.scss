@@ -1,0 +1,27 @@
+@import "../../constants/_vars.scss";
+
+.last-recipes {
+  background: $backgroundDefault;
+  box-shadow: $boxShadovDefault;
+  border-radius: $borderRadiusDefault;
+  min-height: 320px;
+  margin: 0px auto;
+  padding: 20px;
+  box-sizing: border-box;
+
+  h2 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 23px;
+    color: #644838;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.last-recipes__container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
