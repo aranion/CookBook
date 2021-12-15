@@ -22,7 +22,6 @@
     min-height: 718px;
     background: $backgroundDefault;
     position: relative;
-    margin: 0 20px;
     padding: 16px;
     max-height: calc(100vh - 40px);
     display: flex;
@@ -52,10 +51,8 @@
     & button {
       padding: 10px 60px;
       height: 40px;
-      background: #6E5530;
       border: none;
       border-radius: 4px; 
-      color: white;
     }
   }
 
@@ -69,66 +66,68 @@
   &_body {
     overflow: auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin: 30px 0;
-  }
 
-  &_body__left {
-    width: calc(100% - 580px);
-    padding-left: 44px;
+    &__left {
+      flex-basis: calc(30% - 10px);
+      padding: 10px;
+      box-sizing: border-box;
 
-    &-img {
-      width: 200px;
-      height: 200px;
-      margin: 0 auto;
-    }
+      &-img {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+      }
 
-    &-title {
-      margin: 10px 0;
-    }
-  }
-
-  &_body__right{
-    width: 540px;
-    
-    &-title {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      & h3 {
-        margin: 0px;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 24px;
-        line-height: 28px;
+      &-title {
+        margin: 10px 0;
       }
     }
 
-    &-line {
-      width: 100%;
-      margin: 10px 0;
-      border-top: 1px solid #A1A1A1;
-    }
+    &__right{
+      flex-basis: calc(70% - 10px);
+      padding: 10px;
+      
+      &-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        & h3 {
+          margin: 0px;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 24px;
+          line-height: 28px;
+        }
+      }
 
-    &-author {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      color: #6E5530;
-    }
+      &-line {
+        width: 100%;
+        margin: 10px 0;
+        border-top: 1px solid #A1A1A1;
+      }
 
-    &-process {
-      background-color: white;
-      border: 1px solid black;
-      margin-top: 10px;
-      width: 100%;
-      min-height: 447px;
-      box-sizing: border-box;
+      &-author {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        color: #6E5530;
+      }
+
+      &-process {
+        background-color: white;
+        border: 1px solid black;
+        margin-top: 10px;
+        width: 100%;
+        min-height: 447px;
+        box-sizing: border-box;
+      }
     }
   }
-  
   &_title {
     width: 100%;
     margin-top: 25px;

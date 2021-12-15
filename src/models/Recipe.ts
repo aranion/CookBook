@@ -7,6 +7,7 @@ export interface IRecipe {
   time: number;
   typeOfMeal: string; // тип трапезы
   cost: number; // затраты
+  dateCreation: string // дата создания рецепта
 }
 
 export interface Ingredients {

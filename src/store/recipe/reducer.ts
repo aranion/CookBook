@@ -1,8 +1,10 @@
+import { RECIPES_LIST } from "constants/recipesList"
 import {IRecipe} from "../../models/Recipe"
 import {Action, RecipeState, RecipeActionTypes} from "./types"
 
 const initialState: RecipeState = {
     loading: false,
+    data: [...RECIPES_LIST]
 }
 
 export const recipeReducer = (state = initialState, action: Action) => {
