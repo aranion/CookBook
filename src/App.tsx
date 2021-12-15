@@ -1,19 +1,23 @@
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 import {AppRouter} from './router'
 import store from './store'
-import { Header } from "components";
+import {Header} from "components";
 import styles from './App.module.scss';
+import {ProvideAuth} from "hooks/useAuth";
 
 export function App() {
-  return (
-          <Provider store={store}>
-            <BrowserRouter>
-              <Header />
-              <div className={styles.main}>
-                <AppRouter />
-              </div>
-            </BrowserRouter>
-          </Provider>
-  );
+    return (
+        <ProvideAuth>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <div className={styles.main}>
+                        <Header/>
+                        <AppRouter/>
+                    </div>
+                </BrowserRouter>
+            </Provider>
+        </ProvideAuth>
+
+    );
 }

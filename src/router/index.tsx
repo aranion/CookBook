@@ -1,9 +1,38 @@
-// import {Suspense} from 'react'
-import {PrivateRouter} from './privateRouter'
-import {PublicRouter} from './publicRouter'
-
-const isAuth = true;  // поправим после реализации авторизации
+import {Suspense} from 'react'
+import {useAuth} from 'hooks/useAuth';
+import {Routes, Route, Navigate, useNavigate, useLocation} from 'react-router';
+import {routeList, IRoute} from './routeList'
+import Login from 'pages/Login';
 
 export const AppRouter = () => {
-    return isAuth ? (<PrivateRouter/>) : <PublicRouter/>
+    // const {isAuth} = useAuth();
+    const isAuth = false
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    if (isAuth) return <Suspense fallback={<div>Загрузка...</div>}>
+        <Routes>
+            {routeList.map((route: IRoute, idx: number) => {
+                return <Route key={idx} path={route.path}
+                              element={route.component}/>
+            })}
+        </Routes>
+    </Suspense>
+
+    return <Suspense fallback={<div>Загрузка...</div>}>
+        <Routes>
+            {routeList.map((route: IRoute, idx: number) => {
+                return route.private ?
+                    <Route key={idx} path={route.path}
+                           element={<Navigate to="/login"
+                                              state={{from: location}}/>}/>
+                    :
+                    <Route key={idx} path={route.path}
+                           element={route.component}/>
+            })}
+        </Routes>
+    </Suspense>
+
+
 }

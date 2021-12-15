@@ -1,5 +1,6 @@
 import styles from "./navigation.module.scss";
 import { Link } from "react-router-dom";
+import { menuList } from "router/routeList";
 
 // Временный массив для отрисовки навигации
 const links = [
@@ -25,10 +26,10 @@ export const Navigation = () => {
   return (
     <nav className={styles.menu}>
       <ul>
-        {links.map((el) => {
-          return (
-            <li key={el.URL}>
-              <Link to={el.URL}>{el.title}</Link>
+        {menuList.map((el, idx) => {
+          return (el.menu &&
+            <li key={idx}>
+              <Link to={el.path}>{el.title}</Link>
             </li>
           );
         })}
