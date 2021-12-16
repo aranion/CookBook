@@ -6,6 +6,9 @@ import { LastRecipes } from "components/LastRecipes";
 
 const Home = () => {
   const {data} = useAppSelector((state:RootState) => state.recipes);
+  const {profile} = useAppSelector((state:RootState) => state);
+  console.log('data',data);
+  console.log('profile', profile);
   
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);

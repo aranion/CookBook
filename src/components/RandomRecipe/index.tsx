@@ -49,22 +49,22 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
         <div className={styles["info-container"]}>
           <div className={styles["heading-container"]}>
             <span className={styles["heading-container__header"]}>
-              {recipe.title}
+              {recipe?.title}
             </span>
             <PrintIcon />
           </div>
           <ul>
-            {recipe.ingredients.map((item: Ingredients, index) => (
+            {recipe?.ingredients.map((item: Ingredients, index) => (
               <li key={index}>
                 {item.ingredient} - {item.amount}
               </li>
             ))}
           </ul>
-          <span>~{recipe.time} мин</span>
+          <span>~{recipe?.time} мин</span>
           <div className={styles["info-container__added-author"]}>
             <AccountCircleIcon />
             <span>
-              {recipe.author}
+              {recipe?.author}
             </span>
           </div>
           <div className={styles["info-container__added"]}>
@@ -74,7 +74,7 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
             <DescriptionRecipe
               visible={isModal}
               title="Подробности рецепта"
-              idRecipe={recipe.id}
+              idRecipe={recipe?.id}
               footer={<Button variant="contained" color="primary" onClick={onClose}>Закрыть</Button>}
               onClose={onClose}
             />

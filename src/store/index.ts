@@ -1,9 +1,11 @@
 import { combineReducers, createStore } from 'redux';
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { recipeReducer } from "./recipe/reducer";
+import { profileReducer } from "./profile/reducer";
 
 const rootReducer = combineReducers({
     recipes: recipeReducer,
+    profile: profileReducer
 });
 const store = createStore(
     rootReducer
