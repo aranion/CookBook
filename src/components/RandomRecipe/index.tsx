@@ -83,11 +83,6 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
                   Закрыть
                 </Button>
               }
-              footer={
-                <Button variant="contained" color="primary" onClick={onClose}>
-                  Закрыть
-                </Button>
-              }
               onClose={onClose}
             />
           </div>
