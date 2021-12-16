@@ -39,7 +39,7 @@ export default function RecipeReviewCard({ recipe }: { recipe: IRecipe }) {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {recipe.description}
+          Краткое описание
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
