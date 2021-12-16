@@ -1,4 +1,7 @@
+@import "../../constants/_vars.scss";
+
 .small-recipe {
+  color: $textColor;
   &:not(:last-child) {
     margin-right: 10px;
   }

@@ -1,11 +1,11 @@
 import React from "react";
 import PrintIcon from "@mui/icons-material/Print";
 import { Button } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import FlatwareIcon from '@mui/icons-material/Flatware';
-import MessageIcon from '@mui/icons-material/Message';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import FlatwareIcon from "@mui/icons-material/Flatware";
+import MessageIcon from "@mui/icons-material/Message";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { DescriptionRecipe } from "..";
 import { Ingredients, IRecipe } from "../../models/Recipe";
 import image from "../../assets/image2.png";
@@ -26,20 +26,20 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
               <div>
                 <span>
                   <AccessTimeIcon />
-                  <span>30&nbsp;мин.</span>
+                  <span>{recipe.time}&nbsp;мин.</span>
                 </span>
-                <span >
+                <span>
                   <FlatwareIcon />
-                  <span>2</span>
+                  <span>{recipe.portionsAmount}</span>
                 </span>
               </div>
-              <div >
-                <span >
+              <div>
+                <span>
                   <MessageIcon />
                   <span>1</span>
                 </span>
                 <span>
-                  <VisibilityIcon/> 
+                  <VisibilityIcon />
                   <span>2.1к.</span>
                 </span>
               </div>
@@ -49,33 +49,39 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
         <div className={styles["info-container"]}>
           <div className={styles["heading-container"]}>
             <span className={styles["heading-container__header"]}>
-              {recipe.title}
+              {recipe?.title}
             </span>
             <PrintIcon />
           </div>
           <ul>
-            {recipe.ingredients.map((item: Ingredients, index) => (
+            {recipe?.ingredients.map((item: Ingredients, index) => (
               <li key={index}>
                 {item.ingredient} - {item.amount}
               </li>
             ))}
           </ul>
-          <span>~{recipe.time} мин</span>
           <div className={styles["info-container__added-author"]}>
             <AccountCircleIcon />
-            <span>
-              {recipe.author}
-            </span>
+            <span>{recipe?.author}</span>
           </div>
           <div className={styles["info-container__added"]}>
-            <Button variant="contained" color="primary" onClick={() => setModal(true)}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => setModal(true)}
+            >
               Посмотреть рецепт...
             </Button>
             <DescriptionRecipe
               visible={isModal}
               title="Подробности рецепта"
-              idRecipe={recipe.id}
-              footer={<Button variant="contained" color="primary" onClick={onClose}>Закрыть</Button>}
+              recipe={recipe}
+              footer={
+                <Button variant="contained" color="primary" onClick={onClose}>
+                  Закрыть
+                </Button>
+              }
               onClose={onClose}
             />
           </div>
