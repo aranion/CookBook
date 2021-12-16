@@ -6,7 +6,7 @@ import Login from 'pages/Login';
 
 export const AppRouter = () => {
     // const {isAuth} = useAuth();
-    const isAuth = false
+    const isAuth = true
 
     const location = useLocation();
     const navigate = useNavigate();

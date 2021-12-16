@@ -6,7 +6,17 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MyCookbook from "pages/Cookbook";
 import AddRecipe  from "pages/AddRecipe/AddRecipe";
+import AdvancedSearch from 'components/AdvancedSearch';
 
+export enum RouteNames {
+  HOME = '/',
+  RECIPES = '/recipes',
+  COOKBOOK = '/cookbook',
+  ADD_RECIPE = '/addRecipe',
+  LOGIN = '/login',
+  REGISTER = '/register',
+  ADVANCED_SEARCH = '/search/advanced',
+}
 export interface IRoute {
   title: string;
   path: string;
@@ -57,6 +67,13 @@ export const routeList: IRoute[] = [
       component: <Register />,
       private: false,
       menu: false,
+  },
+  {
+    title: "Расширенный поиск",
+    path: "/search/advanced",
+    component: <AdvancedSearch />,
+    private: false,
+    menu: false,
   },
   {
     title: "Страница не найдена",
