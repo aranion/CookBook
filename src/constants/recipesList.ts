@@ -62,7 +62,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
     stepsData: [
       {
         title: "шаг 1",
-        description: "Рыбное филе порезать на мелкие кусочки",
+        description: "Макароши кинуть в воду",
       },
       {
         title: "шаг 2",
@@ -71,8 +71,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
       },
       {
         title: "шаг 3",
-        description:
-          "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+        description: "Смешать с макарошами",
       },
     ],
     time: 15,
@@ -134,17 +133,19 @@ export const RECIPES_LIST: Array<IRecipe> = [
     stepsData: [
       {
         title: "шаг 1",
-        description: "Рыбное филе порезать на мелкие кусочки",
+        description: "Яйца разбить",
       },
       {
         title: "шаг 2",
-        description:
-          "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+        description: "Смешать с молоком",
       },
       {
         title: "шаг 3",
-        description:
-          "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+        description: "Пожарить",
+      },
+      {
+        title: "шаг 3",
+        description: "Съесть пока горячее",
       },
     ],
     time: 48,
