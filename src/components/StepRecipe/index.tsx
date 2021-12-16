@@ -1,19 +1,19 @@
 import styles from "./StepRecipe.module.scss";
-import img from '../../assets/recipeImgId00001.jpg';
+import img from "../../assets/recipeImgId00001.jpg";
+import { StepData } from "../../models/Recipe";
 
-// временно any, потом нужно проработать структуру пропсов
-export const StepRecipe = (props: any) => {
-  const {
-    title = '',
-    description = '',
-    urlImg = '',
-  } = props.stepData;
-
-  return <div className={styles.step} >
-    <img className={styles.step_img} src={urlImg || img} alt='Recipe'></img>
-    <div>
-      <h5 className={styles.step_title}>{title}</h5>
-      <div>{description}</div>
+export const StepRecipe = ({ steps }: { steps: StepData }) => {
+  return (
+    <div className={styles.step}>
+      <img
+        className={styles.step_img}
+        src={steps.urlImg || img}
+        alt="Recipe"
+      ></img>
+      <div>
+        <h5 className={styles.step_title}>{steps.title}</h5>
+        <div>{steps.description}</div>
+      </div>
     </div>
-  </div>
-}
+  );
+};

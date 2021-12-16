@@ -1,6 +1,7 @@
-@import '../../constants/_vars.scss';
+@import "../../constants/_vars.scss";
 
 .form {
+  color: $textColor;
   margin: 12px auto 0 auto;
   max-width: 839px;
   display: flex;
@@ -14,23 +15,23 @@
     display: flex;
     justify-content: center;
   }
-  &__confirm{
+  &__confirm {
     margin-right: 12px;
   }
 }
 .title {
   text-align: center;
 }
-.cooking{
+.cooking {
   display: flex;
   margin-top: 12px;
-  &__left{
+  &__left {
     flex-basis: 40%;
     display: flex;
     flex-direction: column;
     padding: 0 12px;
   }
-  &__right{
+  &__right {
     flex-basis: 60%;
     padding: 0 12px;
   }
@@ -46,20 +47,19 @@
     flex: 2;
     margin: 0 12px;
   }
-
 }
 .photoRecipe {
-   width: 64px;
-   height: 64px;
-   background-color: #c4c4c4;
-   & img {
+  width: 64px;
+  height: 64px;
+  background-color: #c4c4c4;
+  & img {
     width: 64px;
     height: 64px;
-   }
+  }
 
   &__container {
     position: absolute;
     top: 12px;
     right: 12px;
   }
- }
+}
