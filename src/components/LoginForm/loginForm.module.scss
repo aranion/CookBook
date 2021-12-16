@@ -1,0 +1,14 @@
+@import '../../constants/_vars.scss';
+
+.center {
+  margin: 0 auto;
+  width: 60%;
+  background-color: $backgroundDefault;
+  background: $backgroundDefault;
+  box-shadow: $boxShadovDefault;
+  border-radius: $borderRadiusDefault;
+  min-height: 320px;
+  margin: 0px auto 20px;
+  padding: 20px;
+  box-sizing: border-box;
+}
