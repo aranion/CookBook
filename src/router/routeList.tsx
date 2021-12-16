@@ -5,7 +5,7 @@ import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MyCookbook from "pages/Cookbook";
-import AddRecipe  from "pages/AddRecipe/AddRecipe";
+import AddRecipe from "pages/AddRecipe/AddRecipe";
 
 export interface IRoute {
   title: string;
@@ -41,22 +41,22 @@ export const routeList: IRoute[] = [
     title: "Создать рецепт",
     path: "/addRecipe",
     component: <AddRecipe />,
-    private: true,
+    private: false,
     menu: true,
   },
   {
-      title: "Авторизация",
-      path: "/login",
-      component: <Login />,
-      private: false,
-      menu: false,
+    title: "Авторизация",
+    path: "/login",
+    component: <Login />,
+    private: false,
+    menu: false,
   },
   {
-      title: "Регистрация",
-      path: "/register",
-      component: <Register />,
-      private: false,
-      menu: false,
+    title: "Регистрация",
+    path: "/register",
+    component: <Register />,
+    private: false,
+    menu: false,
   },
   {
     title: "Страница не найдена",
@@ -67,4 +67,4 @@ export const routeList: IRoute[] = [
   },
 ];
 
-export const menuList = routeList.filter(item => item.menu === true)
+export const menuList = routeList.filter((item) => item.menu === true);

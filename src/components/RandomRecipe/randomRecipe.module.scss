@@ -1,19 +1,19 @@
-@import '../../constants/_vars.scss';
+@import "../../constants/_vars.scss";
 
 .recipe-block {
   background: $backgroundDefault;
   box-shadow: $boxShadovDefault;
   border-radius: $borderRadiusDefault;
   min-height: 320px;
-  margin: 0px auto 20px;
+  margin: 20px auto;
   padding: 20px;
   box-sizing: border-box;
+  color: $textColor;
 
   &__header {
     font-size: 20px;
     font-weight: normal;
     line-height: 23px;
-    color: #644838;
     text-align: center;
     margin: 0 0 20px;
   }
@@ -23,7 +23,7 @@
     align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
-    
+
     & img {
       max-width: 100%;
     }
@@ -48,9 +48,6 @@
         color: #6e5530;
       }
     }
-    a:hover {
-      color: #6e5530;
-    }
   }
   ul {
     padding-left: 0px;
@@ -74,7 +71,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  font-size: .9em;
+  font-size: 0.9em;
   color: #666;
   align-items: center;
   min-height: 30px;

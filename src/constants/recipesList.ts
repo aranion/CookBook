@@ -19,12 +19,28 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "1кг",
       },
     ],
-    description: "Просто жарить",
+    stepsData: [
+      {
+        title: "шаг 1",
+        description: "Рыбное филе порезать на мелкие кусочки",
+      },
+      {
+        title: "шаг 2",
+        description:
+          "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+      },
+      {
+        title: "шаг 3",
+        description:
+          "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+      },
+    ],
     time: 48,
     author: "Cooker",
     typeOfMeal: "обед",
+    portionsAmount: 2,
     cost: 15,
-    dateCreation: '31.11.21'
+    dateCreation: "31.11.21",
   },
   {
     id: "01fe",
@@ -43,12 +59,28 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "1кг",
       },
     ],
-    description: "Просто варить, смешать",
+    stepsData: [
+      {
+        title: "шаг 1",
+        description: "Рыбное филе порезать на мелкие кусочки",
+      },
+      {
+        title: "шаг 2",
+        description:
+          "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+      },
+      {
+        title: "шаг 3",
+        description:
+          "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+      },
+    ],
     time: 15,
     author: "Cooker",
     typeOfMeal: "обед",
+    portionsAmount: 5,
     cost: 49,
-    dateCreation: '31.11.21'
+    dateCreation: "31.11.21",
   },
   {
     id: "02fe",
@@ -63,12 +95,28 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "300г",
       },
     ],
-    description: "Просто жарить",
+    stepsData: [
+      {
+        title: "шаг 1",
+        description: "Рыбное филе порезать на мелкие кусочки",
+      },
+      {
+        title: "шаг 2",
+        description:
+          "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+      },
+      {
+        title: "шаг 3",
+        description:
+          "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+      },
+    ],
     time: 48,
     author: "Cooker",
     typeOfMeal: "обед",
+    portionsAmount: 3,
     cost: 22,
-    dateCreation: '31.11.21'
+    dateCreation: "31.11.21",
   },
   {
     id: "03fe",
@@ -83,11 +131,27 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "300г",
       },
     ],
-    description: "Просто жарить",
+    stepsData: [
+      {
+        title: "шаг 1",
+        description: "Рыбное филе порезать на мелкие кусочки",
+      },
+      {
+        title: "шаг 2",
+        description:
+          "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+      },
+      {
+        title: "шаг 3",
+        description:
+          "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+      },
+    ],
     time: 48,
     author: "Cooker",
     typeOfMeal: "обед",
+    portionsAmount: 4,
     cost: 22,
-    dateCreation: '31.11.21'
+    dateCreation: "31.11.21",
   },
 ];
