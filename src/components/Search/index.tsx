@@ -1,17 +1,23 @@
-import styles from "./search.module.scss";
 import { ChangeEvent, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
+import styles from "./search.module.scss";
 
 export const Search = () => {
   const [search, setSearch] = useState<string>("");
+
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     console.log("search!");
   };
+
+  const handleSearchClick = () => {
+
+  }
+
   return (
     <div className={styles["search-block"]}>
       <div className={styles["search-block__container"]}>
@@ -31,7 +37,7 @@ export const Search = () => {
             value={search}
             onChange={handleSearch}
           />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search" onClick={handleSearchClick}>
             <SearchIcon />
           </IconButton>
         </Paper>

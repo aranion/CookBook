@@ -3,17 +3,11 @@ import { AuthResponse } from "../models/AuthResponse";
 import { $api } from "../api/api";
 
 export class AuthService {
-    // private instance: object;
-    // constructor() {
-    //   if (this.instance) return this.instance;
-    //   this.instance = this;
-    // }
-
     static async register(
         email: string,
         password: string
     ): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>("/register", {
+        return $api.post<AuthResponse>("/registration", {
             email,
             password
         });
@@ -23,7 +17,7 @@ export class AuthService {
         email: string,
         password: string
     ): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>("/register", {
+        return $api.post<AuthResponse>("/login", {
             email,
             password
         });

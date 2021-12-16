@@ -14,7 +14,7 @@ export interface RecipeState {
 }
 
 export enum RecipeActionTypes {
-    FETCH_RECIPES = '@recipes/FETCH_RECIPES',
+    START_RECIPES = '@recipes/START_RECIPES',
     FETCH_RECIPES_SUCCESS = '@recipes/FETCH_RECIPES_SUCCESS',
     FETCH_RECIPES_ERROR = '@recipes/FETCH_RECIPES_ERROR',
     ADD_RECIPE = '@recipes/ADD_RECIPE',
@@ -23,8 +23,8 @@ export enum RecipeActionTypes {
     SET_RECIPES_PAGE = '@recipes/SET_RECIPES_PAGE',
 }
 
-interface FetchRecipeAction {
-    type: RecipeActionTypes.FETCH_RECIPES
+interface StartRecipeAction {
+    type: RecipeActionTypes.START_RECIPES
 }
 
 interface FetchRecipeSuccessAction {
@@ -58,7 +58,7 @@ interface SetRecipesPage {
 }
 
 export type RecipeAction =
-    FetchRecipeAction
+    StartRecipeAction
     | FetchRecipeErrorAction
     | FetchRecipeSuccessAction
     | AddRecipeAction

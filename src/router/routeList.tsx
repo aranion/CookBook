@@ -27,7 +27,7 @@ export const routeList: IRoute[] = [
     title: "Рецепты",
     path: "/recipes",
     component: <Recipes />,
-    private: true,
+    private: false,
     menu: true,
   },
   {
@@ -53,7 +53,7 @@ export const routeList: IRoute[] = [
   },
   {
     title: "Регистрация",
-    path: "/register",
+    path: "/registration",
     component: <Register />,
     private: false,
     menu: false,

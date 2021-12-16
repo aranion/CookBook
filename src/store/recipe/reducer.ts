@@ -9,7 +9,7 @@ const initialState: RecipeState = {
 
 export const recipeReducer = (state = initialState, action: Action) => {
     switch (action.type) {
-        case RecipeActionTypes.FETCH_RECIPES:
+        case RecipeActionTypes.START_RECIPES:
             return {...state, loading: true}
         case RecipeActionTypes.FETCH_RECIPES_SUCCESS:
             return {...state, loading: false, data: action.payload}
