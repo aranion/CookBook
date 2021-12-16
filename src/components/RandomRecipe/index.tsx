@@ -60,7 +60,6 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
               </li>
             ))}
           </ul>
-          <span>~{recipe?.time} мин</span>
           <div className={styles["info-container__added-author"]}>
             <AccountCircleIcon />
             <span>{recipe?.author}</span>
