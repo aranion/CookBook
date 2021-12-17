@@ -14,6 +14,9 @@ import {
   Select,
   MenuItem,
   SelectChangeEvent,
+  Rating,
+  Typography,
+  Button,
 } from '@mui/material';
 
 import RecipeCard from 'components/RecipeCard';
@@ -43,13 +46,13 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
         >
           <h3 className={styles.drawer__header}>Расширенный поиск:</h3>
           <div>
-            <h4 className={styles.drawer__label}>Основные ингредиенты:</h4>
+          <Typography variant="body1" color="text.secondary">Основные ингредиенты:</Typography>
             <Paper elevation={0}>
               <InputBase className={styles.drawer__input}/>
             </Paper>
           </div>
           <div>
-            <h4 className={styles.drawer__label}>Время приготовления:</h4>
+          <Typography variant="body1" color="text.secondary">Время приготовления:</Typography>
             <Select
               value={time}
               onChange={handleChangeTime}
@@ -63,8 +66,14 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
               <MenuItem value={120}>не более 2 часов</MenuItem>
             </Select>
           </div>
+          <Box sx={{display: 'flex', gridGap: 16, alignItems: 'center'}}>
+            <Typography variant="body1" color="text.secondary">
+              Рейтинг:
+            </Typography>
+            <Rating name="size-small" defaultValue={4} />
+          </Box>
           <div>
-            <h4 className={styles.drawer__label}>Тип блюда:</h4>
+            <Typography variant="body1" color="text.secondary">Тип блюда:</Typography>
             <FormGroup className={styles.drawer__checkbox}>
               <FormControlLabel control={<Checkbox />} label="Закуски" color="primary"/>
               <FormControlLabel control={<Checkbox />} label="Основные блюда" color="primary"/>
@@ -73,19 +82,19 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
             </FormGroup>
           </div>
           <div>
-            <h4 className={styles.drawer__label}>Название рецепта:</h4>
+          <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
             <Paper elevation={0}>
               <InputBase className={styles.drawer__input}/>
             </Paper>
           </div>
           <div>
-            <h4 className={styles.drawer__label}>Имя автора:</h4>
+          <Typography variant="body1" color="text.secondary">Имя автора:</Typography>
             <Paper elevation={0}>
               <InputBase className={styles.drawer__input}/>
             </Paper>
           </div>
           <div>
-            <h4 className={styles.drawer__label}>Продукты:</h4>
+          <Typography variant="body1" color="text.secondary">Продукты:</Typography>
             <FormControl 
               className={styles.drawer__radio}
             >
@@ -100,7 +109,10 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
                 <FormControlLabel value="kosher" control={<Radio />} label="Кошерные" color="primary"/>
               </RadioGroup>
             </FormControl>
-          </div> 
+          </div>
+          <Button variant="contained" disableElevation>
+            Найти
+          </Button>
         </Paper>
       </Box>
       <Box
@@ -110,7 +122,7 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
       >
         <div className={styles.main}>
           {recipes.map(recipe => {
-            return <RecipeCard recipe={recipe}/>
+            return <RecipeCard recipe={recipe} key={recipe.id}/>
           })}
         </div>
 

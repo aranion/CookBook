@@ -5,8 +5,6 @@ const AdvancedSearch = () => {
 
   const {data} = useAppSelector((state:RootState) => state.recipes);
 
-  console.log(data)
-
   return (
     <Content recipes={data}/>
   );
