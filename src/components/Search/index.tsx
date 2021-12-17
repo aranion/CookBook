@@ -5,6 +5,8 @@ import { Button } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
+import {useNavigate} from 'react-router-dom'
+import {RouteNames} from '../../router/routeList'
 
 export const Search = () => {
   const [search, setSearch] = useState<string>("");
@@ -12,6 +14,9 @@ export const Search = () => {
     setSearch(e.target.value);
     console.log("search!");
   };
+
+  const router = useNavigate()
+  
   return (
     <div className={styles["search-block"]}>
       <div className={styles["search-block__container"]}>
@@ -36,7 +41,12 @@ export const Search = () => {
           </IconButton>
         </Paper>
       </div>
-      <Button variant="contained" color="primary">
+      <Button 
+        variant="contained" 
+        color="primary"
+        onClick={() => router(RouteNames.ADVANCED_SEARCH)}
+      >
+
         Расширенный поиск
       </Button>
     </div>
