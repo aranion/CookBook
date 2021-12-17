@@ -46,6 +46,7 @@ export const Search = () => {
         color="primary"
         onClick={() => router(RouteNames.ADVANCED_SEARCH)}
       >
+
         Расширенный поиск
       </Button>
     </div>

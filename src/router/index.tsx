@@ -1,15 +1,15 @@
-import {Suspense} from 'react'
-import {useAuth} from 'hooks/useAuth';
-import {Routes, Route, Navigate, useNavigate, useLocation} from 'react-router';
-import {routeList, IRoute} from './routeList'
-import Login from 'pages/Login';
+import {Suspense} from 'react';
+// import {useAuth} from 'hooks/useAuth';
+import {Routes, Route, Navigate, useLocation} from 'react-router';
+import {routeList, IRoute} from './routeList';
+import { RootState, useAppSelector } from 'store';
 
 export const AppRouter = () => {
     // const {isAuth} = useAuth();
-    const isAuth = true
-
+    // const isAuth = false
+    const {isAuth} = useAppSelector((state:RootState) => state.profile);
     const location = useLocation();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     if (isAuth) return <Suspense fallback={<div>Загрузка...</div>}>
         <Routes>

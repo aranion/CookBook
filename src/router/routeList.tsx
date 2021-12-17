@@ -51,22 +51,22 @@ export const routeList: IRoute[] = [
     title: "Создать рецепт",
     path: "/addRecipe",
     component: <AddRecipe />,
-    private: true,
+    private: false,
     menu: true,
   },
   {
-      title: "Авторизация",
-      path: "/login",
-      component: <Login />,
-      private: false,
-      menu: false,
+    title: "Авторизация",
+    path: "/login",
+    component: <Login />,
+    private: false,
+    menu: false,
   },
   {
-      title: "Регистрация",
-      path: "/register",
-      component: <Register />,
-      private: false,
-      menu: false,
+    title: "Регистрация",
+    path: "/register",
+    component: <Register />,
+    private: false,
+    menu: false,
   },
   {
     title: "Расширенный поиск",
@@ -84,4 +84,4 @@ export const routeList: IRoute[] = [
   },
 ];
 
-export const menuList = routeList.filter(item => item.menu === true)
+export const menuList = routeList.filter((item) => item.menu === true);
