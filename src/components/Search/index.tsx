@@ -1,54 +1,60 @@
 import styles from "./search.module.scss";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, FormEvent } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
+import { Button, InputBase, IconButton, Paper, Box } from "@mui/material";
 import {useNavigate} from 'react-router-dom'
 import {RouteNames} from '../../router/routeList'
 
 export const Search = () => {
+
   const [search, setSearch] = useState<string>("");
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+
+  const handleChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
-    console.log("search!");
   };
+
+  const handleSearch = (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+  }
 
   const router = useNavigate()
   
   return (
-    <div className={styles["search-block"]}>
-      <div className={styles["search-block__container"]}>
+    <Box className={styles["search-block"]}>
+      <Box className={styles["search-block__container"]}>
         <Paper
           component="form"
           sx={{
-            p: "2px 3px",
             display: "flex",
             alignItems: "center",
             width: 400,
-            height: 35,
+            height: 40,
           }}
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Название рецепта"
             value={search}
-            onChange={handleSearch}
+            onChange={handleChangeSearchValue}
           />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+          <IconButton 
+            type="submit" 
+            sx={{ p: 1 }} 
+            aria-label="search"
+            onClick={handleSearch}
+          >
             <SearchIcon />
           </IconButton>
         </Paper>
-      </div>
+      </Box>
       <Button 
+        sx={{ height: 40 }}
         variant="contained" 
         color="primary"
         onClick={() => router(RouteNames.ADVANCED_SEARCH)}
       >
-
         Расширенный поиск
       </Button>
-    </div>
+    </Box>
   );
 };
