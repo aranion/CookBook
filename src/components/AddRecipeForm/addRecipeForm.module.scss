@@ -1,5 +1,8 @@
 @import "../../constants/_vars.scss";
-
+* {
+  margin: 0;
+  padding: 0;
+}
 .form {
   color: $textColor;
   margin: 12px auto 0 auto;

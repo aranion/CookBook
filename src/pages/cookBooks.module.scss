@@ -1,0 +1,47 @@
+@import "../constants/_vars.scss";
+
+.container {
+  color: $textColor;
+  margin: 12px auto 0 auto;
+  max-width: 839px;
+  display: flex;
+  flex-direction: column;
+  background-color: $backgroundDefault;
+  border-radius: $borderRadiusDefault;
+  padding: 16px;
+  position: relative;
+  box-shadow: $boxShadovDefault;
+}
+.item {
+  display: flex;
+  flex: 1;
+  &__photo {
+    width: 64px;
+    margin-right: 16px;
+  }
+
+  &__photoBox {
+    width: 64px;
+    height: 64px;
+    background-color: #c4c4c4;
+    margin-right: 16px;
+  }
+  &__name {
+    margin-right: 16px;
+    flex: 1;
+    flex-basis: 20%;
+  }
+  &__description {
+    margin-right: 16px;
+    flex: 1;
+    flex-basis: 50%;
+  }
+  &__count {
+    flex: 1;
+    flex-basis: 10%;
+  }
+
+}
+.title {
+  text-align: center;
+}
