@@ -36,7 +36,7 @@ export const Search = () => {
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Название рецепта"
-            value={search}
+            value={searchValue}
             onChange={handleChangeSearch}
           />
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
