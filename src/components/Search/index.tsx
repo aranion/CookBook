@@ -1,21 +1,23 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useCallback } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
+import {Button, InputBase, IconButton, Paper} from "@mui/material";
+import {useAppSelector} from "../../store";
+import { IRecipe } from "models/Recipe";
+import {useActions} from 'hooks/useActions'
+import {useTimeout} from 'hooks/useTimeout'
 import styles from "./search.module.scss";
 
 export const Search = () => {
-  const [search, setSearch] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>("");
+    const {setRecipesFilter} = useActions()
+    const {filter} = useAppSelector(state => state.recipes)
 
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    console.log("search!");
+  const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
   };
 
   const handleSearchClick = () => {
-
+      setRecipesFilter(searchValue)
   }
 
   return (
@@ -35,9 +37,9 @@ export const Search = () => {
             sx={{ ml: 1, flex: 1 }}
             placeholder="Название рецепта"
             value={search}
-            onChange={handleSearch}
+            onChange={handleChangeSearch}
           />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search" onClick={handleSearchClick}>
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
           </IconButton>
         </Paper>

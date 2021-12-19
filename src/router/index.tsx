@@ -1,10 +1,11 @@
-import {Suspense} from 'react';
+import {Suspense, useEffect} from 'react';
 // import {useAuth} from 'hooks/useAuth';
 import {Routes, Route, Navigate, useLocation} from 'react-router';
 import {routeList, IRoute} from './routeList';
 import { RootState, useAppSelector } from 'store';
 
 export const AppRouter = () => {
+
     // const {isAuth} = useAuth();
     // const isAuth = false
     const {isAuth} = useAppSelector((state:RootState) => state.profile);
