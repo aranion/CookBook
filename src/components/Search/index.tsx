@@ -18,7 +18,7 @@ export const Search = () => {
       setSearchValue(e.target.value);
   };
 
-  const handleSearchClick = () => {
+  const handleSearch = () => {
       setRecipesFilter(searchValue)
   }
   const router = useNavigate()
