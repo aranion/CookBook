@@ -126,42 +126,4 @@ export const RECIPES_LIST: IRecipe[] = [
       cost: 22,
         createdAt: "31.11.21",
     },
-    // {
-    //   id: "03fe",
-    //   title: "Омлет2",
-    //   ingredients: [
-    //     {
-    //       ingredient: "Яйца",
-    //       amount: "3шт",
-    //     },
-    //     {
-    //       ingredient: "Молоко",
-    //       amount: "300г",
-    //     },
-    //   ],
-    //   stepsData: [
-    //     {
-    //       title: "шаг 1",
-    //       description: "Яйца разбить",
-    //     },
-    //     {
-    //       title: "шаг 2",
-    //       description: "Смешать с молоком",
-    //     },
-    //     {
-    //       title: "шаг 3",
-    //       description: "Пожарить",
-    //     },
-    //     {
-    //       title: "шаг 3",
-    //       description: "Съесть пока горячее",
-    //     },
-    //   ],
-    //   time: 48,
-    //   author: "Cooker",
-    //   typeOfMeal: "обед",
-    //   portionsAmount: 4,
-    //   cost: 22,
-    //   dateCreation: "31.11.21",
-    // },
 ];

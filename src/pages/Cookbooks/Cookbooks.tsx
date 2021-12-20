@@ -2,7 +2,7 @@ import style from "./cookBooks.module.scss";
 import { Divider, List, ListItem } from "@mui/material";
 import { useState } from "react";
 const Cookbooks = () => {
-  const [books, setBooks] = useState([
+  const [books] = useState([
     {
       photo: "*",
       name: "Моя первая книга",
@@ -18,7 +18,7 @@ const Cookbooks = () => {
     },
   ]);
   return (
-    <>
+    <div className={style.pages__center}>
       <div className={style.container}>
         <h1 className={style.title}>Список моих кулинарных книг</h1>
         <div>
@@ -37,7 +37,7 @@ const Cookbooks = () => {
             {books &&
               books.map((book) => {
                 return (
-                  <ListItem button={true}>
+                  <ListItem button={true} key={book.name}>
                     <div className={style.item}>
                       <div className={style.item__photoBox}>
                         <img src={book.photo} alt="book" />
@@ -54,7 +54,7 @@ const Cookbooks = () => {
           </List>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

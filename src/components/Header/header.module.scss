@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   background-color: #eaa31a;
-  height: 84px;
-  padding-left: 16px;
-  padding-right: 16px;
+  min-height: 84px;
+  padding: 0 20px;
 }
 .headerName {
   font-style: normal;
@@ -13,4 +13,5 @@
   font-size: 36px;
   line-height: 42px;
   color: #000000;
+  margin: 0;
 }

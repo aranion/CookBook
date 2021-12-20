@@ -50,7 +50,7 @@ export const DescriptionRecipe = ({
               alt="price"
             ></img>
             <div>
-              <h4 className={styles["modal_body__left-title"]}>Ингридиенты:</h4>
+              <h4 className={styles["modal_body__left-title"]}>Ингредиенты:</h4>
               <ul>
                 {recipe.ingredients.map((item: Ingredients, index: number) => (
                   <li key={index}>
@@ -86,7 +86,7 @@ export const DescriptionRecipe = ({
             <div className={styles["modal_body__right-line"]}></div>
             <div className={styles["modal_body__right-author"]}>
               <span className={styles.author}>
-                Автор: <span>{recipe.author}</span>
+                Автор: <span>{recipe.author.name}</span>
               </span>
               <span>
                 ID: <span>id_{recipe.id}</span>

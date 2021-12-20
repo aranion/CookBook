@@ -3,7 +3,6 @@ import styles from "./searchForm.module.scss";
 import Chips from '../Chips'
 import {useNavigate} from 'react-router-dom'
 import {RouteNames} from 'router/routeList'
-
 import { 
   Paper, 
   Box, 

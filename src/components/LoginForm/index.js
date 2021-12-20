@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
 import { useAppDispatch } from "store";
 import { changeIsAuth } from "store/profile/actions";
@@ -11,16 +11,22 @@ export const LoginForm = () => {
 
     function  logInFake () {
         dispatch(changeIsAuth(true));
-        navigate(location.state.from.pathname);         
+        navigate(location.state?.from.pathname || '/');         
     } 
     return (
         <div className={styles.center}>
-            Страница входа
-            <p>
+            Страница входа (Заглушка!)
+            <div>
+                <TextField label="Логин" variant="standard" />
+            </div>
+            <div>
+                <TextField type='password' label="Пароль" variant="standard" />
+            </div>
+            <div>
                 <Button variant="contained" color="primary" onClick={logInFake}>
                     Войти
                 </Button>
-            </p>
+            </div>
         </div>
     );
 };

@@ -1,10 +1,15 @@
 // цвет
 $backgroundDefault: #f4f4f4;
+$backgroundMenu:#d56600;
 $textColor: #644838;
 $primary: #6e5530;
 $label: #705a40;
-$paper: #f4f4f4;
+$paper: $backgroundDefault;
 
 // другое
 $boxShadovDefault: 0px 4px 20px rgba(0, 0, 0, 0.25);
 $borderRadiusDefault: 12px;
+
+// размеры
+$marginDefault: 20px;
+$paddingDefault: 20px;

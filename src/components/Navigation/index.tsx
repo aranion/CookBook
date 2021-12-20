@@ -1,8 +1,11 @@
 import styles from "./navigation.module.scss";
 import { Link } from "react-router-dom";
 import { menuList } from "router/routeList";
+import { useAppSelector } from "store";
 
 export const Navigation = () => {
+  const profile = useAppSelector(state => state.profile);
+
   return (
     <nav className={styles.menu}>
       <ul>
@@ -14,6 +17,11 @@ export const Navigation = () => {
           );
         })}
       </ul>
+      <div className={styles.menu__login}>
+        {
+          profile.isAuth ? 'Здравствуйте, Гость' : <Link to="/login">Войти</Link>
+        }
+        </div>
     </nav>
   );
 };

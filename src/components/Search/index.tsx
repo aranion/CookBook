@@ -1,10 +1,8 @@
-import { ChangeEvent, useState, useCallback, FormEvent } from "react";
+import { ChangeEvent, useState} from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import {Button, InputBase, IconButton, Paper, Box} from "@mui/material";
 import {useAppSelector} from "../../store";
-import { IRecipe } from "models/Recipe";
 import {useActions} from 'hooks/useActions'
-import {useTimeout} from 'hooks/useTimeout'
 import styles from "./search.module.scss";
 import {SearchModal} from 'components'
 
@@ -15,9 +13,10 @@ export const Search = () => {
   const handleClose = () => setOpen(false);
 
   const [searchValue, setSearchValue] = useState<string>("");
-    const {setRecipesFilter} = useActions()
-    const {filter} = useAppSelector(state => state.recipes)
-
+  const {setRecipesFilter} = useActions()
+  const {filter} = useAppSelector(state => state.recipes)
+  console.log('filter', filter);
+  
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);
   };
