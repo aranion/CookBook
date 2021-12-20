@@ -31,6 +31,7 @@ export const DescriptionRecipe = ({
   // если компонент невидим, то не отображаем его
   if (!visible) return null;
 
+  if(!recipe) return <div>Рецепты не подгружены</div>
   // или возвращаем верстку модального окна
   return (
     <div className={styles.modal} onClick={onClose}>
@@ -45,7 +46,7 @@ export const DescriptionRecipe = ({
           <div className={styles.modal_body__left}>
             <img
               className={styles["modal_body__left-img"]}
-              src={recipe.urlRecipeImg || img}
+              src={recipe.urlImg || img}
               alt="price"
             ></img>
             <div>
@@ -93,7 +94,7 @@ export const DescriptionRecipe = ({
             </div>
             <div>
               <div className={styles["modal_body__right-process"]}>
-                {recipe.stepsData.map((el) => {
+                {recipe.steps.map((el) => {
                   return <StepRecipe key={el.title} steps={el} />;
                 })}
               </div>

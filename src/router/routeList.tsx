@@ -4,18 +4,23 @@ import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+//import MyCookbook from "pages/Cookbook";
 import MyCookbooks from "pages/Cookbook";
-import AddRecipe from "pages/AddRecipe/AddRecipe";
-import AdvancedSearch from "components/AdvancedSearch";
+import AddRecipe  from "pages/AddRecipe/AddRecipe";
+import AdvancedSearch from 'components/AdvancedSearch';
 
 export enum RouteNames {
-  HOME = "/",
-  RECIPES = "/recipes",
-  COOKBOOK = "/cookbook",
-  ADD_RECIPE = "/addRecipe",
-  LOGIN = "/login",
-  REGISTER = "/register",
-  ADVANCED_SEARCH = "/search/advanced",
+  HOME = '/',
+  RECIPES = '/recipes',
+  COOKBOOKS = '/cookbooks',
+  ADD_RECIPE = '/addRecipe',
+  LOGIN = '/login',
+  REGISTER = '/register',
+  ADVANCED_SEARCH = '/search/advanced',
+// export enum RouteNames {
+//   COOKBOOK = "/cookbook",
+// }
+
 }
 export interface IRoute {
   title: string;
@@ -37,7 +42,7 @@ export const routeList: IRoute[] = [
     title: "Рецепты",
     path: "/recipes",
     component: <Recipes />,
-    private: true,
+    private: false,
     menu: true,
   },
   {
@@ -63,7 +68,7 @@ export const routeList: IRoute[] = [
   },
   {
     title: "Регистрация",
-    path: "/register",
+    path: "/registration",
     component: <Register />,
     private: false,
     menu: false,

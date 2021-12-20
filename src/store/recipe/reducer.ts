@@ -1,24 +1,27 @@
-import { RECIPES_LIST } from "constants/recipesList"
+import { Reducer } from "redux"
 import {IRecipe} from "../../models/Recipe"
 import {Action, RecipeState, RecipeActionTypes} from "./types"
 
 const initialState: RecipeState = {
     loading: false,
-    data: [...RECIPES_LIST]
+    filter: '',
+    data: []
 }
 
 export const recipeReducer = (state = initialState, action: Action) => {
     switch (action.type) {
-        case RecipeActionTypes.FETCH_RECIPES:
+        case RecipeActionTypes.START_RECIPES:
             return {...state, loading: true}
         case RecipeActionTypes.FETCH_RECIPES_SUCCESS:
             return {...state, loading: false, data: action.payload}
         case RecipeActionTypes.FETCH_RECIPES_ERROR:
             return {...state, loading: false, error: action.payload}
         case RecipeActionTypes.ADD_RECIPE:
-            return {...state, page: action.payload}
+            return {...state, data: addData(state.data, action.payload as IRecipe)}
         case RecipeActionTypes.MODIFY_RECIPE:
-            return {...state, page: action.payload}
+            return {...state, data: modifyData(state.data, action.payload as IRecipe)}
+        case RecipeActionTypes.SET_FILTER:
+            return {...state, filter: action.payload}
         case RecipeActionTypes.DELETE_RECIPE: {
             const data: IRecipe[] = state.data ?
                 state.data.filter((item) => item.id !== action.payload)
@@ -30,4 +33,12 @@ export const recipeReducer = (state = initialState, action: Action) => {
         default:
             return state
     }
+}
+
+function addData(state: IRecipe[] = [], payload: IRecipe) {
+    return [...state, payload]
+}
+
+function modifyData(state: IRecipe[] = [], payload: IRecipe) {
+    return [...state.filter(item => item.id !==payload.id), payload]
 }

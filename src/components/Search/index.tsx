@@ -1,24 +1,27 @@
-import styles from "./search.module.scss";
-import { ChangeEvent, useState, FormEvent } from "react";
+import { ChangeEvent, useState, useCallback, FormEvent } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button, InputBase, IconButton, Paper, Box } from "@mui/material";
+import {Button, InputBase, IconButton, Paper, Box} from "@mui/material";
+import {useAppSelector} from "../../store";
+import { IRecipe } from "models/Recipe";
+import {useActions} from 'hooks/useActions'
+import {useTimeout} from 'hooks/useTimeout'
 import {useNavigate} from 'react-router-dom'
 import {RouteNames} from '../../router/routeList'
+import styles from "./search.module.scss";
 
 export const Search = () => {
+  const [searchValue, setSearchValue] = useState<string>("");
+    const {setRecipesFilter} = useActions()
+    const {filter} = useAppSelector(state => state.recipes)
 
-  const [search, setSearch] = useState<string>("");
-
-  const handleChangeSearchValue = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+  const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
   };
 
-  const handleSearch = (e: FormEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+  const handleSearchClick = () => {
+      setRecipesFilter(searchValue)
   }
-
   const router = useNavigate()
-  
   return (
     <Box className={styles["search-block"]}>
       <Box className={styles["search-block__container"]}>
@@ -34,8 +37,8 @@ export const Search = () => {
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Название рецепта"
-            value={search}
-            onChange={handleChangeSearchValue}
+            value={searchValue}
+            onChange={handleChangeSearch}
           />
           <IconButton 
             type="submit" 

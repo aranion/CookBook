@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState} from 'react';
 import styles from "./advancedSearch.module.scss";
 import Chips from '../Chips'
@@ -20,14 +21,15 @@ import {
   Button,
 } from '@mui/material';
 
-import RecipeCard from 'components/RecipeCard';
+
+import {RecipeReviewCard as RecipeCard} from 'components';
 import { IRecipe } from "models/Recipe";
 
 const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
 
   const drawerWidth = 300;
 
-  const [time, setTime] = useState('');
+  const [time, setTime] = React.useState('');
 
   const handleChangeTime = (event: SelectChangeEvent) => {
     setTime(event.target.value);
@@ -46,9 +48,20 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
           className={styles.drawer}
         >
           <h3 className={styles.drawer__header}>Расширенный поиск:</h3>
-          <Chips chipsLabel='Основные ингридиенты:'/>
-          <Box>
-            <Typography variant="body1" color="text.secondary">Время приготовления:</Typography>
+
+        // конфлие слияния, необходимо проверить --->
+          <div>
+          <Typography variant="body1" color="text.secondary">Основные ингредиенты:</Typography>
+            <Paper elevation={0}>
+              <InputBase className={styles.drawer__input}/>
+            </Paper>
+          </div>
+          <div>
+          <Typography variant="body1" color="text.secondary">Время приготовления:</Typography>
+         // <Chips chipsLabel='Основные ингридиенты:'/>
+         // <Box>
+         //   <Typography variant="body1" color="text.secondary">Время приготовления:</Typography>
+         // <-------
             <Select
               value={time}
               onChange={handleChangeTime}
@@ -61,14 +74,21 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
               <MenuItem value={60}>не более часа</MenuItem>
               <MenuItem value={120}>не более 2 часов</MenuItem>
             </Select>
-          </Box>
+// ---->
+          </div>
+          //</Box>
+// <-----
           <Box sx={{display: 'flex', gridGap: 16, alignItems: 'center'}}>
             <Typography variant="body1" color="text.secondary">
               Рейтинг:
             </Typography>
             <Rating name="size-small" defaultValue={4} />
           </Box>
-          <Box>
+// ---->
+          <div>
+// <Box>
+// <-----
+
             <Typography variant="body1" color="text.secondary">Тип блюда:</Typography>
             <FormGroup className={styles.drawer__checkbox}>
               <FormControlLabel control={<Checkbox />} label="Закуски" color="primary"/>
@@ -76,21 +96,38 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
               <FormControlLabel control={<Checkbox />} label="Десерты" color="primary"/>
               <FormControlLabel control={<Checkbox />} label="Напитки" color="primary"/>
             </FormGroup>
-          </Box>
-          <Box>
-            <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
+// -------->
+          </div>
+          <div>
+          <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
             <Paper elevation={0}>
               <InputBase className={styles.drawer__input}/>
             </Paper>
-          </Box>
-          <Box>
-            <Typography variant="body1" color="text.secondary">Имя автора:</Typography>
+          </div>
+          <div>
+          <Typography variant="body1" color="text.secondary">Имя автора:</Typography>
             <Paper elevation={0}>
               <InputBase className={styles.drawer__input}/>
             </Paper>
-          </Box>
-          <Box>
-            <Typography variant="body1" color="text.secondary">Продукты:</Typography>
+          </div>
+          <div>
+          <Typography variant="body1" color="text.secondary">Продукты:</Typography>
+  //        </Box>
+  //        <Box>
+  //          <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
+  //          <Paper elevation={0}>
+  //            <InputBase className={styles.drawer__input}/>
+  //          </Paper>
+  //        </Box>
+  //        <Box>
+  //          <Typography variant="body1" color="text.secondary">Имя автора:</Typography>
+  //          <Paper elevation={0}>
+  //            <InputBase className={styles.drawer__input}/>
+  //          </Paper>
+  //        </Box>
+  //        <Box>
+  //          <Typography variant="body1" color="text.secondary">Продукты:</Typography>
+// <---------------------
             <FormControl 
               className={styles.drawer__radio}
             >
@@ -105,7 +142,11 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
                 <FormControlLabel value="kosher" control={<Radio />} label="Кошерные" color="primary"/>
               </RadioGroup>
             </FormControl>
-          </Box>
+
+// ------>
+          </div>
+//          </Box>
+// <--------
           <Button variant="contained" disableElevation>
             Найти
           </Button>

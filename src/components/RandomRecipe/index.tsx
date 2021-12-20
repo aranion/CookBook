@@ -15,6 +15,8 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
   const [isModal, setModal] = React.useState(false);
   const onClose = () => setModal(false);
 
+  if(!recipe) return <div>Рецепты не подгружены</div>
+
   return (
     <div className={styles["recipe-block"]}>
       <h3 className={styles["recipe-block__header"]}>Случайный рецепт</h3>
@@ -62,7 +64,7 @@ export const Recipe = ({ recipe }: { recipe: IRecipe }) => {
           </ul>
           <div className={styles["info-container__added-author"]}>
             <AccountCircleIcon />
-            <span>{recipe?.author}</span>
+            <span>{recipe?.author.name}</span>
           </div>
           <div className={styles["info-container__added"]}>
             <Button
