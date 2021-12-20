@@ -13,10 +13,10 @@ export interface IRecipe {
   id: string;
   title: string;
   ingredients: Array<Ingredients>;
-  stepsData: Array<StepData>;
+  steps: Array<StepData>;
   author: string;
   time: number;
-  urlRecipeImg?: string;
+  urlImg ?: string;
   typeOfMeal: string; // тип трапезы
   portionsAmount: number;
   cost: number; // затраты

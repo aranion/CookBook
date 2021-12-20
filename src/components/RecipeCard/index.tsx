@@ -1,22 +1,26 @@
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { 
+  Card,
+  CardHeader,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Avatar, 
+  IconButton, 
+  Typography,
+  Button, 
+  Box, 
+  Rating
+} from '@mui/material';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import {Button, Box, Rating} from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IRecipe } from "models/Recipe";
 
 export default function RecipeReviewCard({ recipe }: { recipe: IRecipe }) {
 
   return (
-    <Card sx={{ width: 800, display: 'flex'}}>
+    <Card sx={{ width: 800, display: 'flex', borderRadius: '12px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)'}}>
       <CardMedia
         component="img"
         image="/img/5.jpg"

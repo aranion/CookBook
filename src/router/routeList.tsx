@@ -51,7 +51,7 @@ export const routeList: IRoute[] = [
     title: "Создать рецепт",
     path: "/addRecipe",
     component: <AddRecipe />,
-    private: false,
+    private: true,
     menu: true,
   },
   {

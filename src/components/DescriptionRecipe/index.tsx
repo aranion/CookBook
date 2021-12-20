@@ -45,11 +45,11 @@ export const DescriptionRecipe = ({
           <div className={styles.modal_body__left}>
             <img
               className={styles["modal_body__left-img"]}
-              src={recipe.urlRecipeImg || img}
+              src={recipe.urlImg  || img}
               alt="price"
             ></img>
             <div>
-              <h4 className={styles["modal_body__left-title"]}>Ингридиенты:</h4>
+              <h4 className={styles["modal_body__left-title"]}>Ингредиенты:</h4>
               <ul>
                 {recipe.ingredients.map((item: Ingredients, index: number) => (
                   <li key={index}>
@@ -93,7 +93,7 @@ export const DescriptionRecipe = ({
             </div>
             <div>
               <div className={styles["modal_body__right-process"]}>
-                {recipe.stepsData.map((el) => {
+                {recipe.steps.map((el) => {
                   return <StepRecipe key={el.title} steps={el} />;
                 })}
               </div>

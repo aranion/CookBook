@@ -19,7 +19,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "1кг",
       },
     ],
-    stepsData: [
+    steps: [
       {
         title: "шаг 1",
         description: "Рыбное филе порезать на мелкие кусочки",
@@ -59,7 +59,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "1кг",
       },
     ],
-    stepsData: [
+    steps: [
       {
         title: "шаг 1",
         description: "Макароши кинуть в воду",
@@ -94,7 +94,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "300г",
       },
     ],
-    stepsData: [
+    steps: [
       {
         title: "шаг 1",
         description: "Рыбное филе порезать на мелкие кусочки",
@@ -130,7 +130,7 @@ export const RECIPES_LIST: Array<IRecipe> = [
         amount: "300г",
       },
     ],
-    stepsData: [
+    steps: [
       {
         title: "шаг 1",
         description: "Яйца разбить",

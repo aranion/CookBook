@@ -5,7 +5,8 @@
   box-shadow: $boxShadovDefault;
   border-radius: $borderRadiusDefault;
   min-height: 280px;
-  margin: 0px auto;
+  margin: 20px auto;
+  margin-bottom: 0;
   padding: 16px;
   box-sizing: border-box;
 
@@ -17,11 +18,10 @@
     text-align: center;
     margin: 0;
   }
-}
-
-.last-recipes__container {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  &__container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 }

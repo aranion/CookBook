@@ -1,8 +1,9 @@
 import { AddRecipeForm } from "../../components";
+import styles from "../pages.module.scss";
 
 const AddRecipe = () => {
   return (
-    <div>
+    <div className={styles.pages__center}>
       <AddRecipeForm />
     </div>
   );

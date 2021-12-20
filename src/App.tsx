@@ -12,6 +12,7 @@ const mainTheme = createTheme({
     primary: {
       main: "#6E5530",
     },
+    
   },
 });
 
