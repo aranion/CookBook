@@ -1,10 +1,12 @@
-import { ChangeEvent, useState, useCallback } from "react";
+import { ChangeEvent, useState, useCallback, FormEvent } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import {Button, InputBase, IconButton, Paper} from "@mui/material";
+import {Button, InputBase, IconButton, Paper, Box} from "@mui/material";
 import {useAppSelector} from "../../store";
 import { IRecipe } from "models/Recipe";
 import {useActions} from 'hooks/useActions'
 import {useTimeout} from 'hooks/useTimeout'
+import {useNavigate} from 'react-router-dom'
+import {RouteNames} from '../../router/routeList'
 import styles from "./search.module.scss";
 
 export const Search = () => {
@@ -19,18 +21,17 @@ export const Search = () => {
   const handleSearchClick = () => {
       setRecipesFilter(searchValue)
   }
-
+  const router = useNavigate()
   return (
-    <div className={styles["search-block"]}>
-      <div className={styles["search-block__container"]}>
+    <Box className={styles["search-block"]}>
+      <Box className={styles["search-block__container"]}>
         <Paper
           component="form"
           sx={{
-            p: "2px 3px",
             display: "flex",
             alignItems: "center",
             width: 400,
-            height: 35,
+            height: 40,
           }}
         >
           <InputBase
@@ -39,14 +40,24 @@ export const Search = () => {
             value={searchValue}
             onChange={handleChangeSearch}
           />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+          <IconButton 
+            type="submit" 
+            sx={{ p: 1 }} 
+            aria-label="search"
+            onClick={handleSearch}
+          >
             <SearchIcon />
           </IconButton>
         </Paper>
-      </div>
-      <Button variant="contained" color="primary">
+      </Box>
+      <Button 
+        sx={{ height: 40 }}
+        variant="contained" 
+        color="primary"
+        onClick={() => router(RouteNames.ADVANCED_SEARCH)}
+      >
         Расширенный поиск
       </Button>
-    </div>
+    </Box>
   );
 };
