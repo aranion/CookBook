@@ -5,11 +5,15 @@ import {useAppSelector} from "../../store";
 import { IRecipe } from "models/Recipe";
 import {useActions} from 'hooks/useActions'
 import {useTimeout} from 'hooks/useTimeout'
-import {useNavigate} from 'react-router-dom'
-import {RouteNames} from '../../router/routeList'
 import styles from "./search.module.scss";
+import {SearchModal} from 'components'
 
 export const Search = () => {
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const [searchValue, setSearchValue] = useState<string>("");
     const {setRecipesFilter} = useActions()
     const {filter} = useAppSelector(state => state.recipes)
@@ -21,7 +25,7 @@ export const Search = () => {
   const handleSearch = () => {
       setRecipesFilter(searchValue)
   }
-  const router = useNavigate()
+
   return (
     <Box className={styles["search-block"]}>
       <Box className={styles["search-block__container"]}>
@@ -54,10 +58,11 @@ export const Search = () => {
         sx={{ height: 40 }}
         variant="contained" 
         color="primary"
-        onClick={() => router(RouteNames.ADVANCED_SEARCH)}
+        onClick={handleOpen}
       >
         Расширенный поиск
       </Button>
+      <SearchModal handleClose={handleClose} open={open}/>
     </Box>
   );
 };

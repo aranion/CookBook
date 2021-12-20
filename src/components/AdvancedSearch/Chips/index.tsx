@@ -13,7 +13,7 @@ const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-const Chips = ({chipsLabel}: {chipsLabel: string}) => {
+const Chips = ({chipsLabel, drawerWidth}: {chipsLabel: string, drawerWidth: number}) => {
 
   const [value, setValue] = useState('')
 
@@ -38,7 +38,6 @@ const Chips = ({chipsLabel}: {chipsLabel: string}) => {
   ]);
 
   const handleDelete = (chipToDelete: ChipData) => () => {
-    console.log(chipToDelete)
     setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
   };
 
@@ -46,9 +45,14 @@ const Chips = ({chipsLabel}: {chipsLabel: string}) => {
     event.preventDefault();
   };
 
+  const displayGrid = 
+  drawerWidth > 300 
+    ? {display: 'grid', gridTemplateColumns: '1fr 3fr', alignItems: 'center', textAlign: 'right', gridGap: '16px'} as const
+    : {}
+
   return (
     <Box>
-      <Box>
+      <Box sx={displayGrid}>
         <Typography variant="body1" color="text.secondary">{chipsLabel}</Typography>
         <Paper elevation={0}>
           <InputBase
