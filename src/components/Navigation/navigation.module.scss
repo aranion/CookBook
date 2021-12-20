@@ -1,9 +1,11 @@
+@import "../../constants/_vars.scss";
+
 .menu {
   display: flex;
   align-items: center;
   width: 100%;
   min-height: 32px;
-  background: #d56600;
+  background: $backgroundMenu;
   color: #ffffff;
   ul {
     width: calc(100% - 240px);

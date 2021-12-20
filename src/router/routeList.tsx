@@ -1,17 +1,17 @@
 import { ReactElement } from "react";
-import Home from "../pages/Home/Home";
+import Home from "../pages/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import MyCookbook from "pages/Cookbook";
-import AddRecipe  from "pages/AddRecipe/AddRecipe";
+import MyCookbooks from "pages/Cookbooks/Cookbooks";
+import AddRecipe  from "pages/AddRecipe";
 import AdvancedSearch from 'components/AdvancedSearch';
 
 export enum RouteNames {
   HOME = '/',
   RECIPES = '/recipes',
-  COOKBOOK = '/cookbook',
+  COOKBOOKS = '/cookbooks',
   ADD_RECIPE = '/addRecipe',
   LOGIN = '/login',
   REGISTER = '/register',
@@ -37,13 +37,13 @@ export const routeList: IRoute[] = [
     title: "Рецепты",
     path: "/recipes",
     component: <Recipes />,
-    private: true,
+    private: false,
     menu: true,
   },
   {
-    title: "Моя кулинарная книга",
-    path: "/cookbook",
-    component: <MyCookbook />,
+    title: "Мои кулинарные книги",
+    path: "/cookbooks",
+    component: <MyCookbooks />,
     private: true,
     menu: true,
   },
@@ -63,7 +63,7 @@ export const routeList: IRoute[] = [
   },
   {
     title: "Регистрация",
-    path: "/register",
+    path: "/registration",
     component: <Register />,
     private: false,
     menu: false,

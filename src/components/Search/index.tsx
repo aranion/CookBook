@@ -1,54 +1,67 @@
-import styles from "./search.module.scss";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState} from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import { Button } from "@mui/material";
-import InputBase from "@mui/material/InputBase";
-import IconButton from "@mui/material/IconButton";
-import Paper from "@mui/material/Paper";
-import {useNavigate} from 'react-router-dom'
-import {RouteNames} from '../../router/routeList'
+import {Button, InputBase, IconButton, Paper, Box} from "@mui/material";
+import {useAppSelector} from "../../store";
+import {useActions} from 'hooks/useActions'
+import styles from "./search.module.scss";
+import {SearchModal} from 'components'
 
 export const Search = () => {
-  const [search, setSearch] = useState<string>("");
-  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    console.log("search!");
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const [searchValue, setSearchValue] = useState<string>("");
+  const {setRecipesFilter} = useActions()
+  const {filter} = useAppSelector(state => state.recipes)
+  console.log('filter', filter);
+  
+  const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(e.target.value);
   };
 
-  const router = useNavigate()
-  
+  const handleSearch = () => {
+      setRecipesFilter(searchValue)
+  }
+
   return (
-    <div className={styles["search-block"]}>
-      <div className={styles["search-block__container"]}>
+    <Box className={styles["search-block"]}>
+      <Box className={styles["search-block__container"]}>
         <Paper
           component="form"
           sx={{
-            p: "2px 3px",
             display: "flex",
             alignItems: "center",
             width: 400,
-            height: 35,
+            height: 40,
           }}
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Название рецепта"
-            value={search}
-            onChange={handleSearch}
+            value={searchValue}
+            onChange={handleChangeSearch}
           />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+          <IconButton 
+            type="submit" 
+            sx={{ p: 1 }} 
+            aria-label="search"
+            onClick={handleSearch}
+          >
             <SearchIcon />
           </IconButton>
         </Paper>
-      </div>
+      </Box>
       <Button 
+        sx={{ height: 40 }}
         variant="contained" 
         color="primary"
-        onClick={() => router(RouteNames.ADVANCED_SEARCH)}
+        onClick={handleOpen}
       >
-
         Расширенный поиск
       </Button>
-    </div>
+      <SearchModal handleClose={handleClose} open={open}/>
+    </Box>
   );
 };

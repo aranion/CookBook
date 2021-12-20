@@ -17,10 +17,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IRecipe } from "models/Recipe";
 
-export default function RecipeReviewCard({ recipe }: { recipe: IRecipe }) {
+export const RecipeReviewCard = ({ recipe }: { recipe: IRecipe })  => {
 
   return (
-    <Card sx={{ width: 800, display: 'flex', borderRadius: '12px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)'}}>
+    <Card sx={{ width: 800, display: 'flex', borderRadius: '12px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)', margin: '20px auto'}}>
       <CardMedia
         component="img"
         image="/img/5.jpg"

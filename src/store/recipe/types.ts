@@ -1,30 +1,32 @@
 import {IRecipe} from "../../models/Recipe"
 
 export type Action = {
-    type: string
-    payload: IRecipe | Error | number | string
+    type: RecipeActionTypes
+    payload: any //IRecipe | Error | number | string
 }
 
 export interface RecipeState {
     loading: boolean
-    data?: IRecipe[]
+    data: IRecipe[] | []
+    filter: string
     error?: Error
     page?: number;
     limit?: number;
 }
 
 export enum RecipeActionTypes {
-    FETCH_RECIPES = '@recipes/FETCH_RECIPES',
+    START_RECIPES = '@recipes/START_RECIPES',
     FETCH_RECIPES_SUCCESS = '@recipes/FETCH_RECIPES_SUCCESS',
     FETCH_RECIPES_ERROR = '@recipes/FETCH_RECIPES_ERROR',
     ADD_RECIPE = '@recipes/ADD_RECIPE',
     MODIFY_RECIPE = '@recipes/MODIFY_RECIPES',
     DELETE_RECIPE = '@recipes/DELETE_RECIPE',
+    SET_FILTER = '@recipes/SET_FILTER',
     SET_RECIPES_PAGE = '@recipes/SET_RECIPES_PAGE',
 }
 
-interface FetchRecipeAction {
-    type: RecipeActionTypes.FETCH_RECIPES
+interface StartRecipeAction {
+    type: RecipeActionTypes.START_RECIPES
 }
 
 interface FetchRecipeSuccessAction {
@@ -57,11 +59,17 @@ interface SetRecipesPage {
     payload: number;
 }
 
+interface SetRecipesFilter {
+    type: RecipeActionTypes.SET_FILTER;
+    payload: string;
+}
+
 export type RecipeAction =
-    FetchRecipeAction
+    StartRecipeAction
     | FetchRecipeErrorAction
     | FetchRecipeSuccessAction
     | AddRecipeAction
     | ModifyRecipeAction
     | DeleteRecipeAction
     | SetRecipesPage
+    | SetRecipesFilter

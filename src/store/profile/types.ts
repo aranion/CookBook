@@ -18,5 +18,4 @@ interface FetchProfileErrorAction {
 }
 
 export type ProfileAction =
-    // FetchRecipeAction |
     FetchProfileErrorAction

@@ -12,11 +12,11 @@ const mainTheme = createTheme({
     primary: {
       main: "#6E5530",
     },
-    
   },
 });
 
 export function App() {
+
   return (
     <ProvideAuth>
       <Provider store={store}>

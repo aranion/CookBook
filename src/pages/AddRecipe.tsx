@@ -1,5 +1,5 @@
-import { AddRecipeForm } from "../../components";
-import styles from "../pages.module.scss";
+import { AddRecipeForm } from "../components";
+import styles from "./pages.module.scss";
 
 const AddRecipe = () => {
   return (
