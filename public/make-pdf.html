@@ -10,8 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.4/vfs_fonts.js"></script>
     
     <script>
-
-        const recipe = {
+        //  временнная заглушка полученного от API рецепта:
+        const recipeData = {
             id: "02fe",
             title: "Омлет",
             ingredients: [
@@ -48,6 +48,21 @@
             dateCreation: "31.11.21",
         };
         
+        
+        //  сначала - запрос к серверу по айдишнику fetch() -> recipeData
+        function getAPIdata(recipeId){
+            //  fetch()
+            //  then    ->  buildPDF(recipeData)
+        }
+
+        function buildPDF(){
+            const content = arraizeData(recipeData);
+            var docDefinition = {
+                content,
+                styles: css
+            };
+            pdfMake.createPdf(docDefinition).download("CookBook-"+recipeData.title);
+        }
         function arraizeData(data){
             const time = data.time ? data.time : null;
             const author = data.author ? data.author : null;
@@ -88,53 +103,48 @@
             );
 
             return content;
-        } 
-
-        function buildPDF(){
-            const css = {
-                cookbookLogo:{
-                    margin: [2,2,0,0],
-                    color: '#ccc',
-                    fontSize: 14,
-                },
-                title:{
-                    alignment: 'center',
-                    fontSize: 20,
-                },
-                subTitle:{
-                    fontSize: 18,
-                    alignment: 'center',
-                },
-                props:{
-                    fontSize: 12
-                },
-                propsTitle:{
-                    fontSize: 14
-                },
-                ingrLeft:{
-                    alignment: 'right',
-                    margin:[0,0,10,0]
-                },
-
-                step:{
-                    fontSize: 8
-                },
-                stepText:{
-
-                }
-            };
-            
-            var docDefinition = {
-                content: arraizeData(recipe),
-                styles: css
-            };
-
-            var pdf = pdfMake.createPdf(docDefinition).download();
         }
+
+        const css = {
+            cookbookLogo:{
+                margin: [2,2,0,0],
+                color: '#ccc',
+                fontSize: 14,
+            },
+            title:{
+                alignment: 'center',
+                fontSize: 20,
+            },
+            subTitle:{
+                fontSize: 18,
+                alignment: 'center',
+            },
+            props:{
+                fontSize: 12
+            },
+            propsTitle:{
+                fontSize: 14
+            },
+            ingrLeft:{
+                alignment: 'right',
+                margin:[0,0,10,0]
+            },
+
+            step:{
+                fontSize: 8
+            },
+            stepText:{
+
+            }
+        };
+            
+            
     </script>
 </head>
 <body>
     <h1>PDF-make</h1>
-    <button onclick="buildPDF()">Build PDF with PDFmake</button>
+    <p>Можно будет открывать эту страницу новым окном с GET-параметром 'ID рецепта', который зафетчит и по полученным данным построит PDF</p>
+    <i>этой нопки не будет, функция запустится после открытия стрницы</i>
+    <button onclick="buildPDF()">Build PDF </button>
 </body>
 </html>
