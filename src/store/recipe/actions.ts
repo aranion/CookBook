@@ -7,9 +7,9 @@ import {RECIPES_LIST} from "constants/recipesList"
 export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
     try {
         dispatch({type: RecipeActionTypes.START_RECIPES})
-        const {data} = await $api.get('/recipes')
-
-        dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
+        throw new Error("Пропуск запроса к серверу... Обращения к серверу не проходят");
+        // const {data} = await $api.get('/recipes')
+        // dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
     } catch (e: any) {
         if (e instanceof Error) dispatch({
             type: RecipeActionTypes.FETCH_RECIPES_ERROR,

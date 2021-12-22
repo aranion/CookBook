@@ -16,15 +16,25 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IRecipe } from "models/Recipe";
+import imgDefaultGB from "../../assets/cbDefault.jpg";
 
 export const RecipeReviewCard = ({ recipe }: { recipe: IRecipe })  => {
 
   return (
-    <Card sx={{ width: 800, display: 'flex', borderRadius: '12px', boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)', margin: '20px auto'}}>
+    <Card sx={{ 
+        width: 800, 
+        display: 'flex', 
+        borderRadius: '12px',
+        background: '#f4f4f4', 
+        boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.25)', 
+        margin: '20px auto',
+        overflow: 'hidden',
+        height: '280px'
+    }}>
       <CardMedia
         component="img"
-        image="/img/5.jpg"
-        alt="Paella dish"
+        image={recipe?.urlImg || imgDefaultGB}
+        alt={recipe?.title}
         sx={{ maxHeight: '100%', maxWidth: 300 }}
       />
       <Box
@@ -53,7 +63,7 @@ export const RecipeReviewCard = ({ recipe }: { recipe: IRecipe })  => {
           sx={{ display: 'flex', flexDirection: 'column', gridGap: 16 }}
         >
           <Typography variant="body1" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.
+          {recipe?.description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Время приготовления: {recipe.time} минут

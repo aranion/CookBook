@@ -6,7 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import MyCookbooks from "pages/Cookbooks/Cookbooks";
 import AddRecipe  from "pages/AddRecipe";
-import AdvancedSearch from 'components/AdvancedSearch';
+import {AdvancedSearch} from '../components';
 
 export enum RouteNames {
   HOME = '/',

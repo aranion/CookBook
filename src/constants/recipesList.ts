@@ -44,6 +44,7 @@ export const RECIPES_LIST: IRecipe[] = [
         portionsAmount: 2,
         cost: 15,
         createdAt: "31.11.21",
+        urlImg: '/img/1.jpg'
     },
     {
       id: "01fe",
@@ -77,15 +78,16 @@ export const RECIPES_LIST: IRecipe[] = [
           description: "Смешать с макарошами",
         },
       ],
-        description: "Рецепт дня",
-        cuisine: "Европа",
-        rating: 4,
+      description: "Рецепт дня",
+      cuisine: "Европа",
+      rating: 4,
       time: 15,
         author: {id: "18", name: "Cookerdoker"},
       typeOfMeal: "обед",
       portionsAmount: 5,
       cost: 49,
       createdAt: "31.11.21",
+      urlImg: '/img/2.jpg'
     },
     {
       id: "02fe",
