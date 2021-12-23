@@ -31,10 +31,10 @@ export const setRecipesFilter = (filter: string) => (dispatch: Dispatch<RecipeAc
     }
 }
 
-export const addRecipe = (recipe: IRecipe) => async (dispatch: Dispatch<RecipeAction>) => {
+export const addRecipe = (recipe: IRecipe, formDataFiles: FormData) => async (dispatch: Dispatch<RecipeAction>) => {
     try {
         dispatch({type: RecipeActionTypes.START_RECIPES})
-        const {data} = await $api.post('/create', {...recipe})
+        const {data} = await $api.post('/create', {recipe, formDataFiles})
 
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
     } catch (e: any) {
