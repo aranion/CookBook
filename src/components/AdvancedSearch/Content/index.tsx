@@ -1,8 +1,5 @@
-import styles from "./advancedSearch.module.scss";
 import {SearchForm} from 'components/AdvancedSearch/SearchForm'
-
 import { Box } from '@mui/material';
-
 import {RecipeReviewCard as RecipeCard} from 'components';
 import { IRecipe } from "models/Recipe";
 
@@ -27,8 +24,13 @@ const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
             alignItems: 'flex-start'
           }}
         >
-          {recipes.map(recipe => {
-            return <RecipeCard recipe={recipe} key={recipe.id}/>
+          {
+          recipes.length === 0 
+            ? <Box sx={{ width: '100%', background: '#FFF', fontSize:'20px', minHeight: '20px', textAlign:'center', borderRadius: '16px'}}>
+                Рецепты не найдены...
+              </Box> 
+            : recipes.map(recipe => {
+              return <RecipeCard recipe={recipe} key={recipe.id}/>
           })}
         </Box>
       </Box>

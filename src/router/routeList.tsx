@@ -1,26 +1,22 @@
 import { ReactElement } from "react";
-import Home from "../pages/Home/Home";
+import Home from "../pages/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-//import MyCookbook from "pages/Cookbook";
-import MyCookbooks from "pages/Cookbook";
-import AddRecipe  from "pages/AddRecipe/AddRecipe";
-import AdvancedSearch from 'components/AdvancedSearch';
+import MyCookbooks from "pages/Cookbooks/Cookbooks";
+import AddRecipe from "pages/AddRecipe";
+import AdvancedSearch from "components/AdvancedSearch";
+import { Book } from "../pages/Book/Book";
 
 export enum RouteNames {
-  HOME = '/',
-  RECIPES = '/recipes',
-  COOKBOOKS = '/cookbooks',
-  ADD_RECIPE = '/addRecipe',
-  LOGIN = '/login',
-  REGISTER = '/register',
-  ADVANCED_SEARCH = '/search/advanced',
-// export enum RouteNames {
-//   COOKBOOK = "/cookbook",
-// }
-
+  HOME = "/",
+  RECIPES = "/recipes",
+  COOKBOOKS = "/cookbooks",
+  ADD_RECIPE = "/addRecipe",
+  LOGIN = "/login",
+  REGISTER = "/register",
+  ADVANCED_SEARCH = "/search/advanced",
 }
 export interface IRoute {
   title: string;
@@ -46,7 +42,7 @@ export const routeList: IRoute[] = [
     menu: true,
   },
   {
-    title: "Моя кулинарная книга",
+    title: "Мои кулинарные книги",
     path: "/cookbooks",
     component: <MyCookbooks />,
     private: true,
@@ -56,8 +52,15 @@ export const routeList: IRoute[] = [
     title: "Создать рецепт",
     path: "/addRecipe",
     component: <AddRecipe />,
-    private: false,
+    private: true,
     menu: true,
+  },
+  {
+    title: "Книга с рецептами",
+    path: "/cookbooks/:id",
+    component: <Book />,
+    private: true,
+    menu: false,
   },
   {
     title: "Авторизация",

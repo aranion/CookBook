@@ -1,4 +1,4 @@
-import { Reducer } from "redux"
+// import { Reducer } from "redux"
 import {IRecipe} from "../../models/Recipe"
 import {Action, RecipeState, RecipeActionTypes} from "./types"
 
@@ -13,7 +13,7 @@ export const recipeReducer = (state = initialState, action: Action) => {
         case RecipeActionTypes.START_RECIPES:
             return {...state, loading: true}
         case RecipeActionTypes.FETCH_RECIPES_SUCCESS:
-            return {...state, loading: false, data: action.payload}
+            return {...state, loading: false, data: [...action.payload]}
         case RecipeActionTypes.FETCH_RECIPES_ERROR:
             return {...state, loading: false, error: action.payload}
         case RecipeActionTypes.ADD_RECIPE:

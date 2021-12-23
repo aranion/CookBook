@@ -1,18 +1,36 @@
+@import "../../constants/_vars.scss";
+
 .menu {
-  margin: 0;
-  margin-top: -16px;
-  height: 32px;
-  background: #d56600;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 32px;
+  background: $backgroundMenu;
+  color: #ffffff;
   ul {
-    padding-top: 6px;
+    width: calc(100% - 240px);
+    margin: 0 30px;
+    padding: 0;
     display: flex;
     justify-content: space-evenly;  
   }
   li {
     font-size: 16px;
     line-height: 19px;
-    color: #ffffff;
-    display: inline;
-    padding-right: 20px;
+    width: 100%;
+    height: 32px;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  li:hover {
+    background-color: #9f4d00;
+  }
+  &__login {
+    min-width: 240px;
   }
 }

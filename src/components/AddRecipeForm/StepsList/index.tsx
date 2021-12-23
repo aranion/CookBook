@@ -12,8 +12,6 @@ interface State {
 export const StepsList = () => {
   const [steps, setSteps] = useState([
     { number: 1, text: "" },
-    { number: 2, text: "" },
-    { number: 3, text: "" },
   ]);
   const addStep = () => {
     setSteps([...steps, { number: steps.length + 1, text: "" }]);
@@ -38,19 +36,10 @@ export const StepsList = () => {
   };
   return (
     <>
-      <Button
-        variant="contained"
-        color="primary"
-        size={"small"}
-        endIcon={<AddIcon />}
-        onClick={() => addStep()}
-      >
-        Добавить шаг
-      </Button>
       <List>
         {steps.map((step) => (
           <ListItem key={step.number}>
-            <p>Шаг {step.number}:</p>
+            <p className={style['cooking__steps-number']}>Шаг {step.number}:</p>
             <Input
               className={style.cooking__stepDescription}
               value={step.text}
@@ -72,6 +61,14 @@ export const StepsList = () => {
           </ListItem>
         ))}
       </List>
+      <Button
+        variant="contained"
+        color="primary"
+        endIcon={<AddIcon />}
+        onClick={() => addStep()}
+      >
+        Добавить шаг
+      </Button>
     </>
   );
 };

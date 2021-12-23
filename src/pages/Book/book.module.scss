@@ -1,0 +1,84 @@
+@import "../../constants/_vars.scss";
+@import "../pages.module.scss";
+
+.container {
+  color: $textColor;
+  display: flex;
+  background-color: $backgroundDefault;
+  border-radius: $borderRadiusDefault;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  box-shadow: $boxShadovDefault;
+}
+.item {
+  display: flex;
+  flex: 1;
+  &__photo {
+    width: 64px;
+    margin-right: 16px;
+  }
+
+  &__photoBox {
+    width: 80px;
+    height: 80px;
+    background-color: #c4c4c4;
+    margin-right: 16px;
+  }
+  &__name {
+    margin-bottom: 8px;
+    flex: 1;
+    flex-basis: 20%;
+  }
+  &__description {
+    margin-bottom: 8px;
+    flex: 1;
+    flex-basis: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &__count {
+    flex: 1;
+    flex-basis: 10%;
+  }
+  &__chip {
+    margin: 0 8px 8px 0;
+    cursor: pointer;
+  }
+  &__content {
+    flex:1;
+    width: 430px;
+  }
+}
+.title {
+  text-align: center;
+  margin: 0 0 8px 0;
+}
+.book {
+  &__left{
+    flex: 1;
+    padding-right: 16px;
+    border-right: 1px solid $textColor;
+  }
+  &__right{
+    flex: 3;
+  }
+  &__cover {
+    width: 128px * 1.45;
+    height: 128px * 2;
+    background-color: #c4c4c4;
+    margin: 0 auto;
+  }
+  &__header {
+    //text-align: center;
+    padding-left: 16px;
+    margin: 0;
+  }
+  &__chip {
+    margin: 0 8px 8px 0;
+  }
+  &__description {
+    margin: 8px auto;
+  }
+}

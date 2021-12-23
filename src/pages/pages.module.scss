@@ -1,0 +1,45 @@
+@import "../constants/_vars.scss";
+
+.pages {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: $paddingDefault;
+  }
+  &__center {
+    padding-left: calc(50vw - 420px);
+    padding-right: calc(50vw - 420px);
+    margin: $marginDefault;
+  }
+  &_h1,
+  &_h2,
+  &_h2 {
+    font-family: "Roboto Thin", sans-serif;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    padding: $paddingDefault;
+    border-radius: $borderRadiusDefault;
+    background-color: $backgroundDefault;
+    box-shadow: $boxShadovDefault;
+  }
+}
+
+@media (min-width: 575.98px) {
+}
+@media (min-width: 767.98px) {
+}
+@media (min-width: 991.98px) {
+}
+@media (min-width: 1199.98px) {
+  .pages {
+    &__center {
+      padding-left: calc(50vw - 520px);
+      padding-right: calc(50vw - 520px);
+    }
+  }
+}

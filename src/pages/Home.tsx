@@ -1,11 +1,5 @@
-import {IRecipe} from "models/Recipe";
-import {useEffect} from "react";
-import {RootState, useAppSelector} from "store";
-import { useActions } from 'hooks/useActions';
-import {Recipe, LastRecipes, RecipeReviewCard} from "components";
-import styles from "./home.module.scss";
-
-import {RECIPES_LIST} from "constants/recipesList"
+import {Recipe, LastRecipes} from "components";
+import styles from './pages.module.scss'
 
 const Home = () => {
     // const {fetchAllRecipes} = useActions()
@@ -19,7 +13,7 @@ const Home = () => {
     //             item.title.indexOf(state.recipes.filter) !== -1
     //         ))
     // console.log("Home", recipes)
-    const {profile} = useAppSelector((state: RootState) => state)
+    // const {profile} = useAppSelector((state: RootState) => state)
 
     // function getRandomInt(min: number, max: number) {
     //   min = Math.ceil(min);
@@ -38,8 +32,8 @@ const Home = () => {
     // const randomRecipe = data[getRandomInt(0, data['length'])];
     // const lastRecipe = lastElement();
     return (
-        <div className={styles.center}>
-            {/*<Recipe recipe={randomRecipe} />*/}
+        <div className={styles.pages__center}>
+            <Recipe />
             <LastRecipes/>
         </div>
     );

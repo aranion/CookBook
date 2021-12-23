@@ -1,56 +1,121 @@
 @import "../../constants/_vars.scss";
 
+$height: 320px;
+$widhtLeft: 400px;
+
 .recipe-block {
   background: $backgroundDefault;
   box-shadow: $boxShadovDefault;
   border-radius: $borderRadiusDefault;
-  min-height: 320px;
-  margin: 20px auto;
-  padding: 20px;
-  box-sizing: border-box;
   color: $textColor;
+  min-height: $height;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow: hidden;
 
+  &__left {
+    border-top-left-radius: $borderRadiusDefault;
+    border-bottom-left-radius: $borderRadiusDefault;
+    height: $height;
+    max-width: $widhtLeft;
+    position: relative;
+    background-color: grey;
+    img {
+      object-fit: cover;
+      height: 100%;
+      max-width: 100%;
+    }
+  }
+  &__left:hover &__meta {
+    background: linear-gradient(0deg, black, rgba(59, 59, 59, 0.4));
+  }
+  &__meta {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25%;
+    background: linear-gradient(0deg, black, rgba(59, 59, 59, 0));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 0.9em;
+    color: white;
+    padding: 0 20px;
+    box-sizing: border-box;
+    div {
+      display: flex;
+      align-items: center;
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: calc(100% - $widhtLeft);
+    min-width: 320px;
+    padding: $paddingDefault;
+    box-sizing: border-box;
+    &_added {
+      display: flex;
+      width: 100%;
+      margin-top: auto;
+      justify-content: space-between;
+      &-author {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+        span {
+          font-size: 14px;
+          padding-left: 10px;
+          color: $primary;
+        }
+      }
+    }
+  }
+  
   &__header {
     font-size: 20px;
     font-weight: normal;
     line-height: 23px;
     text-align: center;
     margin: 0 0 20px;
+    width: 100%;
+    border-bottom: 1px solid black;
   }
 
   &__info {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    flex-direction: column;
     flex-wrap: wrap;
-
-    & img {
+    width: 100%;
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      max-height: 130px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      li {
+        list-style-type: circle;
+      }
+    }
+    img {
       max-width: 100%;
     }
   }
 }
 
 .info-container {
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  &__added {
-    padding-top: 35px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    &-author {
-      display: flex;
-      align-items: center;
-      margin-top: 10px;
-      span {
-        font-size: 14px;
-        color: #6e5530;
-      }
-    }
-  }
-  ul {
-    padding-left: 0px;
+  &_ingredients {
+    margin: 10px 0;
+    font-weight: normal;
   }
 }
 
@@ -58,31 +123,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   span {
     font-size: 20px;
     line-height: 28px;
-    padding: 0 10px 0 0;
+    padding-right: 10px;
+    font-weight: bold;
   }
-}
-
-.recipe-block__meta {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  font-size: 0.9em;
-  color: #666;
-  align-items: center;
-  min-height: 30px;
-  div {
-    display: flex;
+  svg {
+    cursor: pointer;
   }
-  span {
-    display: flex;
-    align-items: center;
-    span {
-      margin-left: 5px;
-    }
+  svg:hover {
+    color: rgb(77, 59, 33);
   }
 }

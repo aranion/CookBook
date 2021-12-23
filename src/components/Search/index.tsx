@@ -5,7 +5,6 @@ import {useAppSelector} from "../../store";
 import {getFilter} from 'store/recipe/selectors'
 import { IRecipe } from "models/Recipe";
 import {useActions} from 'hooks/useActions'
-import {useTimeout} from 'hooks/useTimeout'
 import styles from "./search.module.scss";
 import {SearchModal} from 'components'
 
@@ -16,8 +15,15 @@ export const Search = () => {
   const handleClose = () => setOpen(false);
 
   const [searchValue, setSearchValue] = useState<string>("");
+
+  const {setRecipesFilter} = useActions()
+  const {filter} = useAppSelector(state => state.recipes)
+  console.log('filter', filter);
+  
+
     const {setRecipesFilter} = useActions()
     
+
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);
   };

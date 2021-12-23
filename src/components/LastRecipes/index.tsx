@@ -1,11 +1,13 @@
 import {useAppSelector} from 'store'
 import styles from "./lastRecipes.module.scss";
-import {SmallRecipe} from "../";
+import {Loader, SmallRecipe} from "../";
 import {IRecipe} from "models/Recipe";
-import {RECIPES_LIST} from "constants/recipesList"
 
 export const LastRecipes = () => {
     let recipes = useAppSelector<IRecipe[]>(RootState => RootState.recipes.data)
+    if(!recipes || recipes.length === 0) return <div className={styles["last-recipes"]}>
+        <Loader />
+    </div>
 
     return (
         <div className={styles["last-recipes"]}>

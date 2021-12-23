@@ -1,14 +1,14 @@
-@import "../constants/_vars.scss";
+@import "../../constants/_vars.scss";
+@import "../pages.module.scss";
 
 .container {
   color: $textColor;
-  margin: 12px auto 0 auto;
-  max-width: 839px;
   display: flex;
   flex-direction: column;
   background-color: $backgroundDefault;
   border-radius: $borderRadiusDefault;
-  padding: 16px;
+  padding: 20px;
+  box-sizing: border-box;
   position: relative;
   box-shadow: $boxShadovDefault;
 }
@@ -44,4 +44,5 @@
 }
 .title {
   text-align: center;
+  margin: 0;
 }

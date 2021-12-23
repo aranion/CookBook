@@ -10,8 +10,7 @@ interface State {
 
 export const IngredientList = () => {
   const [ingredients, setIngredients] = useState([
-    { name: "Макароны", placeholder: "Ингредиент 1" },
-    { name: "Молоко", placeholder: "Ингредиент 2" },
+    { name: "", placeholder: "Ингредиент 1" },
   ]);
   const addIngredient = () => {
     setIngredients([
@@ -36,14 +35,7 @@ export const IngredientList = () => {
   };
   return (
     <>
-      <Button
-        onClick={() => addIngredient()}
-        variant="contained"
-        color="primary"
-        endIcon={<AddIcon />}
-      >
-        Добавить ингридиент
-      </Button>
+      <h4>Ингредиенты:</h4>
       <List>
         {ingredients.map((ingredient) => (
           <ListItem key={ingredient.placeholder}>
@@ -52,6 +44,13 @@ export const IngredientList = () => {
               value={ingredient.name}
               onChange={handleInput}
               fullWidth={true}
+              required={true}
+              inputProps={{ "aria-label": "description" }}
+            />
+            <Input
+              placeholder={'Объем'}
+              required={true}
+              style={{width: 100, marginLeft: 10}}
               inputProps={{ "aria-label": "description" }}
             />
             <IconButton onClick={() => deleteItem(ingredient.placeholder)}>
@@ -60,6 +59,14 @@ export const IngredientList = () => {
           </ListItem>
         ))}
       </List>
+      <Button
+        onClick={() => addIngredient()}
+        variant="contained"
+        color="primary"
+        endIcon={<AddIcon />}
+      >
+        Добавить ингридиент
+      </Button>
     </>
   );
 };

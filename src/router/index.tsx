@@ -1,4 +1,4 @@
-import {Suspense, useEffect} from 'react';
+import {Suspense} from 'react';
 // import {useAuth} from 'hooks/useAuth';
 import {Routes, Route, Navigate, useLocation} from 'react-router';
 import {routeList, IRoute} from './routeList';
