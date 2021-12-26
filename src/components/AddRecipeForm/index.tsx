@@ -107,7 +107,7 @@ export const AddRecipeForm = () => {
                                 <FormLabel component="legend">Могут ли другие
                                     просматривать данный рецепт?</FormLabel>
                                 <RadioGroup row aria-label="checked"
-                                            defaultValue="yes"
+                                            defaultValue={true}
                                             name="private">
                                     <FormControlLabel value={true}
                                                       control={<Radio/>}
