@@ -2,7 +2,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { AppRouter } from "./router";
 import store from "./store";
-import { Header } from "components";
+import { DescriptionRecipe, Header } from "components";
 import styles from "./App.module.scss";
 import { ProvideAuth } from "hooks/useAuth";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -16,7 +16,6 @@ const mainTheme = createTheme({
 });
 
 export function App() {
-
   return (
     <ProvideAuth>
       <Provider store={store}>
@@ -25,6 +24,7 @@ export function App() {
             <div className={styles.main}>
               <Header />
               <AppRouter />
+              <DescriptionRecipe />
             </div>
           </BrowserRouter>
         </ThemeProvider>

@@ -1,11 +1,11 @@
-// import { Reducer } from "redux"
 import {IRecipe} from "../../models/Recipe"
 import {Action, RecipeState, RecipeActionTypes} from "./types"
 
 const initialState: RecipeState = {
     loading: false,
     filter: '',
-    data: []
+    data: [],
+    maxItemsPage: 10,
 }
 
 export const recipeReducer = (state = initialState, action: Action) => {

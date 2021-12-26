@@ -1,19 +1,68 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Input, InputLabel, MenuItem, Radio, RadioGroup, Select, TextareaAutosize, TextField } from "@mui/material";
+import { Button, FormControl, FormControlLabel, FormLabel, Input, InputLabel, MenuItem, Radio, RadioGroup, Select, SelectChangeEvent, TextareaAutosize, TextField } from "@mui/material";
 import styles from "./addRecipeForm.module.scss";
 import { StepsList } from "./StepsList";
 import { IngredientList } from "./IngredientList";
-import { useState } from "react";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { useAppSelector } from "store";
+import { AddRecipeState} from "store/addRecipe/types";
+import { IRecipe } from "models/Recipe";
+import { useActions } from "hooks/useActions";
 
 export const AddRecipeForm = () => {
-  const [nameRecipe, setNameRecipe] = useState("");
-  const handleNameRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNameRecipe((e.target as HTMLDataElement).value);
+  const {
+    addRecipe, 
+    setInpuTitleRecipe,
+    setDescriptionRecipe,
+    setIsPrivatRecipe,
+    setCostRecipe,
+    setCookingTime,
+    setPersons,
+    setTypeCuisine,
+    setTypeOfMeal,
+    setKindOfFood,
+    cleanForm,
+  } = useActions(); 
+
+  const {inputFields, dataSelectForm} = useAppSelector(state => (state.addRecipe as AddRecipeState));
+
+  const handleTitleRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInpuTitleRecipe((e.target as HTMLDataElement).value);
   };
+  const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setDescriptionRecipe((e.target as HTMLDataElement).value);
+  };
+  const handleIsPrivat = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsPrivatRecipe(!!(e.target as HTMLDataElement).value);
+  };
+  const handleCost = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCostRecipe(Number((e.target as HTMLDataElement).value));
+  };
+  const handleCookingTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCookingTime(Number((e.target as HTMLDataElement).value));
+  };
+  const handlePersons = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPersons(Number((e.target as HTMLDataElement).value));
+  };
+  const handleTypeCuisine = (e: SelectChangeEvent<string>) => {
+    setTypeCuisine((e.target as HTMLDataElement).value);
+  };
+  const handleTypeOfMeal = (e: SelectChangeEvent<string>) => {
+    setTypeOfMeal((e.target as HTMLDataElement).value);
+  };
+  const handleKindOfFood = (e: SelectChangeEvent<string>) => {
+    setKindOfFood((e.target as HTMLDataElement).value);
+  };
+  const resetForm = () => {
+    cleanForm();  
+  };
+  const submitRecipe= () => {
+    addRecipe( {} as IRecipe);  
+  };
+  
   return (
     <div className={styles.form}>
       <h1 className={styles.form__title}>Новый рецепт</h1>
-      <form className={styles.form__col}>
+      <form className={styles.form__col} onSubmit={(e)=>e.preventDefault()}>
         <div className={styles.form__row}>
           <div className={styles.form__left}>
             <div className={styles["form__left_container"]}>
@@ -33,9 +82,9 @@ export const AddRecipeForm = () => {
             <div className={styles.form__right_title}>
               <Input
                 placeholder={"Название рецепта"}
-                value={nameRecipe}
+                value={inputFields['titleRecipe']}
                 required={true}
-                onChange={handleNameRecipe}
+                onChange={handleTitleRecipe}
                 fullWidth={true}
                 inputProps={{ "aria-label": "description" }}
               />
@@ -44,6 +93,8 @@ export const AddRecipeForm = () => {
               <TextareaAutosize
                 minRows={1}
                 required={true}
+                value={inputFields.description}
+                onChange={handleDescription}
                 placeholder="Введите информацию о рецепте..."
                 style={{ width: "100%", height: 130, border: '1px solid grey', resize: 'none', boxSizing: "border-box"}}
               />
@@ -51,9 +102,15 @@ export const AddRecipeForm = () => {
             <div>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Могут ли другие просматривать данный рецепт?</FormLabel>
-                <RadioGroup row aria-label="checked" defaultValue="yes" name="row-radio-buttons-group">
-                  <FormControlLabel value="yes" control={<Radio />} label="Да" />
-                  <FormControlLabel value="no" control={<Radio />} label="Нет" />
+                <RadioGroup 
+                  row aria-label="checked" 
+                  value={inputFields.isPrivat}
+                  onChange={handleIsPrivat} 
+                  defaultValue={''} 
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel value='' control={<Radio />} label="Да" />
+                  <FormControlLabel value='1' control={<Radio />} label="Нет" />
                 </RadioGroup>
               </FormControl>
             </div>
@@ -75,9 +132,11 @@ export const AddRecipeForm = () => {
             <div className={styles.form__details_row}>
               <TextField 
                 label="Стоимость" 
-                variant="standard" 
-                fullWidth 
+                variant="standard"
+                fullWidth
                 type='number'
+                value={inputFields.cost} 
+                onChange={handleCost}
               />
             </div>
             <div className={styles.form__details_row}>
@@ -86,6 +145,8 @@ export const AddRecipeForm = () => {
                 variant="standard" 
                 fullWidth 
                 type='number'
+                value={inputFields.cookingTime} 
+                onChange={handleCookingTime}
               />
             </div>
           </div>
@@ -96,6 +157,8 @@ export const AddRecipeForm = () => {
                 variant="standard" 
                 fullWidth 
                 type='number'
+                value={inputFields.persons} 
+                onChange={handlePersons}
               />
             </div>
             <div className={styles.form__details_row}>
@@ -104,13 +167,11 @@ export const AddRecipeForm = () => {
                 <Select
                   labelId="select-label-typeCuisine"
                   label="Тип кухни"
-                  value={10}
+                  value={inputFields.typeCuisine}
+                  onChange={handleTypeCuisine}
+                  defaultValue=""
                 >
-                  <MenuItem value={10}>Мясо/Птица</MenuItem>
-                  <MenuItem value={20}>Морепродукты</MenuItem>
-                  <MenuItem value={30}>Вегетарианская</MenuItem>
-                  <MenuItem value={40}>Веганская</MenuItem>
-                  <MenuItem value={50}>Другая</MenuItem>
+                  {dataSelectForm.cuisine.map(el => <MenuItem key={el} value={el}>{el}</MenuItem>)}
                 </Select>
               </FormControl>
             </div>
@@ -122,12 +183,11 @@ export const AddRecipeForm = () => {
                 <Select
                   labelId="select-label-typeOfMeal"
                   label="Трапеза"
-                  value={10}
+                  value={inputFields.typeOfMeal}
+                  onChange={handleTypeOfMeal}
+                  defaultValue=""
                 >
-                  <MenuItem value={10}>Завтрак</MenuItem>
-                  <MenuItem value={20}>Обед</MenuItem>
-                  <MenuItem value={30}>Ужин</MenuItem>
-                  <MenuItem value={40}>Другое</MenuItem>
+                  {dataSelectForm.typeOfMeal.map(el => <MenuItem key={el} value={el}>{el}</MenuItem>)}
                 </Select>
               </FormControl>
             </div>
@@ -137,28 +197,23 @@ export const AddRecipeForm = () => {
                 <Select
                   labelId="select-label-kindOfFood"
                   label="Вид пищи"
-                  value={10}
+                  value={inputFields.kindOfFood}
+                  onChange={handleKindOfFood}
+                  defaultValue=""
                 >
-                  <MenuItem value={10}>Закуск</MenuItem>
-                  <MenuItem value={20}>Салаты</MenuItem>
-                  <MenuItem value={30}>Супы</MenuItem>
-                  <MenuItem value={40}>Вторые</MenuItem>
-                  <MenuItem value={50}>Выпечк</MenuItem>
-                  <MenuItem value={60}>Напитк</MenuItem>
-                  <MenuItem value={70}>Соусы</MenuItem>
-                  <MenuItem value={80}>Другое</MenuItem>
+                  {dataSelectForm.kindOfFood.map(el => <MenuItem key={el} value={el}>{el}</MenuItem>)} 
                 </Select>
               </FormControl>
             </div>
           </div>
         </div>
         <div className={`${styles.form__row} ${styles.form__send}`}>
-            <Button variant="contained" color="primary" style={{ width: 100}}>
-              Создать
-            </Button>
-            <Button variant="contained" color="primary" style={{ width: 100}}>
-              Отмена
-            </Button>
+          <Button onClick={submitRecipe} variant="contained" color="primary" style={{ width: 100}} type="submit">
+            Создать 
+          </Button>
+          <Button onClick={resetForm} variant="contained" color="primary" style={{ width: 100}} >
+            Отмена
+          </Button>
         </div>
       </form>
     </div>

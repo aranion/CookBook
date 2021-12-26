@@ -1,17 +1,18 @@
 import style from "./cookBooks.module.scss";
 import { Divider, List, ListItem } from "@mui/material";
 import { useState } from "react";
+import imgDefaultGB from "../../assets/cbDefault.jpg";
 
 const Cookbooks = () => {
   const [books] = useState([
     {
-      photo: "*",
+      photo: "",
       name: "Моя первая книга",
       description: "Разные рецепты по разным кухням, всё подряд.",
       count: 53,
     },
     {
-      photo: "*",
+      photo: "",
       name: "Made in italy",
       description:
         "Самые вкусные рецепты итальянской кухни, разные виды пасты.",
@@ -41,7 +42,7 @@ const Cookbooks = () => {
                   <ListItem button={true} key={book.name}>
                     <div className={style.item}>
                       <div className={style.item__photoBox}>
-                        <img src={book.photo} alt="book" />
+                        <img src={book.photo || imgDefaultGB} alt="book" />
                       </div>
                       <p className={style.item__name}>{book.name}</p>
                       <p className={style.item__description}>

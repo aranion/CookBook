@@ -1,16 +1,14 @@
-import React from "react";
-import PrintIcon from "@mui/icons-material/Print";
 import { Button } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FlatwareIcon from "@mui/icons-material/Flatware";
 import MessageIcon from "@mui/icons-material/Message";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { DescriptionRecipe, Loader } from "..";
+import { Loader, PrintElem } from "..";
 import { Ingredients, IRecipe } from "../../models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import styles from "./randomRecipe.module.scss";
-import { Link } from "react-router-dom";
+import { useActions } from "hooks/useActions";
 
 interface PropsType {
   recipes: IRecipe[];
@@ -18,10 +16,9 @@ interface PropsType {
 
 export const RandomRecipe = (props: PropsType) => {
   const {recipes} = props;
-  // const recipes = useAppSelector(state => state.recipes.data);
 
-  const [isModal, setModal] = React.useState(false);
-  const onClose = () => setModal(false);
+  const {setIsModal} = useActions();
+  const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -65,9 +62,7 @@ export const RandomRecipe = (props: PropsType) => {
             <span className={styles["heading-container__header"]}>
               {recipe?.title}
             </span>
-            <Link to="/">
-              <PrintIcon />
-            </Link>
+            <PrintElem recipe={recipe}/>
           </div>
           <h4 className={styles["info-container_ingredients"]}>Ингредиенты:</h4>
           <ul>
@@ -83,25 +78,9 @@ export const RandomRecipe = (props: PropsType) => {
             <AccountCircleIcon />
             <span>{recipe?.author.name}</span>
           </div>
-          <Button
-            variant="text"
-            color="primary"
-            size="small"
-            onClick={() => setModal(true)}
-          >
+          <Button size="small" onClick={() => onOpen(recipe.id)}>
             Посмотреть рецепт
           </Button> 
-          <DescriptionRecipe
-            visible={isModal}
-            title="Подробности рецепта"
-            recipe={recipe}
-            footer={
-              <Button variant="contained" color="primary" onClick={onClose}>
-                Закрыть
-              </Button>
-            }
-            onClose={onClose}
-          />
         </div>
       </div>
     </div>

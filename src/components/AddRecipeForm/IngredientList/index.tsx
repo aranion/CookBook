@@ -1,38 +1,38 @@
 import { Button, IconButton, Input, List, ListItem } from "@mui/material";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useState } from "react";
 import AddIcon from "@material-ui/icons/Add";
-
-interface State {
-  name: string 
-  placeholder: string 
-}
+import { RootState, useAppSelector } from "store";
+import { AddRecipeState } from "store/addRecipe/types";
+import { Ingredients } from "models/Recipe";
+import { useActions } from "hooks/useActions";
 
 export const IngredientList = () => {
-  const [ingredients, setIngredients] = useState([
-    { name: "", placeholder: "Ингредиент 1" },
-  ]);
-  const addIngredient = () => {
-    setIngredients([
-      ...ingredients,
-      { name: "", placeholder: `Ингредиент ${ingredients.length + 1}` },
-    ]);
+
+  const ingredients: Ingredients[] = useAppSelector((state: RootState) => 
+    (state.addRecipe as AddRecipeState).inputFields.ingredients
+  );
+
+  const {
+    addIngredientItem, 
+    delIngredientItem,
+    setIngredientItem, 
+    setIngredientAmountItem
+  } = useActions();
+
+  const addItem = () => {
+    addIngredientItem();
   };
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>)  => {
-    const curItem = ingredients.find(
-      (item) => item.placeholder === (e.target as HTMLInputElement).placeholder
-    ) as State;
-    curItem.name = (e.target as HTMLInputElement).value;
-    setIngredients([...ingredients]);
+  const deleteItem = (value: string) => {
+    delIngredientItem(value);
   };
-  const deleteItem = (val: string) => {
-    const arr = ingredients;
-    arr.splice(
-      arr.findIndex((item) => item.placeholder === val),
-      1
-    );
-    setIngredients([...arr]);
+  
+  const handleIngredient = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, placeholder: string)  => {
+    setIngredientItem({value: (e.target as HTMLInputElement).value, placeholder});
   };
+  const handleIngredientAmount = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, placeholder: string)  => {
+    setIngredientAmountItem({value: (e.target as HTMLInputElement).value, placeholder});
+  };
+  
   return (
     <>
       <h4>Ингредиенты:</h4>
@@ -41,8 +41,8 @@ export const IngredientList = () => {
           <ListItem key={ingredient.placeholder}>
             <Input
               placeholder={ingredient.placeholder}
-              value={ingredient.name}
-              onChange={handleInput}
+              value={ingredient.ingredient}
+              onChange={(e) => handleIngredient(e, ingredient.placeholder || '')}
               fullWidth={true}
               required={true}
               inputProps={{ "aria-label": "description" }}
@@ -50,22 +50,24 @@ export const IngredientList = () => {
             <Input
               placeholder={'Объем'}
               required={true}
+              value={ingredient.amount}
+              onChange={(e) => handleIngredientAmount(e, ingredient.placeholder || '')}
               style={{width: 100, marginLeft: 10}}
               inputProps={{ "aria-label": "description" }}
             />
-            <IconButton onClick={() => deleteItem(ingredient.placeholder)}>
+            <IconButton onClick={() => deleteItem(ingredient.placeholder || '')}>
               <DeleteIcon />
             </IconButton>
           </ListItem>
         ))}
       </List>
       <Button
-        onClick={() => addIngredient()}
+        onClick={() => addItem()}
         variant="contained"
         color="primary"
         endIcon={<AddIcon />}
       >
-        Добавить ингридиент
+        Добавить ингредиент
       </Button>
     </>
   );

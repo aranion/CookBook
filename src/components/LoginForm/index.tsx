@@ -1,7 +1,6 @@
 import { Button, TextField } from "@mui/material";
 import { useLocation, useNavigate } from "react-router";
-import { useAppDispatch } from "store";
-import { changeIsAuth } from "store/profile/actions";
+import { useAppDispatch, ActionCreators } from "store";
 import styles from './loginForm.module.scss';
 
 export const LoginForm = () => {
@@ -10,11 +9,11 @@ export const LoginForm = () => {
     const dispatch = useAppDispatch();
 
     function  logInFake () {
-        dispatch(changeIsAuth(true));
+        dispatch(ActionCreators.changeIsAuth());
         navigate(location.state?.from.pathname || '/');         
     } 
     return (
-        <div className={styles.center}>
+        <form className={styles.center} onSubmit={(e)=> { e.preventDefault(); logInFake()}}>
             Страница входа (Заглушка!)
             <div>
                 <TextField label="Логин" variant="standard" />
@@ -23,10 +22,10 @@ export const LoginForm = () => {
                 <TextField type='password' label="Пароль" variant="standard" />
             </div>
             <div>
-                <Button variant="contained" color="primary" onClick={logInFake}>
+                <Button variant="contained" color="primary" type="submit">
                     Войти
                 </Button>
             </div>
-        </div>
+        </form>
     );
 };

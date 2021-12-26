@@ -1,10 +1,13 @@
+import { IUser } from "models/User"
+
 export type Action = {
     type: string
-    payload: boolean | Error | number | string
+    payload?: boolean | Error | number | string
 }
 
 export interface ProfileState {
-    isAuth: boolean
+    isAuth: boolean,
+    data: IUser
 }
 
 export enum ProfileActionTypes {

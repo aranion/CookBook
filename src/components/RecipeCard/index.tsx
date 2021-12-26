@@ -17,8 +17,13 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IRecipe } from "models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
+import { useActions } from 'hooks/useActions';
 
 export const RecipeReviewCard = ({ recipe }: { recipe: IRecipe })  => {
+
+  const {setIsModal} = useActions();
+  
+  const onOpenModal = (idRecipe: string) => setIsModal(idRecipe);
 
   return (
     <Card sx={{ 
@@ -81,11 +86,9 @@ export const RecipeReviewCard = ({ recipe }: { recipe: IRecipe })  => {
               <ShareIcon />
             </IconButton>
           </Box>
-
-          <Button size="small">Посмотреть рецепт</Button>
+          <Button size="small" onClick={() => onOpenModal(recipe.id)}>Посмотреть рецепт</Button>
         </CardActions>
       </Box>
-      
     </Card>
   );
 }

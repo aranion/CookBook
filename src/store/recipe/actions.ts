@@ -6,10 +6,10 @@ import {RECIPES_LIST} from "constants/recipesList"
 
 export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
     try {
-        dispatch({type: RecipeActionTypes.START_RECIPES})
-        throw new Error("Пропуск запроса к серверу... Обращения к серверу не проходят");
-        // const {data} = await $api.get('/recipes')
-        // dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
+        dispatch({type: RecipeActionTypes.START_RECIPES});
+
+        const {data} = await $api.get('/recipes/get');
+        dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
     } catch (e: any) {
         if (e instanceof Error) dispatch({
             type: RecipeActionTypes.FETCH_RECIPES_ERROR,
@@ -33,9 +33,12 @@ export const setRecipesFilter = (filter: string) => (dispatch: Dispatch<RecipeAc
 
 export const addRecipe = (recipe: IRecipe) => async (dispatch: Dispatch<RecipeAction>) => {
     try {
-        dispatch({type: RecipeActionTypes.START_RECIPES})
-        const {data} = await $api.post('/create', {...recipe})
+        dispatch({type: RecipeActionTypes.START_RECIPES});
 
+        // для добавления в store миную сервер, временно...
+        dispatch({type: RecipeActionTypes.ADD_RECIPE, payload: recipe}); 
+
+        const {data} = await $api.post('/create', {...recipe});
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
     } catch (e: any) {
         if (e instanceof Error) dispatch({

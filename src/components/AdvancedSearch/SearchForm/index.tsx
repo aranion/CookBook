@@ -48,7 +48,7 @@ export const SearchForm = ({drawerWidth, handleClose}: {drawerWidth: number, han
   };
 
   const handleSearch = () => {
-    router(RouteNames.ADVANCED_SEARCH);
+    router(RouteNames.SEARCH_ADVANCED);
     if(!!handleClose) {
       handleClose();
     }

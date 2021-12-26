@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <div className={styles.pages__center}>
       <RandomRecipe recipes={recipes}/>
-      <LastRecipes />
+      <LastRecipes recipes={recipes} />
     </div>
   );
 };
