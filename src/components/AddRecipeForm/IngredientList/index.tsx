@@ -37,10 +37,11 @@ export const IngredientList = () => {
     <>
       <h4>Ингредиенты:</h4>
       <List>
-        {ingredients.map((ingredient) => (
+        {ingredients.map((ingredient, idx) => (
           <ListItem key={ingredient.placeholder}>
             <Input
               placeholder={ingredient.placeholder}
+              name={`ingredient-${idx}-description`}
               value={ingredient.name}
               onChange={handleInput}
               fullWidth={true}
@@ -49,6 +50,7 @@ export const IngredientList = () => {
             />
             <Input
               placeholder={'Объем'}
+              name={`ingredient-${idx}-count`}
               required={true}
               style={{width: 100, marginLeft: 10}}
               inputProps={{ "aria-label": "description" }}

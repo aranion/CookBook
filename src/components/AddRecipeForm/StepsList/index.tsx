@@ -1,8 +1,8 @@
+import { useState, ChangeEvent } from "react";
 import { Button, IconButton, Input, List, ListItem } from "@mui/material";
 import style from "../addRecipeForm.module.scss";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { useState } from "react";
 
 interface State {
   number: number,
@@ -13,20 +13,13 @@ export const StepsList = () => {
   const [steps, setSteps] = useState([
     { number: 1, text: "" },
   ]);
+  const [urlImgStep, setUrlImgStep] = useState("")
+
   const addStep = () => {
     setSteps([...steps, { number: steps.length + 1, text: "" }]);
   };
   const deleteStep = (val: number) => {
-    const arr = steps;
-
-    arr.splice(
-      arr.findIndex((item) => item.number === val),
-      1
-    );
-    arr.forEach((item, idx) => {
-      item.number = idx + 1;
-    });
-    setSteps([...arr]);
+    setSteps(state => state.filter(item=> item.number !== val))
   };
   const handleInput = (e: Event, number: number) => {
     const arr = steps;
@@ -34,14 +27,30 @@ export const StepsList = () => {
     curItem.text = (e.target as HTMLDataElement).value;
     setSteps([...steps]);
   };
+
+  const handleUrlImgStepChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUrlImgStep(e.target.value)
+  }
+  // @ts-ignore
+  const handleBtn = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.target.nextSibling.click()
+  }
+
   return (
     <>
       <List>
-        {steps.map((step) => (
+        {steps.map((step, idx) => (
           <ListItem key={step.number}>
             <p className={style['cooking__steps-number']}>Шаг {step.number}:</p>
+            {/*<input*/}
+            {/*    type="number"*/}
+            {/*    hidden*/}
+            {/*    name="stepNumber"*/}
+            {/*    value={step.number}*/}
+            {/*/>*/}
             <Input
               className={style.cooking__stepDescription}
+              name={`step-${idx}-description`}
               value={step.text}
               onChange={((e: Event) => handleInput(e, step.number)) as never }
               placeholder={"Описание"}
@@ -52,9 +61,17 @@ export const StepsList = () => {
               color="primary"
               size={"small"}
               endIcon={<AddIcon />}
+              onClick={handleBtn}
             >
               Фото
             </Button>
+            <input
+                type="file"
+                hidden
+                name={`urlImgStep-${idx}`}
+                value={urlImgStep}
+                onChange={handleUrlImgStepChange}
+            />
             <IconButton onClick={() => deleteStep(step.number)}>
               <DeleteIcon />
             </IconButton>

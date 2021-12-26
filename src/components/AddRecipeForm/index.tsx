@@ -1,3 +1,4 @@
+import {useState, ChangeEvent, FormEvent} from "react";
 import {
     Button,
     FormControl,
@@ -16,33 +17,17 @@ import {SelectChangeEvent} from '@mui/material/Select';
 import styles from "./addRecipeForm.module.scss";
 import {StepsList} from "./StepsList";
 import {IngredientList} from "./IngredientList";
-import {useState} from "react";
 import {useActions} from "../../hooks/useActions";
 import {IRecipe} from "../../models/Recipe";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-
+import {CustomSelect} from '../Simples'
 // TODO заглушка
 // после в БД надо создать списки, которые будем загружать и выводить
-type TSelect = { [index: string]: string }
-const typeOfMeal: TSelect = {
-    NULL: '',
-    BREAKFAST: 'Завтрак',
-    LUNCH: 'Обед',
-    DINNER: 'Ужин',
-    SNACK: 'Перекус',
-}
-const cuisine: TSelect = {
-    NULL: '',
-    SAFOOD: 'Морепродукты',
-    MEAT: 'Мясо',
-    VEGETARIAN: 'Вегетарианская',
-}
-
+import {typeOfMeal, cuisine, kindOfFood} from '../../mocks/list-select'
 
 export const AddRecipeForm = () => {
     const [nameRecipe, setNameRecipe] = useState("");
-    const [selectedTypeOfMeal, setSelectedTypeOfMeal] = useState(typeOfMeal.NULL)
-    const [selectedCuisine, setSelectedCuisine] = useState(cuisine.NULL)
+    const [urlImg, setUrlImg] = useState("")
     const [imgFiles, setImgFiles] = useState<File[]>([])
 
     const handleNameRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,37 +35,25 @@ export const AddRecipeForm = () => {
     };
 
     const {addRecipe} = useActions()
-    const handleAddRecipe = async () => {
-        const form = new FormData()
-        const recipe = {
-            title: "", // поправить - создать useState с соотв. поля
-            description: "", // поправить - создать useState с соотв. поля
-            ingredients: [], // поправить - создать useState с соотв. поля
-            steps: [], // поправить - создать useState с соотв. поля
-            author: {id: '',name: ""}, // поправить - создать useState с соотв. поля
-            time: 0, // поправить - создать useState с соотв. поля
-            urlImg: "", // поправить - создать useState с соотв. поля
-            portionsAmount: 0, // поправить - создать useState с соотв. поля
-            cost: 0, // поправить - создать useState с соотв. поля
-            rating: 0,
-            typeOfMeal: selectedTypeOfMeal,
-            cuisine: selectedCuisine
-        }
-        if(imgFiles.length) imgFiles.forEach((file, idx) => {
-            form.append(`image_${idx}`, file, file.name)
-        })
-        const result = await addRecipe(recipe, form)
+    const handleAddRecipe = async (e: FormEvent) => {
+        e.preventDefault();
+        const form = new FormData(e.target as HTMLFormElement )
+        const result = await addRecipe(form)
         console.log(result)
     }
 
-    const handleChangeSelect = (e: SelectChangeEvent) => {
-        if (e.target.name === "cuisine") setSelectedCuisine(e.target.value)
-        if (e.target.name === "typeOfMeal") setSelectedTypeOfMeal(e.target.value)
+    const handleImgUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setUrlImg(e.target.value)
     }
+    // @ts-ignore
+    const handleBtn = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.target.nextSibling.click()
+    }
+
     return (
         <div className={styles.form}>
             <h1 className={styles.form__title}>Новый рецепт</h1>
-            <form className={styles.form__col}>
+            <form id="form-add-recipe" className={styles.form__col} onSubmit={handleAddRecipe}>
                 <div className={styles.form__row}>
                     <div className={styles.form__left}>
                         <div className={styles["form__left_container"]}>
@@ -95,15 +68,18 @@ export const AddRecipeForm = () => {
                                 }}
                                 variant="contained"
                                 color="primary"
+                                onClick={handleBtn}
                             >
                                 Загрузить фото
                             </Button>
+                            <input type="file" hidden name="urlImg" value={urlImg} onChange={handleImgUrlChange}/>
                         </div>
                     </div>
                     <div className={styles.form__right}>
                         <div className={styles.form__right_title}>
                             <Input
                                 placeholder={"Название рецепта"}
+                                name="title"
                                 value={nameRecipe}
                                 required={true}
                                 onChange={handleNameRecipe}
@@ -115,6 +91,7 @@ export const AddRecipeForm = () => {
                             <TextareaAutosize
                                 minRows={1}
                                 required={true}
+                                name="description"
                                 placeholder="Введите информацию о рецепте..."
                                 style={{
                                     width: "100%",
@@ -131,11 +108,11 @@ export const AddRecipeForm = () => {
                                     просматривать данный рецепт?</FormLabel>
                                 <RadioGroup row aria-label="checked"
                                             defaultValue="yes"
-                                            name="row-radio-buttons-group">
-                                    <FormControlLabel value="yes"
+                                            name="private">
+                                    <FormControlLabel value={true}
                                                       control={<Radio/>}
                                                       label="Да"/>
-                                    <FormControlLabel value="no"
+                                    <FormControlLabel value={false}
                                                       control={<Radio/>}
                                                       label="Нет"/>
                                 </RadioGroup>
@@ -162,6 +139,7 @@ export const AddRecipeForm = () => {
                         <div className={styles.form__details_row}>
                             <TextField
                                 label="Стоимость"
+                                name="cost"
                                 variant="standard"
                                 fullWidth
                                 type='number'
@@ -170,6 +148,7 @@ export const AddRecipeForm = () => {
                         <div className={styles.form__details_row}>
                             <TextField
                                 label="Время приготовления(мин)"
+                                name="time"
                                 variant="standard"
                                 fullWidth
                                 type='number'
@@ -180,85 +159,30 @@ export const AddRecipeForm = () => {
                         <div className={styles.form__details_row}>
                             <TextField
                                 label="Персон"
+                                name="portionsAmount"
                                 variant="standard"
                                 fullWidth
                                 type='number'
                             />
                         </div>
                         <div className={styles.form__details_row}>
-                            <FormControl fullWidth variant="standard">
-                                <InputLabel id="select-label-cuisine">Тип
-                                    кухни</InputLabel>
-                                <Select
-                                    labelId="select-label-cuisine"
-                                    label="Кухня"
-                                    name="cuisine"
-                                    value={selectedCuisine}
-                                    onChange={handleChangeSelect}
-                                >
-                                    {Object.keys(cuisine).map((key: keyof TSelect) => {
-                                        <MenuItem key={key}
-                                                  value={key}>{cuisine[key]}</MenuItem>
-                                    })}
-                                </Select>
-                            </FormControl>
+                            <CustomSelect list={cuisine} label="Кухня" name="cuisine"/>
                         </div>
                     </div>
                     <div className={styles.form__details_col}>
                         <div className={styles.form__details_row}>
-                            <FormControl fullWidth variant="standard">
-                                <InputLabel
-                                    id="select-label-typeOfMeal">Трапеза</InputLabel>
-                                <Select
-                                    labelId="select-label-typeOfMeal"
-                                    label="Трапеза"
-                                    name="typeOfMeal"
-                                    value={selectedTypeOfMeal}
-                                    onChange={handleChangeSelect}
-                                >
-                                    {Object.keys(typeOfMeal).map((key: keyof TSelect) => {
-                                        <MenuItem key={key}
-                                                  value={key}>{typeOfMeal[key]}</MenuItem>
-                                    })}
-                                </Select>
-                            </FormControl>
+                            <CustomSelect list={typeOfMeal} label="Тип трапезы" name="typeOfMeal"/>
                         </div>
                         <div className={styles.form__details_row}>
-                            <FormControl fullWidth variant="standard">
-                                <InputLabel id="select-label-kindOfFood">Вид
-                                    пищи</InputLabel>
-                                <Select
-                                    labelId="select-label-kindOfFood"
-                                    label="Вид пищи"
-                                    value={10}
-                                >
-                                    {/*// TODO - надо переделать как выше пример*/}
-                                    {/*// а фообще можно вынести как отдельный компонент:*/}
-                                    {/*// <CustomSelect name="kindOfFood" label="Вид пищи" values={kindOfFood} />*/}
-                                    {/*Вроде такого
-                  const CustomSelect = ({name, label, values, initialVal}) => {
-                     const [value, setValue] = useState(initialVal)
-                  
-                     return <Select ....
-                  }
-                  */}
-                                    <MenuItem value={10}>Закуск</MenuItem>
-                                    <MenuItem value={20}>Салаты</MenuItem>
-                                    <MenuItem value={30}>Супы</MenuItem>
-                                    <MenuItem value={40}>Вторые</MenuItem>
-                                    <MenuItem value={50}>Выпечк</MenuItem>
-                                    <MenuItem value={60}>Напитк</MenuItem>
-                                    <MenuItem value={70}>Соусы</MenuItem>
-                                    <MenuItem value={80}>Другое</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <CustomSelect list={kindOfFood} label="Вид пищи" name="kindOfFood"/>
                         </div>
                     </div>
                 </div>
                 <div className={`${styles.form__row} ${styles.form__send}`}>
                     <Button variant="contained" color="primary"
+                            type="submit"
                             style={{width: 100}}
-                            onClick={handleAddRecipe}
+                            // onClick={handleAddRecipe}
                     >
                         Создать
                     </Button>
