@@ -1,20 +1,24 @@
- import React from "react";
-import PrintIcon from "@mui/icons-material/Print";
 import { Button } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FlatwareIcon from "@mui/icons-material/Flatware";
 import MessageIcon from "@mui/icons-material/Message";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { DescriptionRecipe, Loader } from "..";
+import { Loader, PrintElem } from "..";
 import { Ingredients, IRecipe } from "../../models/Recipe";
-import image from "../../assets/recipeRandom.jpg";
+import imgDefaultGB from "../../assets/cbDefault.jpg";
 import styles from "./randomRecipe.module.scss";
-import { useAppSelector } from "store";
+import { useActions } from "hooks/useActions";
 
-export const Recipe = () => {
-  const [isModal, setModal] = React.useState(false);
-  const onClose = () => setModal(false);
+interface PropsType {
+  recipes: IRecipe[];
+};
+
+export const RandomRecipe = (props: PropsType) => {
+  const {recipes} = props;
+
+  const {setIsModal} = useActions();
+  const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
@@ -22,11 +26,7 @@ export const Recipe = () => {
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  const recipes = useAppSelector(state => state.recipes.data);
-  const recipe = recipes[getRandomInt(0, recipes['length'])];
-
-  console.log('recipes',recipes);
-  console.log(recipes.map((el:IRecipe) => el));
+  const recipe:IRecipe = recipes[getRandomInt(0, recipes['length'])];
 
   if(!recipes || recipes.length === 0) return <div className={styles["recipe-block"]}>
     <Loader />
@@ -35,7 +35,7 @@ export const Recipe = () => {
   return (
     <div className={styles["recipe-block"]}>
       <div className={styles["recipe-block__left"]}>
-        <img src={recipe?.urlImg || image} alt={recipe?.title} />
+        <img src={recipe?.urlImg || imgDefaultGB} alt={recipe?.title} />
         <div className={styles["recipe-block__meta"]}>
           <div>
             <AccessTimeIcon />
@@ -62,7 +62,7 @@ export const Recipe = () => {
             <span className={styles["heading-container__header"]}>
               {recipe?.title}
             </span>
-            <PrintIcon />
+            <PrintElem recipe={recipe}/>
           </div>
           <h4 className={styles["info-container_ingredients"]}>Ингредиенты:</h4>
           <ul>
@@ -78,25 +78,9 @@ export const Recipe = () => {
             <AccountCircleIcon />
             <span>{recipe?.author.name}</span>
           </div>
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => setModal(true)}
-          >
+          <Button size="small" onClick={() => onOpen(recipe.id)}>
             Посмотреть рецепт
           </Button> 
-          <DescriptionRecipe
-            visible={isModal}
-            title="Подробности рецепта"
-            recipe={recipe}
-            footer={
-              <Button variant="contained" color="primary" onClick={onClose}>
-                Закрыть
-              </Button>
-            }
-            onClose={onClose}
-          />
         </div>
       </div>
     </div>

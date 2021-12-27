@@ -1,10 +1,14 @@
-import {useAppSelector} from 'store'
 import styles from "./lastRecipes.module.scss";
 import {Loader, SmallRecipe} from "../";
 import {IRecipe} from "models/Recipe";
 
-export const LastRecipes = () => {
-    let recipes = useAppSelector<IRecipe[]>(RootState => RootState.recipes.data)
+interface Props {
+    recipes: IRecipe[]
+};
+
+export const LastRecipes = (props: Props) => {
+    const {recipes} = props;
+    
     if(!recipes || recipes.length === 0) return <div className={styles["last-recipes"]}>
         <Loader />
     </div>
@@ -14,12 +18,7 @@ export const LastRecipes = () => {
             <h2>Последние рецепты</h2>
             <div className={styles["last-recipes__container"]}>
                 {recipes && recipes?.map((el) => {
-                    return <SmallRecipe
-                        title={el?.title}
-                        author={el?.author.name}
-                        date={el?.createdAt as string}
-                        key={el?.id}
-                    />
+                    return <SmallRecipe recipe={el} key={el.id}/>
                 })}
             </div>
         </div>

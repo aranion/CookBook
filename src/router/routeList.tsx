@@ -3,20 +3,21 @@ import Home from "../pages/Home";
 import Recipes from "../pages/Recipes";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
-import Register from "../pages/Register";
 import MyCookbooks from "pages/Cookbooks/Cookbooks";
-import AddRecipe from "pages/AddRecipe";
-import AdvancedSearch from "components/AdvancedSearch";
+import AddRecipe  from "pages/AddRecipe";
+import {AdvancedSearch} from '../components';
+import Registration from "../pages/Register";
 import { Book } from "../pages/Book/Book";
 
 export enum RouteNames {
-  HOME = "/",
-  RECIPES = "/recipes",
-  COOKBOOKS = "/cookbooks",
-  ADD_RECIPE = "/addRecipe",
-  LOGIN = "/login",
-  REGISTER = "/register",
-  ADVANCED_SEARCH = "/search/advanced",
+  HOME = '/',
+  NOT_FOUND = '/*',
+  RECIPES = '/recipes',
+  COOKBOOKS = '/cookbooks',
+  ADD_RECIPE = '/addRecipe',
+  LOGIN = '/login',
+  REGISTRATION = '/registration', // "/register"
+  SEARCH_ADVANCED = '/search/advanced',
 }
 export interface IRoute {
   title: string;
@@ -29,28 +30,28 @@ export interface IRoute {
 export const routeList: IRoute[] = [
   {
     title: "Главная",
-    path: "/",
+    path: RouteNames.HOME,
     component: <Home />,
     private: false,
     menu: true,
   },
   {
     title: "Рецепты",
-    path: "/recipes",
+    path: RouteNames.RECIPES,
     component: <Recipes />,
     private: false,
     menu: true,
   },
   {
     title: "Мои кулинарные книги",
-    path: "/cookbooks",
+    path: RouteNames.COOKBOOKS,
     component: <MyCookbooks />,
     private: true,
     menu: true,
   },
   {
     title: "Создать рецепт",
-    path: "/addRecipe",
+    path: RouteNames.ADD_RECIPE,
     component: <AddRecipe />,
     private: true,
     menu: true,
@@ -64,28 +65,28 @@ export const routeList: IRoute[] = [
   },
   {
     title: "Авторизация",
-    path: "/login",
+    path: RouteNames.LOGIN,
     component: <Login />,
     private: false,
     menu: false,
   },
   {
     title: "Регистрация",
-    path: "/registration",
-    component: <Register />,
+    path: RouteNames.REGISTRATION,
+    component: <Registration />,
     private: false,
     menu: false,
   },
   {
     title: "Расширенный поиск",
-    path: "/search/advanced",
+    path: RouteNames.SEARCH_ADVANCED,
     component: <AdvancedSearch />,
     private: false,
     menu: false,
   },
   {
     title: "Страница не найдена",
-    path: "/*",
+    path: RouteNames.NOT_FOUND,
     component: <NotFound />,
     private: false,
     menu: false,

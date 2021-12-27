@@ -22,33 +22,6 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    .cooking {
-      &__left {
-        flex-basis: 40%;
-        display: flex;
-        flex-direction: column;
-        h4 {
-          margin: 0;
-        }
-      }
-      &__right {
-        flex-basis: 60%;
-      }
-      &__heading {
-        margin: 0;
-      }
-      &__steps {
-        display: flex;
-        flex-direction: column;
-        &-number {
-          margin: 0;
-        }
-      }
-      &__stepDescription {
-        flex: 2;
-        margin: 0 12px;
-      }
-    }
   }
   &__row:not(:last-child) {
     margin-bottom: 20px;

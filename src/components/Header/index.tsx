@@ -3,7 +3,7 @@ import {Search} from "../Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {IconButton} from '@mui/material'
 import {Link} from "react-router-dom";
-import {Navigation} from "components/Navigation";
+import {Navigation} from "components";
 
 export const Header = () => {
     return (

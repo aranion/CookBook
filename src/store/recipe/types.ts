@@ -12,6 +12,7 @@ export interface RecipeState {
     error?: Error
     page?: number;
     limit?: number;
+    maxItemsPage: number;
 }
 
 export enum RecipeActionTypes {

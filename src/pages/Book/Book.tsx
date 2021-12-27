@@ -2,10 +2,16 @@ import { useParams } from "react-router";
 import style from "./book.module.scss";
 import { Chip, List, ListItem } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useActions } from "hooks/useActions";
+// import imgDefaultGB from "../../assets/cbDefault.jpg";
 
 export const Book = () => {
+
+  const {setIsModal} = useActions();
+  const onOpen = (idRecipe: string) => setIsModal(idRecipe);
+
   const { id } = useParams();
-  const [recipes, setRecipes] = useState([
+  const [recipes] = useState([
     {
       title: "Паста",
       id: 1,
@@ -22,10 +28,11 @@ export const Book = () => {
       ingredients: ["картошка", "мясо", "соус"],
     },
   ]);
-  const [ingredientList, setIngredientLis] = useState({});
+
+  const [ingredientList, setIngredientLis]: any = useState({});
 
   useEffect(() => {
-    const curList = {};
+    const curList: any = {};
     recipes.forEach((recipe) =>
       recipe.ingredients.forEach((ingredient) => {
         if (curList.hasOwnProperty(ingredient)) {
@@ -56,7 +63,7 @@ export const Book = () => {
                 <Chip
                   size="small"
                   label={ingredient + " " + ingredientList[ingredient]}
-                  key={ingredient}
+                  key={ingredient + new Date()}
                   className={style.book__chip}
                   color={"secondary"}
                 />
@@ -71,7 +78,7 @@ export const Book = () => {
               {recipes &&
                 recipes.map((recipe) => {
                   return (
-                    <ListItem button={true} key={recipe.id}>
+                    <ListItem button={true} key={recipe.id} onClick={() => onOpen((recipe.id).toString())}>
                       <div className={style.item}>
                         <div className={style.item__photoBox}>
                           <img src={recipe.urlImg} alt="recipe" />
@@ -84,6 +91,7 @@ export const Book = () => {
                           <div>
                             {recipe.ingredients.map((ingredient) => (
                               <Chip
+                                key={ingredient}
                                 size="small"
                                 label={ingredient}
                                 className={style.item__chip}
