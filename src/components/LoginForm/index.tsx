@@ -4,7 +4,9 @@ import { useAppDispatch, ActionCreators } from "store";
 import styles from './loginForm.module.scss';
 
 export const LoginForm = () => {
-    const location = useLocation();
+    // Нужно исправить any...
+    const location: any = useLocation();
+    // 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
