@@ -42,7 +42,10 @@ const Cookbooks = () => {
               books.map((book) => {
                 return (
                   <ListItem button={true} key={book.name}>
-                    <Link to={`${match.pathname}/${book.id}`}>
+                    <Link
+                      to={`${match.pathname}/${book.id}`}
+                      className={style.link}
+                    >
                       <div className={style.item}>
                         <div className={style.item__photoBox}>
                           <img src={book.photo} alt="book" />
