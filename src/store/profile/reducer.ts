@@ -3,7 +3,7 @@ import { Action, ProfileState, ProfileActionTypes } from "./types";
 const initialState: ProfileState = {
     isAuth: false,
     data: {
-        id: 'xxx777',
+        id: '',
         email: '',
         isActivated: false,   
         name: 'Гость',

@@ -1,5 +1,5 @@
-import {IRecipe} from "../../models/Recipe"
-import {Action, RecipeState, RecipeActionTypes} from "./types"
+import {IRecipe} from "../../models/Recipe";
+import {Action, RecipeState, RecipeActionTypes} from "./types";
 
 const initialState: RecipeState = {
     loading: false,

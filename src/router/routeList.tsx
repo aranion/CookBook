@@ -7,6 +7,7 @@ import MyCookbooks from "pages/Cookbooks/Cookbooks";
 import AddRecipe  from "pages/AddRecipe";
 import {AdvancedSearch} from '../components';
 import Registration from "../pages/Register";
+import { Book } from "../pages/Book/Book";
 
 export enum RouteNames {
   HOME = '/',
@@ -54,6 +55,13 @@ export const routeList: IRoute[] = [
     component: <AddRecipe />,
     private: true,
     menu: true,
+  },
+  {
+    title: "Книга с рецептами",
+    path: "/cookbooks/:id",
+    component: <Book />,
+    private: true,
+    menu: false,
   },
   {
     title: "Авторизация",

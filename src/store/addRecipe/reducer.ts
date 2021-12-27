@@ -1,4 +1,3 @@
-import { KIND_OF_FOOD, TYPE_CUISINES, TYPE_OF_MEAL } from "constants/selectDataForm";
 import { Ingredients, StepData } from "models/Recipe";
 import { Action, AddRecipeState, AddRecipeActionTypes, IngredientInput } from "./types";
 
@@ -27,9 +26,9 @@ const initialState: AddRecipeState = {
     kindOfFood: '',                         
   },
   dataSelectForm: {
-    cuisine: TYPE_CUISINES,
-    typeOfMeal: TYPE_OF_MEAL,
-    kindOfFood: KIND_OF_FOOD
+    cuisine: [],
+    typeOfMeal: [],
+    kindOfFood: []
   }
 }
 

@@ -13,3 +13,4 @@ export * from "./AdvancedSearch";
 export * from "./Loader";
 export * from "./PrintElem";
 export * from "./Navigation";
+export * from "./AdvancedSearch/SearchForm";

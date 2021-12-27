@@ -37,18 +37,22 @@ export const IngredientList = () => {
     <>
       <h4>Ингредиенты:</h4>
       <List>
-        {ingredients.map((ingredient) => (
+        {ingredients.map((ingredient, idx) => (
           <ListItem key={ingredient.placeholder}>
             <Input
               placeholder={ingredient.placeholder}
               value={ingredient.ingredient}
               onChange={(e) => handleIngredient(e, ingredient.placeholder || '')}
+              name={`ingredient-${idx}-description`}
+              //конфликт// value={ingredient.name}
+              //конфликт// onChange={handleInput}
               fullWidth={true}
               required={true}
               inputProps={{ "aria-label": "description" }}
             />
             <Input
               placeholder={'Объем'}
+              name={`ingredient-${idx}-count`}
               required={true}
               value={ingredient.amount}
               onChange={(e) => handleIngredientAmount(e, ingredient.placeholder || '')}

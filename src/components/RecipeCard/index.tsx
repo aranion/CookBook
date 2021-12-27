@@ -19,7 +19,7 @@ import { IRecipe } from "models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { useActions } from 'hooks/useActions';
 
-export const RecipeReviewCard = ({ recipe }: { recipe: IRecipe })  => {
+export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
 
   const {setIsModal} = useActions();
   

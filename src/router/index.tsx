@@ -7,7 +7,6 @@ import { RootState, useAppSelector } from 'store';
 export const AppRouter = () => {
     // const {isAuth} = useAuth();
     // const isAuth = false
-  
 
     const {isAuth} = useAppSelector((state:RootState) => state.profile);
     const location = useLocation();
