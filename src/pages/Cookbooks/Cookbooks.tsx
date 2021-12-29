@@ -1,6 +1,6 @@
 import style from "./cookBooks.module.scss";
 import { Divider, IconButton, List, ListItem } from "@mui/material";
-import {  useEffect, useState } from "react";
+import {  useEffect } from "react";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { Link, useLocation } from "react-router-dom";
 import { Loader } from "components";

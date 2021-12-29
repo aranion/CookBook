@@ -1,0 +1,24 @@
+.context-menu {
+  &__wrapper {
+    width: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &__actions {
+    width: 100%;
+    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      cursor: pointer;
+    }
+  }
+  &__bg {
+    background: gainsboro;
+    padding-left: 15px;
+    border-radius: 5px;
+  }
+}

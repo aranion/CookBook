@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   FormControl,
   InputLabel,
@@ -15,15 +14,14 @@ interface PropsSelect {
   list: TSelect,
   label: string,
   name: string,
+  selectedValue: string,
+  setSelectedValue: (value: string) => void
 }
 
-export const CustomSelect = ({list, label, name}: PropsSelect) => {
-
-  const [ selectedValue, setSelectedValue ] = useState('');
+export const CustomSelect = ({list, label, name, selectedValue, setSelectedValue}: PropsSelect) => {
 
   const handleChangeSelect = (e: SelectChangeEvent) => {
-    setSelectedValue(e.target.value);
-    console.log(selectedValue);
+    setSelectedValue((e.target as any).value);
   }
   return (
     <FormControl fullWidth variant="standard">

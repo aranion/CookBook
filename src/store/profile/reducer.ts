@@ -11,6 +11,7 @@ const initialState: ProfileState = {
 }
 
 export const profileReducer = (state = initialState, action: Action) => {
+  console.log(action.type, action.payload);
   switch (action.type) {
     case ProfileActionTypes.FETCH_PROFILE_SUCCESS:
       return {
