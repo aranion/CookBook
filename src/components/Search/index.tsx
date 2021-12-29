@@ -20,7 +20,8 @@ export const Search = () => {
       setSearchValue(e.target.value);
   };
 
-  const handleSearch = () => {
+  const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault()
       setRecipesFilter(searchValue)
   }
 

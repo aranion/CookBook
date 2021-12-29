@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {SyntheticEvent, useState} from 'react';
 import styles from "./searchForm.module.scss";
 import Chips from '../Chips'
 import {useNavigate} from 'react-router-dom'
@@ -47,6 +47,14 @@ export const SearchForm = ({drawerWidth, handleClose}: {drawerWidth: number, han
     setTime(event.target.value);
   };
 
+  const [rating, setRating] = useState(4);
+
+  const handelChangeRating = (event: SyntheticEvent<Element, Event>, value: number | null) => {
+    if (value) {
+      setRating(value)
+    }
+  }
+
   const handleSearch = () => {
     router(RouteNames.SEARCH_ADVANCED);
     if(!!handleClose) {
@@ -89,7 +97,11 @@ export const SearchForm = ({drawerWidth, handleClose}: {drawerWidth: number, han
           <Typography variant="body1" color="text.secondary">
             Рейтинг:
           </Typography>
-          <Rating name="size-small" defaultValue={4} />
+          <Rating 
+            name="size-small" 
+            value={rating}
+            onChange={handelChangeRating}
+          />
         </Box>
         <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Тип блюда:</Typography>

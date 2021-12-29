@@ -9,11 +9,17 @@ interface ChipData {
   label: string;
 }
 
+type ChipsProps = {
+  chipsLabel: string;
+  drawerWidth: number;
+  
+}
+
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-const Chips = ({chipsLabel, drawerWidth}: {chipsLabel: string, drawerWidth: number}) => {
+const Chips: React.FC<ChipsProps> = ({chipsLabel, drawerWidth}) => {
 
   const [value, setValue] = useState('')
 
