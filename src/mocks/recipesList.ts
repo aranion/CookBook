@@ -1,4 +1,4 @@
-import {IRecipe} from "../models/Recipe";
+import { IRecipe } from "models/Recipe";
 
 //временная заглушка с рецептами
 export const RECIPES_LIST: IRecipe[] = [
@@ -118,14 +118,106 @@ export const RECIPES_LIST: IRecipe[] = [
             "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
         },
       ],
-        description: "Рецепт дня",
-        cuisine: "Европа",
-        rating: 4,
+      description: "Рецепт дня",
+      cuisine: "Европа",
+      rating: 4,
       time: 48,
       author: {id: "13", name:"Cooker"},
       typeOfMeal: "обед",
       portionsAmount: 3,
       cost: 22,
-        createdAt: "31.11.21",
+      createdAt: "31.11.21",
+    },
+    {
+      id: "14",
+      title: "Паста",
+      ingredients: [
+        {
+          ingredient: "макароны",
+          amount: "300г"
+        },
+        {
+          ingredient: "сливки",
+          amount: "300г"
+        },
+        {
+          ingredient: "бекон",
+          amount: "300г"
+        },
+        {
+          ingredient: "соус",
+          amount: "300г"
+        }
+      ],
+      steps: [
+        {
+          title: "шаг 1",
+          description: "Рыбное филе порезать на мелкие кусочки",
+        },
+        {
+          title: "шаг 2",
+          description:
+            "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+        },
+        {
+          title: "шаг 3",
+          description:
+            "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+        },
+      ],
+      description: "Нежнейшая паста карбонара с яйцом и сливками приготовленная по старинному рейепту",
+      cuisine: "Европа",
+      rating: 5,
+      time: 60,
+      author: {id: "13", name:"Cooker"},
+      typeOfMeal: "обед",
+      portionsAmount: 3,
+      cost: 22,
+      createdAt: "31.11.21",
+      urlImg: '/img/6.jpg'
+    },
+    {
+      id: "13",
+      title: "Мясо по французски",
+      ingredients: [
+        {
+          ingredient: "картошка",
+          amount: "300г"
+        },
+        {
+          ingredient: "мясо",
+          amount: "300г"
+        },
+        {
+          ingredient: "соус",
+          amount: "300г"
+        },
+      ],
+      steps: [
+        {
+          title: "шаг 1",
+          description: "Рыбное филе порезать на мелкие кусочки",
+        },
+        {
+          title: "шаг 2",
+          description:
+            "Смешать соевый соус и кетчуп, посыпать измельченным чесноком. Соус поставить в холодильник  ",
+        },
+        {
+          title: "шаг 3",
+          description:
+            "Рыбное филе обвалять в муке и соли. Обжарить на сковородке",
+        },
+      ],
+      description: "Кортошка с мясом в духовк",
+      cuisine: "Европа",
+      rating: 5,
+      time: 60,
+      author: {id: "15", name:"Cooker"},
+      typeOfMeal: "обед",
+      portionsAmount: 3,
+      cost: 22,
+      createdAt: "31.11.21",
+      urlImg: '/img/4.jpg'
     },
 ];

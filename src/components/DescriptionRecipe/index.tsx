@@ -9,7 +9,7 @@ import { useActions } from "hooks/useActions";
 
 export const DescriptionRecipe = () => {
   
-  const {isModal, idRecipe} = useAppSelector(state => state.modal);
+  const { isModal, idRecipe } = useAppSelector(state => state.modal);
 
   const recipe: IRecipe = useAppSelector(state => 
     state.recipes.data.find((el:IRecipe) => 

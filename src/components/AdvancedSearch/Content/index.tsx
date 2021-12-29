@@ -2,8 +2,11 @@ import { Box } from '@mui/material';
 import { RecipeCard, SearchForm } from 'components';
 import { IRecipe } from "models/Recipe";
 
-const ContentAdvancedSearch = ({ recipes }: { recipes: IRecipe[] }) => {
+interface PropsType {
+  recipes: IRecipe[]
+}
 
+const ContentAdvancedSearch = ({ recipes }: PropsType) => {
   const drawerWidth = 300;
 
   return (

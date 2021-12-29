@@ -33,8 +33,6 @@ const initialState: AddRecipeState = {
 }
 
 export const addRecipeReducer = (state = initialState, action: Action) => {
-    console.log(action.type);
-    console.log(action.payload);
     switch (action.type) {
       case AddRecipeActionTypes.SET_TITLE_RECIPE:
             return {

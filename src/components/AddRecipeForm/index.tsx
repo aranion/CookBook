@@ -1,14 +1,13 @@
 import { Button, FormControl, FormControlLabel, FormLabel, Input,  Radio, RadioGroup, TextareaAutosize, TextField } from "@mui/material";
-import styles from "./addRecipeForm.module.scss";
-import { StepsList } from "./StepsList";
-import { IngredientList } from "./IngredientList";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useAppSelector } from "store";
 import { AddRecipeState} from "store/addRecipe/types";
 import { useActions } from "hooks/useActions";
-import {useState, ChangeEvent, FormEvent} from "react";
-import {CustomSelect} from '../Simples';
-
+import { useState, ChangeEvent, FormEvent} from "react";
+import { StepsList } from "./StepsList";
+import { IngredientList } from "./IngredientList";
+import { CustomSelect} from '../Simples';
+import styles from "./addRecipeForm.module.scss";
 // TODO заглушка
 // после в БД надо создать списки, которые будем загружать и выводить
 import {typeOfMeal, cuisine, kindOfFood} from '../../mocks/list-select';
@@ -18,7 +17,6 @@ export const AddRecipeForm = () => {
   const [urlImg, setUrlImg] = useState("");
   // const [imgFiles, setImgFiles] = useState<File[]>([]);
   //
-
 
   const {
     addRecipe, 

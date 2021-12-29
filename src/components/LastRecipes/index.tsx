@@ -1,13 +1,12 @@
 import styles from "./lastRecipes.module.scss";
-import {Loader, SmallRecipe} from "../";
-import {IRecipe} from "models/Recipe";
+import { Loader, SmallRecipe } from "../";
+import { IRecipe } from "models/Recipe";
 
-interface Props {
+interface PropsType {
     recipes: IRecipe[]
 };
 
-export const LastRecipes = (props: Props) => {
-    const {recipes} = props;
+export const LastRecipes = ({ recipes }: PropsType) => {
     
     if(!recipes || recipes.length === 0) return <div className={styles["last-recipes"]}>
         <Loader />
