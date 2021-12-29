@@ -14,18 +14,20 @@ $widhtLeft: 400px;
   flex-wrap: wrap;
   justify-content: space-evenly;
   overflow: hidden;
-
   &__left {
     border-top-left-radius: $borderRadiusDefault;
     border-bottom-left-radius: $borderRadiusDefault;
     height: $height;
     max-width: $widhtLeft;
+    width: 100%;
+    display: flex;
     position: relative;
-    background-color: grey;
+    background-color: #fff;
     img {
       object-fit: cover;
       height: 100%;
-      max-width: 100%;
+      width: 100%;
+      margin: auto  ;
     }
   }
   &__left:hover &__meta {
@@ -128,11 +130,5 @@ $widhtLeft: 400px;
     line-height: 28px;
     padding-right: 10px;
     font-weight: bold;
-  }
-  svg {
-    cursor: pointer;
-  }
-  svg:hover {
-    color: rgb(77, 59, 33);
   }
 }

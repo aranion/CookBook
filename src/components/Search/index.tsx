@@ -1,29 +1,25 @@
 import { ChangeEvent, useState} from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import {Button, InputBase, IconButton, Paper, Box} from "@mui/material";
-import {useAppSelector} from "../../store";
-import {useActions} from 'hooks/useActions'
+import { Button, InputBase, IconButton, Paper, Box } from "@mui/material";
+// import {useAppSelector} from "../../store";
+import { useActions } from 'hooks/useActions'
 import styles from "./search.module.scss";
-import {SearchModal} from 'components'
+import { SearchModal } from 'components'
 
 export const Search = () => {
 
-  const [open, setOpen] = useState(false);
+  const [ open, setOpen ] = useState(false);
+  const [ searchValue, setSearchValue ] = useState<string>("");
+
+  const { setRecipesFilter } = useActions();
+  // const {filter} = useAppSelector(state => state.recipes);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [searchValue, setSearchValue] = useState<string>("");
-  const {setRecipesFilter} = useActions()
-  const {filter} = useAppSelector(state => state.recipes)
-  console.log('filter', filter);
-  
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);
   };
-
-  const handleSearch = () => {
-      setRecipesFilter(searchValue)
-  }
+  const handleSearch = () => setRecipesFilter(searchValue);
 
   return (
     <Box className={styles["search-block"]}>

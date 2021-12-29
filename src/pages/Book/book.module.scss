@@ -24,6 +24,12 @@
     height: 80px;
     background-color: #c4c4c4;
     margin-right: 16px;
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      margin: auto  ;
+    }
   }
   &__name {
     margin-bottom: 8px;
@@ -65,13 +71,18 @@
     flex: 3;
   }
   &__cover {
-    width: 128px * 1.45;
-    height: 128px * 2;
+    width: 160px * 1.45;
+    height: 160px * 2;
     background-color: #c4c4c4;
     margin: 0 auto;
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      margin: auto  ;
+    }
   }
   &__header {
-    //text-align: center;
     padding-left: 16px;
     margin: 0;
   }

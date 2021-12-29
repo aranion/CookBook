@@ -1,11 +1,11 @@
-// import { Reducer } from "redux"
-import {IRecipe} from "../../models/Recipe"
-import {Action, RecipeState, RecipeActionTypes} from "./types"
+import { IRecipe } from "../../models/Recipe";
+import { Action, RecipeState, RecipeActionTypes } from "./types";
 
 const initialState: RecipeState = {
     loading: false,
     filter: '',
-    data: []
+    data: [],
+    maxItemsPage: 10,
 }
 
 export const recipeReducer = (state = initialState, action: Action) => {
@@ -23,8 +23,8 @@ export const recipeReducer = (state = initialState, action: Action) => {
         case RecipeActionTypes.SET_FILTER:
             return {...state, filter: action.payload}
         case RecipeActionTypes.DELETE_RECIPE: {
-            const data: IRecipe[] = state.data ?
-                state.data.filter((item) => item.id !== action.payload)
+            const data: IRecipe[] = state.data 
+                ? state.data.filter((item) => item.id !== action.payload) 
                 : []
             return {...state, data}
         }

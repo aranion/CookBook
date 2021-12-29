@@ -1,41 +1,45 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { styled } from '@mui/material/styles';
-import {Box, Chip, Typography, Paper, InputBase, InputAdornment, IconButton} from '@mui/material';
+import { Box, Chip, Typography, Paper, InputBase, InputAdornment, IconButton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { CHIPE_DATA } from 'mocks/chipData';
 
 interface ChipData {
   key: string;
   label: string;
 }
 
+interface PropsType {
+  chipsLabel: string, 
+  drawerWidth: number
+}
+
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-const Chips = ({chipsLabel, drawerWidth}: {chipsLabel: string, drawerWidth: number}) => {
-
-  const [value, setValue] = useState('')
+const Chips = (props: PropsType) => {
+  
+  const { chipsLabel, drawerWidth } = props;
+  // TODO useState('') перенести в store
+  const [value, setValue] = useState('');
 
   const handleChange = (event: { target: { value: string } }) => {
-    return setValue(event.target.value)
+    return setValue(event.target.value);
   }
 
   const handleSetChip = () => {
     if(!chipData.filter(chip => chip.label === value).length && value) {
 
-      const newChip = {key: uuidv4(), label: value}
+      const newChip = {key: uuidv4(), label: value};
 
-      setChipData(chips => ([...chips, newChip]))
-      setValue('')
+      setChipData(chips => ([...chips, newChip]));
+      setValue('');
     }
   }
-
-  const [chipData, setChipData] = useState<readonly ChipData[]>([
-    { key: '0', label: 'Картофель' },
-    { key: '1', label: 'Форель' },
-    { key: '2', label: 'Петрушка' },
-  ]);
+  // TODO useState перенести в store
+  const [chipData, setChipData] = useState<readonly ChipData[]>(CHIPE_DATA);
 
   const handleDelete = (chipToDelete: ChipData) => () => {
     setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
