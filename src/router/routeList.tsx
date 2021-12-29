@@ -18,6 +18,7 @@ export enum RouteNames {
   LOGIN = '/login',
   REGISTRATION = '/registration', // "/register"
   SEARCH_ADVANCED = '/search/advanced',
+  PROFILE = '/profile',
 }
 export interface IRoute {
   title: string;

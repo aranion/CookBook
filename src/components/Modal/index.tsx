@@ -1,6 +1,5 @@
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import {SearchForm} from 'components/AdvancedSearch/SearchForm'
+import { Box, Modal } from '@mui/material';
+import { SearchForm } from 'components/AdvancedSearch/SearchForm';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -14,8 +13,12 @@ const style = {
   p: 4,
 };
 
-export const SearchModal = ({open = false, handleClose}: {open: boolean, handleClose: () => void}) => {
+interface PropsType {
+  open: boolean, 
+  handleClose: () => void
+}
 
+export const SearchModal = ({ open = false, handleClose }: PropsType ) => {
   return (
     <div>
       <Modal

@@ -10,10 +10,10 @@ import { useActions } from "hooks/useActions";
 
 export const StepsList = () => {
 
-  // переделать нв STORE
-  const [urlImgStep, setUrlImgStep] = useState("");
+  // TODO переделать на STORE
+  const [ urlImgStep, setUrlImgStep ] = useState("");
 
-  const {addStep, delStep, setStepDescription} = useActions();
+  const { addStep, delStep, setStepDescription } = useActions();
   
   const steps: StepData[] = useAppSelector((state: RootState) => 
     (state.addRecipe as AddRecipeState).inputFields.steps
@@ -72,9 +72,6 @@ export const StepsList = () => {
                 value={urlImgStep}
                 onChange={handleUrlImgStepChange}
             />
-            { /*конфликт <IconButton onClick={() => deleteStep(step.number)}>
-                конфликт<DeleteIcon />
-                конфликт</IconButton> */}
           </ListItem>
         ))}
       </List>

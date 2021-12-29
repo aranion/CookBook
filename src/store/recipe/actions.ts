@@ -1,7 +1,7 @@
-import {$api} from "api/api";
-import {Dispatch} from "redux";
-import {RecipeAction, RecipeActionTypes} from './types'
-import {RECIPES_LIST} from "constants/recipesList"
+import { $api } from "api/api";
+import { Dispatch } from "redux";
+import { RecipeAction, RecipeActionTypes } from './types';
+import { RECIPES_LIST } from "mocks/recipesList";
 
 export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
     try {
@@ -39,9 +39,6 @@ export const setRecipesFilter = (filter: string) => (dispatch: Dispatch<RecipeAc
 export const addRecipe = (recipeData: FormData) => async (dispatch: Dispatch<RecipeAction>) => {
     try {
         dispatch({type: RecipeActionTypes.START_RECIPES});
-
-            // для добавления в store миную сервер, временно...
-            // dispatch({type: RecipeActionTypes.ADD_RECIPE, payload: recipeData}); 
 
         const {data} = await $api.post('recipes/create', recipeData)
         // const {data} = await $api.post('/create', {...recipe});

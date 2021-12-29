@@ -16,10 +16,10 @@ const Recipes = () => {
             item.title.indexOf(state.recipes.filter) !== -1)
     });
 
-    const {loading, maxItemsPage, data} = useAppSelector(state => (state.recipes as RecipeState));
+    const { loading, maxItemsPage, data } = useAppSelector(state => (state.recipes as RecipeState));
 
     useEffect(() => {
-        if(!recipes.length) fetchAllRecipes()   // получает рецепты и сразу пишет в стор
+        if(!recipes.length) fetchAllRecipes();   // получает рецепты и сразу пишет в стор
     },[recipes.length ])
 
     return (

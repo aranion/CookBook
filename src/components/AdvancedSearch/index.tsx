@@ -1,5 +1,5 @@
-import { RootState, useAppSelector } from 'store'
-import Content from './Content'
+import { RootState, useAppSelector } from 'store';
+import Content from './Content';
 
 export const AdvancedSearch = () => {
 

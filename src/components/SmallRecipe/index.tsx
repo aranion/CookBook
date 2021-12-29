@@ -1,6 +1,5 @@
+import { useActions } from "hooks/useActions";
 import { IRecipe } from "models/Recipe";
-import { useAppDispatch } from "store";
-import { setIsModal } from "store/modal/actions";
 import image from "../../assets/cbDefault.jpg";
 import styles from "./small-recipe.module.scss";
 
@@ -17,8 +16,8 @@ export const SmallRecipe = (props: Props) => {
     id
   } = props.recipe;
 
-  const dispatch = useAppDispatch();
-  const onOpen = (idRecipe: string) => dispatch(setIsModal(idRecipe));
+  const { setIsModal } = useActions();
+  const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   return (
     <div className={styles["small-recipe"]} onClick={() => onOpen(id)}>

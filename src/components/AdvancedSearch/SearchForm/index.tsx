@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import styles from "./searchForm.module.scss";
-import Chips from '../Chips'
-import {useNavigate} from 'react-router-dom'
-import {RouteNames} from 'router/routeList'
+import Chips from '../Chips';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from 'router/routeList';
 import { 
   Paper, 
   Box, 
@@ -21,9 +21,14 @@ import {
   Button,
 } from '@mui/material';
 
-export const SearchForm = ({drawerWidth, handleClose}: {drawerWidth: number, handleClose?: () => void}) => {
+interface PropsType {
+  drawerWidth: number, 
+  handleClose?: () => void
+}
 
-  const router = useNavigate()
+export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
+
+  const router = useNavigate();
 
   const displayGrid = 
     drawerWidth > 300 

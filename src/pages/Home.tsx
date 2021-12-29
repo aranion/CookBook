@@ -5,7 +5,7 @@ import { useAppSelector } from "store";
 import styles from './pages.module.scss'
 
 const Home = () => {
-  const {fetchAllRecipes} = useActions();
+  const { fetchAllRecipes } = useActions();
   
   useEffect(()=> {
     fetchAllRecipes();
@@ -16,7 +16,7 @@ const Home = () => {
   return (
     <div className={styles.pages__center}>
       <RandomRecipe recipes={recipes}/>
-      <LastRecipes recipes={recipes} />
+      <LastRecipes recipes={recipes.slice(-3)} />
     </div>
   );
 };

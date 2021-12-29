@@ -14,19 +14,18 @@ interface PropsType {
   recipes: IRecipe[];
 };
 
-export const RandomRecipe = (props: PropsType) => {
-  const {recipes} = props;
+export const RandomRecipe = ({ recipes }: PropsType) => {
 
-  const {setIsModal} = useActions();
+  const { setIsModal } = useActions();
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
-  function getRandomInt(min: number, max: number) {
+  const getRandomInt = (min: number, max: number) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
-  const recipe:IRecipe = recipes[getRandomInt(0, recipes['length'])];
+  const recipe: IRecipe = recipes[ getRandomInt(0, recipes.length) ];
 
   if(!recipes || recipes.length === 0) return <div className={styles["recipe-block"]}>
     <Loader />
@@ -66,8 +65,8 @@ export const RandomRecipe = (props: PropsType) => {
           </div>
           <h4 className={styles["info-container_ingredients"]}>Ингредиенты:</h4>
           <ul>
-            {recipe?.ingredients.map((item: Ingredients, index:number) => (
-              <li key={index}>
+            {recipe?.ingredients.map((item: Ingredients, i:number) => (
+              <li key={i}>
                 {item.ingredient} - {item.amount}
               </li>
             ))}

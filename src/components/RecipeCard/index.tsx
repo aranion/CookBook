@@ -21,7 +21,7 @@ import { useActions } from 'hooks/useActions';
 
 export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
 
-  const {setIsModal} = useActions();
+  const { setIsModal } = useActions();
   
   const onOpenModal = (idRecipe: string) => setIsModal(idRecipe);
 
