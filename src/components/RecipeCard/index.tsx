@@ -76,7 +76,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
           sx={{ display: 'flex', justifyContent: 'space-between' }}
         >
           <Box>
-            <IconButton aria-label="add to favorites">
+            <IconButton aria-label="add to favorites" >
               <FavoriteIcon />
             </IconButton>
           </Box>
