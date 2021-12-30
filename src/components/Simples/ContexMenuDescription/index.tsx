@@ -5,7 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import { PrintElem } from "components";
 import ShareIcon from '@mui/icons-material/Share';
 import { IRecipe } from "models/Recipe";
+import DeleteIcon from '@mui/icons-material/Delete';
 import styles from './contexMenu.module.scss';
+import AddIcon from '@mui/icons-material/Add';
 
 export const ContexMenuDescription = ({recipe}:{recipe:IRecipe}) => {
 
@@ -19,6 +21,8 @@ export const ContexMenuDescription = ({recipe}:{recipe:IRecipe}) => {
   <div className={`${styles['context-menu__wrapper']} ${isVisible || styles['context-menu__bg'] }`}>
       {isVisible ||  
         <div className={styles['context-menu__actions']}>
+          <AddIcon />
+          <DeleteIcon />
           <EditIcon />
           <ShareIcon />
           <PrintElem recipe={recipe} />

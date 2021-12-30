@@ -1,6 +1,6 @@
 .context-menu {
   &__wrapper {
-    width: 135px;
+    min-width: 135px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -14,6 +14,9 @@
 
     svg {
       cursor: pointer;
+    }
+    svg:not(:last-child) {
+      margin-right: 5px;
     }
   }
   &__bg {

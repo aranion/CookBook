@@ -18,7 +18,7 @@ export const LoginForm = () => {
 
     const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        login(email, pass, (location.state as LocationState).from.pathname, navigate);
+        login(email, pass, (location.state as LocationState)?.from.pathname, navigate);
     }
     const registerHandler = () => {
         console.log("registerHandler", email, pass)
