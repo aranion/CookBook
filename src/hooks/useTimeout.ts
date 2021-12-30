@@ -1,7 +1,7 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 export function useTimeout(callback: () => void, delay: number | null) {
-    const savedCallback = useRef(callback)
+    const savedCallback = useRef(callback);
 
     // Remember the latest callback if it changes.
     useLayoutEffect(() => {

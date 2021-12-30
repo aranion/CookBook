@@ -1,7 +1,13 @@
 import { Action, ProfileState, ProfileActionTypes } from "./types";
 
 const initialState: ProfileState = {
-    isAuth: false,
+  isAuth: false,
+  user: {
+    id: '',
+    email: '',
+    isActivated: false,   
+    name: 'Гость',
+  }
 }
 
 export const profileReducer = (state = initialState, action: Action) => {
@@ -25,4 +31,4 @@ export const profileReducer = (state = initialState, action: Action) => {
         default:
             return state
     }
-}
+};

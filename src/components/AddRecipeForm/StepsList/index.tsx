@@ -1,31 +1,32 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, IconButton, Input, List, ListItem } from "@mui/material";
-import style from "../addRecipeForm.module.scss";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-
-interface State {
-  number: number,
-  text: string,
-};
+import styles from "./stepsList.module.scss";
+import { StepData } from "models/Recipe";
+import { RootState, useAppSelector } from "store";
+import { AddRecipeState } from "store/addRecipe/types";
+import { useActions } from "hooks/useActions";
 
 export const StepsList = () => {
-  const [steps, setSteps] = useState([
-    { number: 1, text: "" },
-  ]);
-  const [urlImgStep, setUrlImgStep] = useState("")
 
-  const addStep = () => {
-    setSteps([...steps, { number: steps.length + 1, text: "" }]);
+  // TODO переделать на STORE
+  const [ urlImgStep, setUrlImgStep ] = useState("");
+
+  const { addStep, delStep, setStepDescription } = useActions();
+  
+  const steps: StepData[] = useAppSelector((state: RootState) => 
+    (state.addRecipe as AddRecipeState).inputFields.steps
+  );
+
+  const addStepItem = () => {
+    addStep();
   };
-  const deleteStep = (val: number) => {
-    setSteps(state => state.filter(item=> item.number !== val))
+  const deleteStepItem = (value: string) => {
+    delStep(value);
   };
-  const handleInput = (e: Event, number: number) => {
-    const arr = steps;
-    const curItem = arr.find((item) => item.number === number) as State;
-    curItem.text = (e.target as HTMLDataElement).value;
-    setSteps([...steps]);
+  const handleStepItem = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, title: string) => {
+    setStepDescription({description: (e.target as HTMLInputElement).value, title});
   };
 
   const handleUrlImgStepChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,23 +40,22 @@ export const StepsList = () => {
   return (
     <>
       <List>
+
         {steps.map((step, idx) => (
-          <ListItem key={step.number}>
-            <p className={style['cooking__steps-number']}>Шаг {step.number}:</p>
-            {/*<input*/}
-            {/*    type="number"*/}
-            {/*    hidden*/}
-            {/*    name="stepNumber"*/}
-            {/*    value={step.number}*/}
-            {/*/>*/}
+          <ListItem key={step.title}>
+            <p className={styles['cooking__steps-number']}>{step.title}:</p>
             <Input
-              className={style.cooking__stepDescription}
+              className={styles.cooking__stepDescription}
               name={`step-${idx}-description`}
-              value={step.text}
-              onChange={((e: Event) => handleInput(e, step.number)) as never }
+              value={step.description}
+              onChange={(e) => handleStepItem(e, step.title)}
               placeholder={"Описание"}
               inputProps={{ "aria-label": "description" }}
+              required
             />
+            <IconButton onClick={() => deleteStepItem(step.title)}>
+              <DeleteIcon />
+            </IconButton>
             <Button
               variant="contained"
               color="primary"
@@ -72,9 +72,6 @@ export const StepsList = () => {
                 value={urlImgStep}
                 onChange={handleUrlImgStepChange}
             />
-            <IconButton onClick={() => deleteStep(step.number)}>
-              <DeleteIcon />
-            </IconButton>
           </ListItem>
         ))}
       </List>
@@ -82,7 +79,8 @@ export const StepsList = () => {
         variant="contained"
         color="primary"
         endIcon={<AddIcon />}
-        onClick={() => addStep()}
+        fullWidth={true}
+        onClick={() => addStepItem()}
       >
         Добавить шаг
       </Button>

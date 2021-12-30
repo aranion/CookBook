@@ -1,7 +1,7 @@
-import { RootState, useAppSelector } from 'store'
-import Content from './Content'
+import { RootState, useAppSelector } from 'store';
+import Content from './Content';
 
-const AdvancedSearch = () => {
+export const AdvancedSearch = () => {
 
   const {data} = useAppSelector((state:RootState) => state.recipes);
 
@@ -9,5 +9,3 @@ const AdvancedSearch = () => {
     <Content recipes={data}/>
   );
 };
-
-export default AdvancedSearch;

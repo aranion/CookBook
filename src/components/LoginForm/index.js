@@ -1,8 +1,6 @@
-import {useState} from 'react'
-import {Button, TextField} from "@mui/material";
-import {useLocation, useNavigate} from "react-router";
-import {useAppDispatch} from "store";
-import {useActions} from "hooks/useActions";
+import { useState } from 'react'
+import { Button, TextField } from "@mui/material";
+import { useActions } from "hooks/useActions";
 import styles from './loginForm.module.scss';
 
 export const LoginForm = () => {
@@ -12,9 +10,8 @@ export const LoginForm = () => {
 
     const {login, register} = useActions()
 
-    const [email, setEmail] = useState('')
-    const [pass, setPass] = useState(''
-    )
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
     //
     // function logInFake() {
     //     dispatch(changeIsAuth(true));

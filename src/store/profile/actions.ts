@@ -1,8 +1,7 @@
-import {$api} from "api/api";
 import axios from "axios";
 import {API_BASE_URL} from "constants/config";
 import {AuthResponse} from "models/AuthResponse";
-import {IRecipe} from "models/Recipe";
+import { IUser } from "models/User";
 import {Dispatch} from "redux";
 import {AuthService} from "services/authService";
 import {ProfileActionTypes, ProfileAction} from './types'
@@ -10,9 +9,9 @@ import {ProfileActionTypes, ProfileAction} from './types'
 export const login = (email: string, password: string) => async (dispatch: Dispatch<ProfileAction>) => {
     try {
 
-        const response = await AuthService.login(email, password)
-        console.log(response.data)
-        if (response.status !== 200) throw TypeError('Ошибка авторизации')
+        const response = await AuthService.login(email, password);
+        console.log(response.data);
+        if (response.status !== 200) throw TypeError('Ошибка авторизации');
         localStorage.setItem('token', response.data.accessToken);
 
         dispatch({
@@ -24,6 +23,12 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
             type: ProfileActionTypes.LOGIN_PROFILE_ERROR,
             payload: e
         })
+        // пока не понятно как войти на сайт
+        dispatch({
+            type: ProfileActionTypes.LOGIN_PROFILE_SUCCESS,
+            payload: {} as IUser
+        })
+        // ....
     }
 }
 

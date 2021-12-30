@@ -1,11 +1,10 @@
 import styles from "./navigation.module.scss";
 import { Link } from "react-router-dom";
-import { menuList } from "router/routeList";
+import { menuList, RouteNames } from "router/routeList";
 import { useAppSelector } from "store";
-import {getIsAuth, getUser } from "store/profile/selectors";
+import { getIsAuth, getUser } from "store/profile/selectors";
 
 export const Navigation = () => {
-  const profile = useAppSelector(state => state.profile);
 
   const isAuth = useAppSelector(getIsAuth)
   const user = useAppSelector(getUser)
@@ -23,9 +22,11 @@ export const Navigation = () => {
       </ul>
       <div className={styles.menu__login}>
         {
-            isAuth ? `Здравствуйте, ${user.name? user.name: user.email}` : <Link to="/login">Войти</Link>
+          isAuth 
+            ? `Здравствуйте, ${user.name? user.name: user.email}` 
+            : <Link to={RouteNames.LOGIN}>Войти</Link>
         }
-        </div>
+      </div>
     </nav>
   );
 };

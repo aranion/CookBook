@@ -1,15 +1,20 @@
-import {$api} from "api/api";
-import {IRecipe} from "models/Recipe";
-import {Dispatch} from "redux";
-import {RecipeAction, RecipeActionTypes} from './types'
-import {RECIPES_LIST} from "constants/recipesList"
+import { $api } from "api/api";
+import { Dispatch } from "redux";
+import { RecipeAction, RecipeActionTypes } from './types';
+import { RECIPES_LIST } from "mocks/recipesList";
 
 export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
     try {
-        dispatch({type: RecipeActionTypes.START_RECIPES})
-        const {data} = await $api.get('/recipes')
+        dispatch({type: RecipeActionTypes.START_RECIPES});
 
-        dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
+        const {data} = await $api.get('/recipes/get');
+        
+        // пока сервер пустой, пусть будет заглушка
+        if(data) {
+            dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
+        } else {
+            dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
+        }
     } catch (e: any) {
         if (e instanceof Error) dispatch({
             type: RecipeActionTypes.FETCH_RECIPES_ERROR,
@@ -33,9 +38,10 @@ export const setRecipesFilter = (filter: string) => (dispatch: Dispatch<RecipeAc
 
 export const addRecipe = (recipeData: FormData) => async (dispatch: Dispatch<RecipeAction>) => {
     try {
-        dispatch({type: RecipeActionTypes.START_RECIPES})
-        const {data} = await $api.post('recipes/create', recipeData)
+        dispatch({type: RecipeActionTypes.START_RECIPES});
 
+        const {data} = await $api.post('recipes/create', recipeData)
+        // const {data} = await $api.post('/create', {...recipe});
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data})
     } catch (e: any) {
         if (e instanceof Error) dispatch({

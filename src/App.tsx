@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
-import {AppRouter} from "./router";
+import { BrowserRouter } from "react-router-dom";
+import { AppRouter } from "./router";
 import store from "./store";
-import {Header} from "components";
+import { Header } from "components";
 import styles from "./App.module.scss";
-import {ProvideAuth} from "hooks/useAuth";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import { ProvideAuth } from "hooks/useAuth";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useActions } from "hooks/useActions";
 
 const mainTheme = createTheme({
@@ -30,12 +30,12 @@ const Main = () => {
         <div className={styles.main}>
             <Header/>
             <AppRouter/>
+            {/* <DescriptionRecipe /> */}
         </div>
     );
 }
 
 export function App() {
-
     return (
         <ProvideAuth>
             <Provider store={store}>
