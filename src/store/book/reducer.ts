@@ -18,6 +18,7 @@ const initialState: BookState = {
 };
 
 export const bookReducer = (state = initialState, action: Action) => {
+  console.log(action.type, action.payload);
   switch (action.type) {
     case BookActionTypes.START_BOOK:
       return {...state, loading: true}

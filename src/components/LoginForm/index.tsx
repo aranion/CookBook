@@ -1,25 +1,24 @@
+import styles from './loginForm.module.scss';
 import { useState } from 'react'
 import { Button, TextField } from "@mui/material";
 import { useActions } from "hooks/useActions";
-import styles from './loginForm.module.scss';
+import { useLocation, useNavigate } from 'react-router';
 
 export const LoginForm = () => {
-    // const location = useLocation();
-    // const navigate = useNavigate();
-    // const dispatch = useAppDispatch();
+    type LocationState = {
+        from: { pathname: string }
+      }
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const {login, register} = useActions()
 
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
-    //
-    // function logInFake() {
-    //     dispatch(changeIsAuth(true));
-    //     navigate(location.state?.from.pathname || '/');
-    // }
 
-    const loginHandler = () => {
-        login(email, pass)
+    const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        login(email, pass, (location.state as LocationState).from.pathname, navigate);
     }
     const registerHandler = () => {
         console.log("registerHandler", email, pass)
@@ -27,7 +26,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <div className={styles.center}>
+        <form className={styles.center} onSubmit={(e)=> loginHandler(e)}>
             Страница входа (Заглушка!)
             <div>
                 <TextField label="Логин" variant="standard"
@@ -42,13 +41,13 @@ export const LoginForm = () => {
                 />
             </div>
             <div>
-                <Button variant="contained" color="primary" onClick={loginHandler}>
+                <Button variant="contained" color="primary" type='submit'>
                     Войти
                 </Button>
                 <Button variant="contained" color="primary" onClick={registerHandler}>
                     Регистрация
                 </Button>
             </div>
-        </div>
+        </form>
     );
 };

@@ -13,11 +13,10 @@ import {
 } from '@mui/material';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IRecipe } from "models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { useActions } from 'hooks/useActions';
+import { ContexMenuDescription } from 'components/Simples';
 
 export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
 
@@ -52,9 +51,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
+            <ContexMenuDescription recipe={recipe} />
           }
           title={recipe.title}
         />
@@ -68,7 +65,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
           sx={{ display: 'flex', flexDirection: 'column', gridGap: 16 }}
         >
           <Typography variant="body1" color="text.secondary">
-          {recipe?.description}
+            {recipe?.description}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Время приготовления: {recipe.time} минут
@@ -81,9 +78,6 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe })  => {
           <Box>
             <IconButton aria-label="add to favorites">
               <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
             </IconButton>
           </Box>
           <Button size="small" onClick={() => onOpenModal(recipe.id)}>Посмотреть рецепт</Button>

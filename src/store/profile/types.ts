@@ -18,9 +18,9 @@ export enum ProfileActionTypes {
     LOGOUT_PROFILE_SUCCESS = '@profile/LOGOUT_PROFILE_SUCCESS',
 }
 
-interface StartProfileAction {
-    type: ProfileActionTypes.START_PROFILE
-}
+// interface StartProfileAction {
+//     type: ProfileActionTypes.START_PROFILE
+// }
 
 interface LoginProfileErrorAction {
     type: ProfileActionTypes.LOGIN_PROFILE_ERROR;
