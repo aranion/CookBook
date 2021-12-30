@@ -1,24 +1,42 @@
-import { IUser } from "models/User"
+import {IUser} from "models/User"
 
 export type Action = {
-    type: string
-    payload?: boolean | Error | number | string
+    type: ProfileActionTypes
+    payload: any //boolean | Error | number | string
 }
 
 export interface ProfileState {
-    isAuth: boolean,
-    data: IUser
+    isAuth: boolean
+    user?: IUser
+    error?: Error | string
 }
 
 export enum ProfileActionTypes {
-    FETCH_PROFILE_SUCCESS = '@profile/FETCH_PROFILE_SUCCESS',
-    FETCH_PROFILE_ERROR='@profile/FETCH_PROFILE_ERROR'
+    START_PROFILE = '@profile/START_PROFILE',
+    LOGIN_PROFILE_SUCCESS = '@profile/FETCH_PROFILE_SUCCESS',
+    LOGIN_PROFILE_ERROR = '@profile/LOGIN_PROFILE_ERROR',
+    LOGOUT_PROFILE_SUCCESS = '@profile/LOGOUT_PROFILE_SUCCESS',
 }
 
-interface FetchProfileErrorAction {
-    type: ProfileActionTypes.FETCH_PROFILE_ERROR;
+// interface StartProfileAction {
+//     type: ProfileActionTypes.START_PROFILE
+// }
+
+interface LoginProfileErrorAction {
+    type: ProfileActionTypes.LOGIN_PROFILE_ERROR;
     payload: Error;
 }
 
+interface LoginProfileSuccessAction {
+    type: ProfileActionTypes.LOGIN_PROFILE_SUCCESS;
+    payload: IUser;
+}
+
+interface LogoutProfileSuccessAction {
+    type: ProfileActionTypes.LOGOUT_PROFILE_SUCCESS;
+}
+
 export type ProfileAction =
-    FetchProfileErrorAction
+    LoginProfileErrorAction
+    | LoginProfileSuccessAction
+    | LogoutProfileSuccessAction
