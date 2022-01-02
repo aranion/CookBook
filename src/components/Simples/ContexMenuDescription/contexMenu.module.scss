@@ -1,0 +1,27 @@
+.context-menu {
+  &__wrapper {
+    min-width: 135px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &__actions {
+    width: 100%;
+    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      cursor: pointer;
+    }
+    svg:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+  &__bg {
+    background: gainsboro;
+    padding-left: 15px;
+    border-radius: 5px;
+  }
+}

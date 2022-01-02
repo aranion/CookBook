@@ -33,4 +33,13 @@
   &__login {
     min-width: 240px;
   }
+  .authorization {
+    display: flex;
+    align-items: center;
+    span {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
 }

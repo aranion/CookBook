@@ -9,6 +9,7 @@ const initialState: RecipeState = {
 }
 
 export const recipeReducer = (state = initialState, action: Action) => {
+    console.log(action.type, action.payload);
     switch (action.type) {
         case RecipeActionTypes.START_RECIPES:
             return {...state, loading: true}

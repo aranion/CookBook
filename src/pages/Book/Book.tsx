@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import style from "./book.module.scss";
 import { Chip, List, ListItem } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useActions } from "../../hooks/useActions";
 import { RootState, useAppSelector } from "store";
 import { BookState } from "store/book/types";
@@ -11,12 +11,9 @@ import { Loader } from "../../components";
 export const Book = () => {
 
   const { id } = useParams();
-
   const { setIsModal, fetchAllRecipes, fetchDataMemo } = useActions();
   const { loading, data } = useAppSelector((state) => (state as RootState).book as BookState);
   const recipes = useAppSelector((state) => (state as RootState).recipes.data as IRecipe[]);
-
-  const [ ingredientList, setIngredientLis ] = useState({}); // нужно переделать в Store...
 
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
@@ -24,21 +21,8 @@ export const Book = () => {
     // получение с сервера рецептов книги
     if(!recipes.length) fetchAllRecipes();
     // получение данных кулинарной книги
-    fetchDataMemo(id);
-
-    const curList: any= {}; 
-    recipes.forEach((recipe) =>
-      recipe.ingredients.forEach((item) => {
-        // от Евгений Г.С. -> Для чего тут идет подсчет? 
-        // от Евгений Г.С. -> Общее количество общих игридиентов во всех рецептах в книге? А зачем?
-        if (curList.hasOwnProperty(item.ingredient)) {
-          setIngredientLis( curList[item.ingredient] += 1 );
-        } else {
-          setIngredientLis( curList[item.ingredient] = 1 );
-        }
-      })
-    );
-  }, [recipes, setIngredientLis]);
+    fetchDataMemo(id);   
+  }, [recipes, id]);
 
   // Идет загрузка, рендерится прелоадер
   if(loading) {
@@ -67,18 +51,6 @@ export const Book = () => {
             <img src={data.photo} alt={data.title} />
           </div>
           <p className={style.book__description}>{data.description}</p>
-          <div>
-          <p>{Object.keys(ingredientList).map(el => el)}</p>
-            {Object.keys(ingredientList).map((ingredient) => (
-              <Chip
-                size="small"
-                label={ingredient + " " + (ingredientList as any)[ingredient] } // убрать any....
-                key={ingredient}
-                className={style.book__chip}
-                color={"secondary"}
-              />
-            ))}
-          </div>
         </div>
         <div className={style.book__right}>
           <h2 className={style.book__header}>

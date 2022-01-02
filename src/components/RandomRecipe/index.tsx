@@ -3,12 +3,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FlatwareIcon from "@mui/icons-material/Flatware";
 import MessageIcon from "@mui/icons-material/Message";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Loader, PrintElem } from "..";
 import { Ingredients, IRecipe } from "../../models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import styles from "./randomRecipe.module.scss";
 import { useActions } from "hooks/useActions";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 interface PropsType {
   recipes: IRecipe[];
@@ -17,6 +17,7 @@ interface PropsType {
 export const RandomRecipe = ({ recipes }: PropsType) => {
 
   const { setIsModal } = useActions();
+
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   const getRandomInt = (min: number, max: number) => {
@@ -49,7 +50,7 @@ export const RandomRecipe = ({ recipes }: PropsType) => {
             <span>1</span>
           </div>
           <div>
-            <VisibilityIcon />
+            <ThumbUpIcon />
             <span>2.1к.</span>
           </div>
         </div>

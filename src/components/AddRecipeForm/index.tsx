@@ -10,7 +10,7 @@ import { CustomSelect} from '../Simples';
 import styles from "./addRecipeForm.module.scss";
 // TODO заглушка
 // после в БД надо создать списки, которые будем загружать и выводить
-import {typeOfMeal, cuisine, kindOfFood} from '../../mocks/list-select';
+import { typeOfMeal, cuisine, kindOfFood } from '../../mocks/list-select';
 
 export const AddRecipeForm = () => {
   // Перенести в Store
@@ -27,6 +27,7 @@ export const AddRecipeForm = () => {
     setCookingTime,
     setPersons,
     cleanForm,
+    setKindOfFood, setTypeCuisine, setTypeOfMeal
   } = useActions(); 
 
   const {inputFields} = useAppSelector(state => (state.addRecipe as AddRecipeState));
@@ -49,18 +50,20 @@ export const AddRecipeForm = () => {
   const handlePersons = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPersons(Number((e.target as HTMLDataElement).value));
   };
-  // const handleTypeCuisine = (e: SelectChangeEvent<string>) => {
-  //   setTypeCuisine((e.target as HTMLDataElement).value);
-  // };
-  // const handleTypeOfMeal = (e: SelectChangeEvent<string>) => {
-  //   setTypeOfMeal((e.target as HTMLDataElement).value);
-  // };
-  // const handleKindOfFood = (e: SelectChangeEvent<string>) => {
-  //   setKindOfFood((e.target as HTMLDataElement).value);
-  // };
+  const handleTypeCuisine = (value:string) => {
+    setTypeCuisine(value);
+  };
+  const handleTypeOfMeal = (value:string) => {
+    setTypeOfMeal(value);
+  };
+  const handleKindOfFood = (value:string) => {
+    setKindOfFood(value);
+  };
+
   const resetForm = () => {
     cleanForm();  
   };
+
   const handleAddRecipe = async (e: FormEvent) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement );
@@ -184,58 +187,38 @@ export const AddRecipeForm = () => {
               />
             </div>
             <div className={styles.form__details_row}>
-              {/* <FormControl fullWidth variant="standard">
-                <InputLabel id="select-label-typeCuisine">Тип кухни</InputLabel>
-                <Select
-                  labelId="select-label-typeCuisine"
-                  label="Тип кухни"
-                  value={inputFields.typeCuisine}
-                  onChange={handleTypeCuisine}
-                  defaultValue=""
-                >
-                  {dataSelectForm.cuisine.map(el => <MenuItem key={el} value={el}>{el}</MenuItem>)}
-                </Select>
-              </FormControl> */}
-              <CustomSelect list={cuisine} label="Кухня" name="cuisine"/>
+              <CustomSelect 
+                list={cuisine} 
+                label="Кухня" 
+                name="cuisine" 
+                selectedValue={inputFields.typeCuisine}
+                setSelectedValue={handleTypeCuisine}
+              />
             </div>
           </div>
           <div className={styles.form__details_col}>
             <div className={styles.form__details_row}>
-              {/* <FormControl fullWidth variant="standard">
-                <InputLabel id="select-label-typeOfMeal">Трапеза</InputLabel>
-                <Select
-                  labelId="select-label-typeOfMeal"
-                  label="Трапеза"
-                  value={inputFields.typeOfMeal}
-                  onChange={handleTypeOfMeal}
-                  defaultValue=""
-                >
-                  {dataSelectForm.typeOfMeal.map(el => <MenuItem key={el} value={el}>{el}</MenuItem>)}
-                </Select>
-              </FormControl> */}
-              <CustomSelect list={typeOfMeal} label="Тип трапезы" name="typeOfMeal"/>
+              <CustomSelect 
+                list={typeOfMeal} 
+                label="Тип трапезы" 
+                name="typeOfMeal"
+                selectedValue={inputFields.typeOfMeal}
+                setSelectedValue={handleTypeOfMeal}
+              />
             </div>
             <div className={styles.form__details_row}>
-              {/* <FormControl fullWidth variant="standard">
-                <InputLabel id="select-label-kindOfFood">Вид пищи</InputLabel>
-                <Select
-                  labelId="select-label-kindOfFood"
-                  label="Вид пищи"
-                  value={inputFields.kindOfFood}
-                  onChange={handleKindOfFood}
-                  defaultValue=""
-                >
-                  {dataSelectForm.kindOfFood.map(el => <MenuItem key={el} value={el}>{el}</MenuItem>)} 
-                </Select>
-              </FormControl> */}
-              <CustomSelect list={kindOfFood} label="Вид пищи" name="kindOfFood"/>
+              <CustomSelect 
+                list={kindOfFood} 
+                label="Вид пищи" 
+                name="kindOfFood"
+                selectedValue={inputFields.kindOfFood}
+                setSelectedValue={handleKindOfFood}
+              />
             </div>
           </div>
         </div>
         <div className={`${styles.form__row} ${styles.form__send}`}>
           <Button 
-            // onClick={submitRecipe} 
-            // onClick={handleAddRecipe}
             variant="contained" 
             color="primary" 
             style={{ width: 100}} 

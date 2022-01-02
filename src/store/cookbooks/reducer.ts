@@ -15,7 +15,6 @@ const initialState: CookbooksState = {
 
 export const cookbooksReducer = (state = initialState, action: Action) => {
   console.log(action.type, action.payload);
-
   switch (action.type) {
     case CookbooksActionTypes.START_COOKBOOKS:
       return {...state, loading: true}
