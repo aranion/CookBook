@@ -10,7 +10,7 @@ export interface StepData {
   urlImg?: string;
 }
 
-interface IAuthor {
+export interface IAuthor {
   id: string;  // id user - привязка к создателю
   name: string  // Для отображения инфы
 }

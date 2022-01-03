@@ -1,4 +1,4 @@
-import {SyntheticEvent, useState} from 'react';
+import {SyntheticEvent, ChangeEvent} from 'react';
 import styles from "./searchForm.module.scss";
 import Chips from '../Chips';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +20,10 @@ import {
   Typography,
   Button,
 } from '@mui/material';
+import { useActions } from "hooks/useActions";
+import { RootState, useAppSelector } from 'store';
+import { SearchState } from "store/search/types";
+import {typeOfMeal as typeOfMealList, kindOfFood as kindOfFoodList} from "mocks/list-select"
 
 interface PropsType {
   drawerWidth: number, 
@@ -46,17 +50,40 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
     ? {flexDirection: 'row'} as const
     : {pl: 2}
 
-  const [time, setTime] = useState('');
+  const { title, author, rating } = useAppSelector((state: RootState) => 
+    (state.searchRecipe as SearchState)
+  );
 
-  const handleChangeTime = (event: SelectChangeEvent) => {
-    setTime(event.target.value);
+  const time = useAppSelector((state: RootState) => 
+    (state.searchRecipe as SearchState).time.toString()
+  );
+
+  const {
+    setSearchTime, 
+    setSearchRating, 
+    setSearchTitle,
+    setSearchAuthor,
+    setSearchTypeOfMeal,
+    setSearchCuisine,
+    setSearchKindOfFood,
+  } = useActions()
+
+  const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchTitle(event.target.value);
   };
 
-  const [rating, setRating] = useState(4);
+  const handleChangeAuthor = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.value)
+    setSearchAuthor(event.target.value);
+  };
+
+  const handleChangeTime = (event: SelectChangeEvent) => {
+    setSearchTime(+event.target.value);
+  };
 
   const handelChangeRating = (event: SyntheticEvent<Element, Event>, value: number | null) => {
     if (value) {
-      setRating(value)
+      setSearchRating(value)
     }
   }
 
@@ -87,9 +114,7 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
             onChange={handleChangeTime}
             className={styles.drawer__select}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
+            <MenuItem value={0}>любое</MenuItem>
             <MenuItem value={30}>не более 30 минут</MenuItem>
             <MenuItem value={60}>не более часа</MenuItem>
             <MenuItem value={120}>не более 2 часов</MenuItem>
@@ -110,23 +135,42 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
         </Box>
         <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Тип блюда:</Typography>
-          <FormGroup sx={checkboxStyle}>
-            <FormControlLabel control={<Checkbox />} label="Закуски" color="primary"/>
-            <FormControlLabel control={<Checkbox />} label="Основные блюда" color="primary"/>
-            <FormControlLabel control={<Checkbox />} label="Десерты" color="primary"/>
-            <FormControlLabel control={<Checkbox />} label="Напитки" color="primary"/>
-          </FormGroup>
+          <FormControl>
+            <RadioGroup
+              sx={checkboxStyle}
+              aria-label="gender"
+              defaultValue="NULL"
+            >
+              {Object.entries(kindOfFoodList).map(kindOfFood => {
+                return <FormControlLabel 
+                    value={kindOfFood[0]} 
+                    control={<Radio />} 
+                    label={kindOfFood[0] === "NULL" ? "Любое" : kindOfFood[1]} 
+                    color="primary" 
+                    key={kindOfFood[0]}
+                  />
+              })}
+            </RadioGroup>
+          </FormControl>
         </Box>
         <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
           <Paper elevation={0}>
-            <InputBase className={styles.drawer__input}/>
+            <InputBase 
+              className={styles.drawer__input}
+              value={title}
+              onChange={handleChangeTitle}
+            />
           </Paper>
         </Box>
         <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Имя автора:</Typography>
           <Paper elevation={0}>
-            <InputBase className={styles.drawer__input}/>
+            <InputBase 
+              className={styles.drawer__input}
+              value={author}
+              onChange={handleChangeAuthor}
+            />
           </Paper>
         </Box>
         <Box sx={displayGrid}>
