@@ -28,7 +28,7 @@ const Chips: React.FC<ChipsProps> = ({chipsLabel, drawerWidth}) => {
   const [value, setValue] = useState('');
 
   const handleChange = (event: { target: { value: string } }) => {
-    return setValue(event.target.value);
+    return setValue(event.target.value.trim());
   }
 
   const handleSetChip = () => {
