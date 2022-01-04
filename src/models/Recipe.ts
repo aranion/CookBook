@@ -1,6 +1,6 @@
 export interface Ingredients {
-  ingredient: string;
-  amount: string;
+  description: string;
+  count: string;
   placeholder?: string // нужен для удаления нужного ингридиента
 }
 
@@ -16,18 +16,20 @@ interface IAuthor {
 }
 export interface IRecipe {
   // Все правки согласовывайте!!! такая модель сформирована в АПИ на сервере
-  id: string;
+  _id: string;
   title: string;
+  private: false;
   description: string;  // краткое описание
   ingredients: Array<Ingredients>;
   steps: Array<StepData>;
   author: IAuthor;
   time: number;
   urlImg?: string;
-  cuisine: string;   // кухня мира/категория (европа, азия...
-  typeOfMeal: string; // тип трапезы
-  portionsAmount: number;
-  cost: number; // затраты
-  createdAt?: string; // дата создания рецепта
+  cuisine?: string;   // кухня мира/категория (европа, азия...
+  typeOfMeal?: string; // тип трапезы
+  kindOfFood?: string;
+  portionsAmount?: number;
+  cost?: number; // затраты
+  createdAt: string; // дата создания рецепта
   rating: number // рейтинг
 }

@@ -3,6 +3,7 @@ import { Action, RecipeState, RecipeActionTypes } from "./types";
 
 const initialState: RecipeState = {
     loading: false,
+    isAddRecipe: false,
     filter: '',
     data: [],
     maxItemsPage: 10,
@@ -13,6 +14,8 @@ export const recipeReducer = (state = initialState, action: Action) => {
     switch (action.type) {
         case RecipeActionTypes.START_RECIPES:
             return {...state, loading: true}
+        case RecipeActionTypes.IS_ADD_RECIPE:
+            return {...state, isAddRecipe: !state.isAddRecipe,}
         case RecipeActionTypes.FETCH_RECIPES_SUCCESS:
             return {...state, loading: false, data: [...action.payload]}
         case RecipeActionTypes.FETCH_RECIPES_ERROR:
@@ -25,7 +28,7 @@ export const recipeReducer = (state = initialState, action: Action) => {
             return {...state, filter: action.payload}
         case RecipeActionTypes.DELETE_RECIPE: {
             const data: IRecipe[] = state.data 
-                ? state.data.filter((item) => item.id !== action.payload) 
+                ? state.data.filter((item) => item._id !== action.payload) 
                 : []
             return {...state, data}
         }
@@ -41,5 +44,5 @@ function addData(state: IRecipe[] = [], payload: IRecipe) {
 }
 
 function modifyData(state: IRecipe[] = [], payload: IRecipe) {
-    return [...state.filter(item => item.id !==payload.id), payload]
+    return [...state.filter(item => item._id !==payload._id), payload]
 }

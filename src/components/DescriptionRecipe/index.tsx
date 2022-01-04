@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./DescriptionRecipe.module.scss";
-import img from "../../assets/cbDefault.jpg";
+import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { Loader, StepRecipe } from "../";
 import { Ingredients, IRecipe } from "../../models/Recipe";
 import { Button, Rating } from "@mui/material";
@@ -19,7 +19,7 @@ export const DescriptionRecipe = () => {
 
   const recipe: IRecipe = useAppSelector(state => 
     state.recipes.data.find((el:IRecipe) => 
-      el.id === idRecipe
+      el._id === idRecipe
     ));
 
   const { setIsModal } = useActions();
@@ -56,11 +56,16 @@ export const DescriptionRecipe = () => {
         <div className={styles.modal_body}>
           <div className={styles.modal_body__left}>
             <div className={styles['modal_body__left-wrapper-img']}>
+              
               <img
-              className={styles["modal_body__left-img"]}
-              src={recipe.urlImg || img}
-              alt={recipe.title}
-            />
+                className={styles["modal_body__left-img"]}
+                // TODO 'src' тут заглушка для показа фотографий не с сервера, необходимо убрать при работе на сервере
+                src={recipe.urlImg 
+                  ? '/img/' + recipe.urlImg?.split('/')[recipe.urlImg?.split('/').length - 1]
+                  : imgDefaultGB
+                }
+                alt={recipe.title}
+              />
             </div>
             <div  className={styles["modal_body__left-rating"]}>
               <Rating name="half-rating" defaultValue={recipe.rating} precision={0.5} readOnly />
@@ -73,7 +78,7 @@ export const DescriptionRecipe = () => {
               <ul>
                 {recipe.ingredients.map((item: Ingredients, index: number) => (
                   <li key={index}>
-                    {item.ingredient} - {item.amount}
+                    {item.description} - {item.count}
                   </li>
                 ))}
               </ul>
@@ -115,16 +120,16 @@ export const DescriptionRecipe = () => {
             <div className={styles["modal_body__right-line"]}></div>
             <div className={styles["modal_body__right-author"]}>
               <span className={styles.author}>
-                Автор: <span>{recipe.author.name}</span>
+                Автор: <span>{recipe?.author?.name || 'Автор не указан...'}</span>
               </span>
               <span>
-                ID: <span>id_{recipe.id}</span>
+                ID: <span>id_{recipe._id}</span>
               </span>
             </div>
             <div>
               <div className={styles["modal_body__right-process"]}>
-                {recipe.steps.map((el) => {
-                  return <StepRecipe key={el.title} step={el} />;
+                {recipe.steps.map((el, i) => {
+                  return <StepRecipe key={el.title || i} step={el} />;
                 })}
               </div>
             </div>

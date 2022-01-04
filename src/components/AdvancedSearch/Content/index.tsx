@@ -32,7 +32,7 @@ const ContentAdvancedSearch = ({ recipes }: PropsType) => {
                 Рецепты не найдены...
               </Box> 
             : recipes.map(recipe => {
-              return <RecipeCard recipe={recipe} key={recipe.id}/>
+              return <RecipeCard recipe={recipe} key={recipe._id}/>
           })}
         </Box>
       </Box>

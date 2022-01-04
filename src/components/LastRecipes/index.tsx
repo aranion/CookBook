@@ -17,7 +17,7 @@ export const LastRecipes = ({ recipes }: PropsType) => {
             <h2>Последние рецепты</h2>
             <div className={styles["last-recipes__container"]}>
                 {recipes && recipes?.map((el) => {
-                    return <SmallRecipe recipe={el} key={el.id}/>
+                    return <SmallRecipe recipe={el} key={el._id}/>
                 })}
             </div>
         </div>

@@ -41,7 +41,7 @@ export const IngredientList = () => {
           <ListItem key={ingredient.placeholder}>
             <Input
               placeholder={ingredient.placeholder}
-              value={ingredient.ingredient}
+              value={ingredient.description}
               onChange={(e) => handleIngredient(e, ingredient.placeholder || '')}
               name={`ingredient-${idx}-description`}
               //конфликт// value={ingredient.name}
@@ -54,7 +54,7 @@ export const IngredientList = () => {
               placeholder={'Объем'}
               name={`ingredient-${idx}-count`}
               required={true}
-              value={ingredient.amount}
+              value={ingredient.count}
               onChange={(e) => handleIngredientAmount(e, ingredient.placeholder || '')}
               style={{width: 100, marginLeft: 10}}
               inputProps={{ "aria-label": "description" }}

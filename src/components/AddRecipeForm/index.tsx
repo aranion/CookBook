@@ -11,6 +11,7 @@ import styles from "./addRecipeForm.module.scss";
 // TODO заглушка
 // после в БД надо создать списки, которые будем загружать и выводить
 import { typeOfMeal, cuisine, kindOfFood } from '../../mocks/list-select';
+import { RecipeState } from "store/recipe/types";
 
 export const AddRecipeForm = () => {
   // Перенести в Store
@@ -27,10 +28,14 @@ export const AddRecipeForm = () => {
     setCookingTime,
     setPersons,
     cleanForm,
-    setKindOfFood, setTypeCuisine, setTypeOfMeal
+    setKindOfFood, 
+    setTypeCuisine,
+    setTypeOfMeal,
+    setIsAddRecipe
   } = useActions(); 
 
   const {inputFields} = useAppSelector(state => (state.addRecipe as AddRecipeState));
+  const {isAddRecipe} = useAppSelector(state => (state.recipes as RecipeState));
 
   const handleTitleRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInpuTitleRecipe((e.target as HTMLDataElement).value);
@@ -39,7 +44,8 @@ export const AddRecipeForm = () => {
     setDescriptionRecipe((e.target as HTMLDataElement).value);
   };
   const handleIsPrivat = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsPrivatRecipe(!!(e.target as HTMLDataElement).value);
+    debugger
+    setIsPrivatRecipe((e.target as HTMLDataElement).value === "true" ? true : false);
   };
   const handleCost = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCostRecipe(Number((e.target as HTMLDataElement).value));
@@ -70,6 +76,10 @@ export const AddRecipeForm = () => {
     const result = await addRecipe(form);
     console.log(result)
   }
+  const handleIsAddRecipe = () => {
+    setIsAddRecipe();
+    cleanForm(); 
+  }
   const handleImgUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUrlImg(e.target.value);
   }
@@ -77,6 +87,22 @@ export const AddRecipeForm = () => {
   const handleBtn = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.target.nextSibling.click();
   }
+
+  if (isAddRecipe) {
+    return <div className={styles.form}>
+      <p>
+        Рецепт успешно добавлен!
+      </p>
+      <Button 
+        variant="contained" 
+        color="primary"
+        onClick={handleIsAddRecipe}
+      >
+        Ок
+      </Button>
+    </div>
+  }
+
   return (
     <div className={styles.form}>
       <h1 className={styles.form__title}>Новый рецепт</h1>
@@ -123,12 +149,12 @@ export const AddRecipeForm = () => {
             </div>
             <div>
               <FormControl component="fieldset">
-                <FormLabel component="legend">Могут ли другие просматривать данный рецепт?</FormLabel>
+                <FormLabel component="legend">Сделать рецепт приватным?</FormLabel>
                 <RadioGroup 
                   row aria-label="checked" 
                   value={inputFields.isPrivat}
                   onChange={handleIsPrivat} 
-                  defaultValue={true} 
+                  defaultValue={false} 
                   name="private"
                 >
                   <FormControlLabel value={true} control={<Radio />} label="Да" />
