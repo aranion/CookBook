@@ -135,7 +135,7 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
             onChange={handelChangeRating}
           />
         </Box>
-        <Box sx={displayGrid}>
+        {/* <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Тип блюда:</Typography>
           <FormControl>
             <RadioGroup
@@ -156,7 +156,7 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
               })}
             </RadioGroup>
           </FormControl>
-        </Box>
+        </Box> */}
         <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
           <Paper elevation={0}>

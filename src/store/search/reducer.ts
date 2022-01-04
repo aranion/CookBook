@@ -6,7 +6,6 @@ const initialState: SearchState = {
   author: '',
   typeOfMeal: '',
   cuisine: '',
-  kindOfFood: '',
   chips: [
     { key: '0', label: 'Картофель' },
     { key: '1', label: 'Форель' },
