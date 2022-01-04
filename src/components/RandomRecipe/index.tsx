@@ -35,7 +35,14 @@ export const RandomRecipe = ({ recipes }: PropsType) => {
   return (
     <div className={styles["recipe-block"]}>
       <div className={styles["recipe-block__left"]}>
-        <img src={recipe?.urlImg || imgDefaultGB} alt={recipe?.title} />
+        <img 
+          // TODO 'src' тут заглушка для показа фотографий не с сервера, необходимо убрать при работе на сервере
+          src={recipe.urlImg
+            ? '/img/' + recipe.urlImg.split('/')[recipe.urlImg?.split('/').length - 1]
+            : imgDefaultGB
+          }
+          alt={recipe?.title} 
+        />
         <div className={styles["recipe-block__meta"]}>
           <div>
             <AccessTimeIcon />
@@ -68,7 +75,7 @@ export const RandomRecipe = ({ recipes }: PropsType) => {
           <ul>
             {recipe?.ingredients.map((item: Ingredients, i:number) => (
               <li key={i}>
-                {item.ingredient} - {item.amount}
+                {item.description} - {item.count}
               </li>
             ))}
           </ul>
@@ -76,9 +83,9 @@ export const RandomRecipe = ({ recipes }: PropsType) => {
         <div className={styles["recipe-block__right_added"]}>
           <div className={styles["recipe-block__right_added-author"]}>
             <AccountCircleIcon />
-            <span>{recipe?.author.name}</span>
+            <span>{recipe?.author?.name || 'Автор не указан...'}</span>
           </div>
-          <Button size="small" onClick={() => onOpen(recipe.id)}>
+          <Button size="small" onClick={() => onOpen(recipe._id)}>
             Посмотреть рецепт
           </Button> 
         </div>

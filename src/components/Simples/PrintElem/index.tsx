@@ -23,11 +23,11 @@ export const PrintElem = ({recipe}:{recipe:IRecipe}) => {
     const {time, author, typeOfMeal, portionsAmount } = data;
 
     const content = [
-        { text: `CookBook: id(${data.id}) - author:${author.name}`, style: 'cookbookLogo' },
+        { text: `CookBook: id(${data._id}) - author:${author?.name || 'Автор не указан...'}`, style: 'cookbookLogo' },
         { text: data.title, style: 'title' },
         { text: 'Ингридиенты:', style:'propsTitle' },
         data.ingredients.map((el)=>{
-            return `${el.ingredient} - ${el.amount}`;
+            return `${el.description} - ${el.count}`;
         }),
         " ",
     ];

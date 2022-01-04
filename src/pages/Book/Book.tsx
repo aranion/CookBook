@@ -60,13 +60,13 @@ export const Book = () => {
             {recipes &&
               recipes
                 // фильтруем все рецепты и передаем только те которые в книге... 
-                .filter(recipe => data.recipesId.indexOf(recipe.id) !== -1 ? false : true) 
+                .filter(recipe => data.recipesId.indexOf(recipe._id) !== -1 ? false : true) 
                 .map((recipe) => {
                 return (
                   <ListItem 
                     button={true} 
-                    key={recipe.id} 
-                    onClick={() => onOpen((recipe.id).toString())}
+                    key={recipe._id} 
+                    onClick={() => onOpen((recipe._id).toString())}
                   >
                     <div className={style.item}>
                       <div className={style.item__photoBox}>
@@ -81,7 +81,7 @@ export const Book = () => {
                           {recipe.ingredients.map((item, i) => (
                             <Chip
                               size="small"
-                              label={item.ingredient}
+                              label={item.description}
                               className={style.item__chip}
                               key={i}
                             />

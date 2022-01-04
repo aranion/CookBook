@@ -6,12 +6,14 @@ export const typeOfMeal: TSelect = {
     LUNCH: 'Обед',
     DINNER: 'Ужин',
     SNACK: 'Перекус',
+    OTHER: 'Другое',
 }
 export const cuisine: TSelect = {
     NULL: '',
     SAFOOD: 'Морепродукты',
     MEAT: 'Мясо',
     VEGETARIAN: 'Вегетарианская',
+    OTHER: 'Другое',
 }
 export const kindOfFood: TSelect = {
     NULL: '',
@@ -22,4 +24,5 @@ export const kindOfFood: TSelect = {
     BAKERY: 'Выпечка',
     DRINKS: 'Напитки',
     SAUCES: 'Соусы',
+    OTHER: 'Другое',
 }

@@ -6,10 +6,11 @@ export type Action = {
 }
 
 export interface RecipeState {
-    loading: boolean
-    data: IRecipe[] | []
-    filter: string
-    error?: Error
+    loading: boolean;
+    isAddRecipe: boolean;
+    data: IRecipe[] | [];
+    filter: string;
+    error?: Error;
     page?: number;
     limit?: number;
     maxItemsPage: number;
@@ -18,6 +19,7 @@ export interface RecipeState {
 export enum RecipeActionTypes {
     START_RECIPES = '@recipes/START_RECIPES',
     FETCH_RECIPES_SUCCESS = '@recipes/FETCH_RECIPES_SUCCESS',
+    IS_ADD_RECIPE = '@recipes/IS_ADD_RECIPE',
     FETCH_RECIPES_ERROR = '@recipes/FETCH_RECIPES_ERROR',
     ADD_RECIPE = '@recipes/ADD_RECIPE',
     MODIFY_RECIPE = '@recipes/MODIFY_RECIPES',
@@ -33,6 +35,9 @@ interface StartRecipeAction {
 interface FetchRecipeSuccessAction {
     type: RecipeActionTypes.FETCH_RECIPES_SUCCESS;
     payload: IRecipe[];
+}
+interface IsAddRecipeAction {
+    type: RecipeActionTypes.IS_ADD_RECIPE
 }
 
 interface FetchRecipeErrorAction {
@@ -68,6 +73,7 @@ interface SetRecipesFilter {
 export type RecipeAction =
     StartRecipeAction
     | FetchRecipeErrorAction
+    | IsAddRecipeAction
     | FetchRecipeSuccessAction
     | AddRecipeAction
     | ModifyRecipeAction

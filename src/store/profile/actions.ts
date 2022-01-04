@@ -69,7 +69,7 @@ export const logout = () => async (dispatch: Dispatch<ProfileAction>) => {
     }
 }
 export const checkAuth = () => async (dispatch: Dispatch<ProfileAction>) => {
-    try {
+        try {
         const response = await axios.get<AuthResponse>(`${API_BASE_URL}/refresh`, {withCredentials: true})
         console.log(response);
         localStorage.setItem('token', response.data.accessToken);
