@@ -12,6 +12,7 @@ import styles from "./addRecipeForm.module.scss";
 // после в БД надо создать списки, которые будем загружать и выводить
 import { typeOfMeal, cuisine, kindOfFood } from '../../mocks/list-select';
 import { RecipeState } from "store/recipe/types";
+import { ProfileState } from "store/profile/types";
 
 export const AddRecipeForm = () => {
   // Перенести в Store
@@ -36,6 +37,7 @@ export const AddRecipeForm = () => {
 
   const {inputFields} = useAppSelector(state => (state.addRecipe as AddRecipeState));
   const {isAddRecipe} = useAppSelector(state => (state.recipes as RecipeState));
+  const {user} = useAppSelector(state => (state.profile as ProfileState));
 
   const handleTitleRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInpuTitleRecipe((e.target as HTMLDataElement).value);
@@ -73,8 +75,9 @@ export const AddRecipeForm = () => {
   const handleAddRecipe = async (e: FormEvent) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement );
+    form.set('author', user!.id); // Добавялет id автора рецепта
     const result = await addRecipe(form);
-    console.log(result)
+    console.log(result);
   }
   const handleIsAddRecipe = () => {
     setIsAddRecipe();

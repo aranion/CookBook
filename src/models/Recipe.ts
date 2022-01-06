@@ -10,10 +10,10 @@ export interface StepData {
   urlImg?: string;
 }
 
-interface IAuthor {
-  id: string;  // id user - привязка к создателю
-  name: string  // Для отображения инфы
-}
+// interface IAuthor {
+//   id: string;  // id user - привязка к создателю
+//   name: string  // Для отображения инфы
+// }
 export interface IRecipe {
   // Все правки согласовывайте!!! такая модель сформирована в АПИ на сервере
   _id: string;
@@ -22,7 +22,8 @@ export interface IRecipe {
   description: string;  // краткое описание
   ingredients: Array<Ingredients>;
   steps: Array<StepData>;
-  author: IAuthor;
+  // author: IAuthor;
+  author: string;
   time: number;
   urlImg?: string;
   cuisine?: string;   // кухня мира/категория (европа, азия...
