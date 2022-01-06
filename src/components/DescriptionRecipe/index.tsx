@@ -120,16 +120,19 @@ export const DescriptionRecipe = () => {
             <div className={styles["modal_body__right-line"]}></div>
             <div className={styles["modal_body__right-author"]}>
               <span className={styles.author}>
-                Автор: <span>{recipe?.author?.name || 'Автор не указан...'}</span>
+                Автор: <span>{recipe?.author || 'Автор не указан...'}</span>
               </span>
               <span>
                 ID: <span>id_{recipe._id}</span>
               </span>
             </div>
+            <div className={styles["modal_body__right-author"]}>
+              <p className={styles["modal_body__right-description"]}>{recipe.description}</p>
+            </div>
             <div>
               <div className={styles["modal_body__right-process"]}>
                 {recipe.steps.map((el, i) => {
-                  return <StepRecipe key={el.title || i} step={el} />;
+                  return <StepRecipe key={el.title || i} step={el} index={i} />;
                 })}
               </div>
             </div>
