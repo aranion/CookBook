@@ -5,7 +5,7 @@ import {Dispatch} from "redux";
 import {AuthService} from "services/authService";
 import {ProfileActionTypes, ProfileAction} from './types'
 
-export const login = (email: string, password: string, pathname:string | undefined, navigate: (e: string) => void) => async (dispatch: Dispatch<ProfileAction>) => {
+export const login = (email: string, password: string) => async (dispatch: Dispatch<ProfileAction>) => {
     try {
 
         const response = await AuthService.login(email, password);
@@ -17,7 +17,6 @@ export const login = (email: string, password: string, pathname:string | undefin
             type: ProfileActionTypes.LOGIN_PROFILE_SUCCESS,
             payload: response.data.user
         });
-        navigate(pathname || '/');
     } catch (e: any) {
         if (e instanceof Error) dispatch({
             type: ProfileActionTypes.LOGIN_PROFILE_ERROR,
@@ -32,11 +31,11 @@ export const login = (email: string, password: string, pathname:string | undefin
     }
 }
 
-export const register = (email: string, password: string) =>
+export const register = (name: string, email: string, password: string) =>
     async (dispatch: Dispatch<ProfileAction>) => {
         try {
             console.log("Store, register")
-            const response = await AuthService.register(email, password)
+            const response = await AuthService.register(name, email, password)
             console.log(response.data)
             if (response.status !== 200) throw TypeError('Ошибка авторизации')
             localStorage.setItem('token', response.data.accessToken);

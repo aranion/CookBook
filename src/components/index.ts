@@ -1,5 +1,5 @@
 export * from "./Header";
-export * from "./LoginForm";
+export * from "./AuthForm";
 export * from "./Modal";
 export * from "./RandomRecipe";
 export * from "./Search";

@@ -8,6 +8,7 @@ export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) =>
         dispatch({type: RecipeActionTypes.START_RECIPES});
 
         const {data} = await $api.get('/recipes/get');
+        console.log(data)
         // пока сервер пустой, пусть будет заглушка
         // if(!('name' in data)) {
         //     dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
