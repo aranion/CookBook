@@ -28,7 +28,7 @@ export const SmallRecipe = (props: Props) => {
       </div>
       <div className={styles["small-recipe__info"]}>
         <DateCreate date={createdAt} />
-        <span>{author?.name || 'Автор не указан...'}</span>
+        <span>{author || 'Автор не указан...'}</span>
       </div>
     </div>
   );

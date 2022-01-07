@@ -68,7 +68,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           action={<ContexMenuDescription recipe={recipe} />}
           title={recipe.title}
         />
-        <Rating sx={{ padding: 1 }} name="size-medium" value={2} readOnly />
+        <Rating sx={{ padding: 1 }} name="size-medium" value={recipe.rating} readOnly />
         <CardContent
           sx={{ display: "flex", flexDirection: "column", gridGap: 16 }}
         >

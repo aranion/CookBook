@@ -68,7 +68,7 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
         <div className={styles["recipe-block__right_added"]}>
           <div className={styles["recipe-block__right_added-author"]}>
             <AccountCircleIcon />
-            <span>{recipe?.author?.name || "Автор не указан..."}</span>
+            <span>{recipe?.author || "Автор не указан..."}</span>
           </div>
           <Button size="small" onClick={() => onOpen(recipe._id)}>
             Посмотреть рецепт
