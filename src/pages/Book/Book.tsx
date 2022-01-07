@@ -9,39 +9,46 @@ import { IRecipe } from "models/Recipe";
 import { Loader } from "../../components";
 
 export const Book = () => {
-
   const { id } = useParams();
   const { setIsModal, fetchAllRecipes, fetchDataMemo } = useActions();
-  const { loading, data } = useAppSelector((state) => (state as RootState).book as BookState);
-  const recipes = useAppSelector((state) => (state as RootState).recipes.data as IRecipe[]);
+  const { loading, data } = useAppSelector(
+    (state) => (state as RootState).book as BookState
+  );
+  const recipes = useAppSelector(
+    (state) => (state as RootState).recipes.data as IRecipe[]
+  );
 
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   useEffect(() => {
     // получение с сервера рецептов книги
-    if(!recipes.length) fetchAllRecipes();
+    if (!recipes.length) fetchAllRecipes();
     // получение данных кулинарной книги
-    fetchDataMemo(id);   
+    fetchDataMemo(id);
   }, [recipes, id]);
 
   // Идет загрузка, рендерится прелоадер
-  if(loading) {
-    return <div className={style.pages__center}>
-      <div className={style.container}>
-        <Loader />
+  if (loading) {
+    return (
+      <div className={style.pages__center}>
+        <div className={style.container}>
+          <Loader />
+        </div>
       </div>
-    </div>
+    );
   }
 
   // Книга не найдены, рендерится уведомление
-  if (!data.hasOwnProperty("title") ) {
-    return <div className={style.pages__center}>
-      <div className={style.container}>
-        <h3>Книга не найдена</h3>
+  if (!data.hasOwnProperty("title")) {
+    return (
+      <div className={style.pages__center}>
+        <div className={style.container}>
+          <h3>Книга не найдена</h3>
+        </div>
       </div>
-    </div>
+    );
   }
-  
+
   return (
     <div className={style.pages__center}>
       <div className={style.container}>
@@ -59,39 +66,41 @@ export const Book = () => {
           <List>
             {recipes &&
               recipes
-                // фильтруем все рецепты и передаем только те которые в книге... 
-                .filter(recipe => data.recipesId.indexOf(recipe.id) !== -1 ? false : true) 
+                // фильтруем все рецепты и передаем только те которые в книге...
+                .filter((recipe) =>
+                  data.recipesId.indexOf(recipe._id) !== -1 ? false : true
+                )
                 .map((recipe) => {
-                return (
-                  <ListItem 
-                    button={true} 
-                    key={recipe.id} 
-                    onClick={() => onOpen((recipe.id).toString())}
-                  >
-                    <div className={style.item}>
-                      <div className={style.item__photoBox}>
-                        <img src={recipe.urlImg} alt={recipe.title} />
-                      </div>
-                      <div className={style.item__content}>
-                        <h3 className={style.item__name}>{recipe.title}</h3>
-                        <p className={style.item__description}>
-                          {recipe.description}
-                        </p>
-                        <div>
-                          {recipe.ingredients.map((item, i) => (
-                            <Chip
-                              size="small"
-                              label={item.ingredient}
-                              className={style.item__chip}
-                              key={i}
-                            />
-                          ))}
+                  return (
+                    <ListItem
+                      button={true}
+                      key={recipe._id}
+                      onClick={() => onOpen(recipe._id.toString())}
+                    >
+                      <div className={style.item}>
+                        <div className={style.item__photoBox}>
+                          <img src={recipe.urlImg} alt={recipe.title} />
+                        </div>
+                        <div className={style.item__content}>
+                          <h3 className={style.item__name}>{recipe.title}</h3>
+                          <p className={style.item__description}>
+                            {recipe.description}
+                          </p>
+                          <div>
+                            {recipe.ingredients.map((item, i) => (
+                              <Chip
+                                size="small"
+                                label={item.description}
+                                className={style.item__chip}
+                                key={i}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </ListItem>
-                );
-              })}
+                    </ListItem>
+                  );
+                })}
           </List>
         </div>
       </div>

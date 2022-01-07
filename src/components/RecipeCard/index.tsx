@@ -17,9 +17,16 @@ import { IRecipe } from "models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { useActions } from "hooks/useActions";
 import { ContexMenuDescription } from "components/Simples";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import style from "./recipeCard.module.scss";
+import { $api } from "../../api/api";
 
 export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
   const { setIsModal } = useActions();
+  const dispatch = useDispatch();
+  console.log("рецепт: ", recipe);
+  const [rating, setRating] = useState(Number(recipe.rating));
 
   const onOpenModal = (idRecipe: string) => setIsModal(idRecipe);
   const getMinDescription = (value: number): string => {
@@ -27,7 +34,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
     str += "...";
     return str;
   };
-
+  useEffect(() => {});
   return (
     <Card
       sx={{
@@ -64,7 +71,22 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           action={<ContexMenuDescription recipe={recipe} />}
           title={recipe.title}
         />
-        <Rating sx={{ padding: 2 }} name="size-medium" value={2} readOnly />
+        <div className={style.card__rating}>
+          <Rating
+            name="size-medium"
+            value={rating}
+            precision={0.5}
+            onChange={(event, newValue) => {
+              setRating(Number(newValue));
+              const curRecipe = {
+                id: recipe._id,
+                rating: newValue,
+              };
+              $api.post("/recipes/modify", curRecipe);
+            }}
+          />
+        </div>
+
         <CardContent
           sx={{ display: "flex", flexDirection: "column", gridGap: 16 }}
         >
@@ -82,11 +104,11 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <Box>
-            <IconButton aria-label="add to favorites" >
+            <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
           </Box>
-          <Button size="small" onClick={() => onOpenModal(recipe.id)}>
+          <Button size="small" onClick={() => onOpenModal(recipe._id)}>
             Посмотреть рецепт
           </Button>
         </CardActions>

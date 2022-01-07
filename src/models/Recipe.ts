@@ -1,7 +1,7 @@
 export interface Ingredients {
-  ingredient: string;
-  amount: string;
-  placeholder?: string // нужен для удаления нужного ингридиента
+  description: string;
+  count: string;
+  placeholder?: string; // нужен для удаления нужного ингридиента
 }
 
 export interface StepData {
@@ -11,23 +11,25 @@ export interface StepData {
 }
 
 interface IAuthor {
-  id: string;  // id user - привязка к создателю
-  name: string  // Для отображения инфы
+  id: string; // id user - привязка к создателю
+  name: string; // Для отображения инфы
 }
 export interface IRecipe {
   // Все правки согласовывайте!!! такая модель сформирована в АПИ на сервере
-  id: string;
+  _id: string;
   title: string;
-  description: string;  // краткое описание
+  private: false;
+  description: string; // краткое описание
   ingredients: Array<Ingredients>;
   steps: Array<StepData>;
   author: IAuthor;
   time: number;
   urlImg?: string;
-  cuisine: string;   // кухня мира/категория (европа, азия...
-  typeOfMeal: string; // тип трапезы
-  portionsAmount: number;
-  cost: number; // затраты
-  createdAt?: string; // дата создания рецепта
-  rating: number // рейтинг
+  cuisine?: string; // кухня мира/категория (европа, азия...
+  typeOfMeal?: string; // тип трапезы
+  kindOfFood?: string;
+  portionsAmount?: number;
+  cost?: number; // затраты
+  createdAt: string; // дата создания рецепта
+  rating: number; // рейтинг
 }
