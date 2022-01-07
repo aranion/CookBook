@@ -14,3 +14,4 @@ export * from "./Loader";
 export * from "./Simples/PrintElem";
 export * from "./Navigation";
 export * from "./AdvancedSearch/SearchForm";
+export * from "./SlideShow";
