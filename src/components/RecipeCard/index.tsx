@@ -45,7 +45,8 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
         component="img"
         image={recipe.urlImg
           // TODO временно изображения с сервера, убрать...
-          ? 'http://modul62.ru/img/' + recipe.urlImg.split('/')[recipe.urlImg?.split('/').length - 1] 
+            ? recipe.urlImg.replace(/\/var\/www\/modul62.ru\/build\//i,'')
+          // ? 'http://modul62.ru/img/' + recipe.urlImg.split('/')[recipe.urlImg?.split('/').length - 1]
           : imgDefaultGB
         }
         alt={recipe?.title}

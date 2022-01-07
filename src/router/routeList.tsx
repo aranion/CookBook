@@ -16,7 +16,7 @@ export enum RouteNames {
   COOKBOOKS = '/cookbooks',
   ADD_RECIPE = '/addRecipe',
   LOGIN = '/login',
-  REGISTRATION = '/registration', // "/register"
+  REGISTRATION = '/register', //
   SEARCH_ADVANCED = '/search/advanced',
   PROFILE = '/profile',
 }
@@ -74,7 +74,7 @@ export const routeList: IRoute[] = [
   {
     title: "Регистрация",
     path: RouteNames.REGISTRATION,
-    component: <Registration />,
+    component: <Login />,
     private: false,
     menu: false,
   },

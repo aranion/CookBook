@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./assets/styles/normalize.css";
 import "./assets/styles/index.scss";
 import { App } from "./App";
+import 'index.css'
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
