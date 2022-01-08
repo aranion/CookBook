@@ -1,5 +1,5 @@
 import { ChipData } from 'models/Search'
-import { IAuthor, IRecipe } from 'models/Recipe'
+import { IRecipe } from 'models/Recipe'
 
 export type Action = {
   type: string
@@ -8,9 +8,10 @@ export type Action = {
 
 export interface ISearchForm {
   title: IRecipe['title'],
-  author: IAuthor['name'],
+  author: IRecipe['author'],
   typeOfMeal: IRecipe['typeOfMeal'],
   cuisine: IRecipe['cuisine'],
+  kindOfFood: IRecipe['kindOfFood'],
   time: IRecipe['time'],
   rating: IRecipe['rating'],
 }

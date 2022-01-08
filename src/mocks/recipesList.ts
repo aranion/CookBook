@@ -3,20 +3,22 @@ import { IRecipe } from "models/Recipe";
 //временная заглушка с рецептами
 export const RECIPES_LIST: IRecipe[] = [
     {
-        id: "00fe",
+        _id: "00fe",
         title: "Картофель жареный",
+        private: false,
+        kindOfFood: "Второе",
         ingredients: [
             {
-                ingredient: "Картоха",
-                amount: "3кг",
+                description: "Картоха",
+                count: "3кг",
             },
             {
-                ingredient: "Масло",
-                amount: "30г",
+                description: "Масло",
+                count: "30г",
             },
             {
-                ingredient: "Лук",
-                amount: "1кг",
+                description: "Лук",
+                count: "1кг",
             },
         ],
         steps: [
@@ -39,7 +41,7 @@ export const RECIPES_LIST: IRecipe[] = [
         cuisine: "Европа",
         rating: 4,
         time: 48,
-        author: {id: "10", name: "Cooker"},
+        author: "10",
         typeOfMeal: "обед",
         portionsAmount: 2,
         cost: 15,
@@ -47,20 +49,21 @@ export const RECIPES_LIST: IRecipe[] = [
         urlImg: '/img/1.jpg'
     },
     {
-      id: "01fe",
+      _id: "01fe",
       title: "Макарон",
+      private: false,
       ingredients: [
         {
-          ingredient: "Макарон",
-          amount: "3кг",
+          description: "Макарон",
+          count: "3кг",
         },
         {
-          ingredient: "Соль",
-          amount: "3г",
+          description: "Соль",
+          count: "3г",
         },
         {
-          ingredient: "Рандомный соус",
-          amount: "1кг",
+          description: "Рандомный соус",
+          count: "1кг",
         },
       ],
       steps: [
@@ -82,7 +85,7 @@ export const RECIPES_LIST: IRecipe[] = [
       cuisine: "Европа",
       rating: 4,
       time: 15,
-        author: {id: "18", name: "Cookerdoker"},
+      author: "18",
       typeOfMeal: "обед",
       portionsAmount: 5,
       cost: 49,
@@ -90,16 +93,17 @@ export const RECIPES_LIST: IRecipe[] = [
       urlImg: '/img/2.jpg'
     },
     {
-      id: "02fe",
+      _id: "02fe",
       title: "Омлет",
+      private: false,
       ingredients: [
         {
-          ingredient: "Яйца",
-          amount: "3шт",
+          description: "Яйца",
+          count: "3шт",
         },
         {
-          ingredient: "Молоко",
-          amount: "300г",
+          description: "Молоко",
+          count: "300г",
         },
       ],
       steps: [
@@ -122,31 +126,32 @@ export const RECIPES_LIST: IRecipe[] = [
       cuisine: "Европа",
       rating: 4,
       time: 48,
-      author: {id: "13", name:"Cooker"},
+      author: '13',
       typeOfMeal: "обед",
       portionsAmount: 3,
       cost: 22,
       createdAt: "31.11.21",
     },
     {
-      id: "14",
+      _id: "14",
       title: "Паста",
+      private: false,
       ingredients: [
         {
-          ingredient: "макароны",
-          amount: "300г"
+          description: "макароны",
+          count: "300г"
         },
         {
-          ingredient: "сливки",
-          amount: "300г"
+          description: "сливки",
+          count: "300г"
         },
         {
-          ingredient: "бекон",
-          amount: "300г"
+          description: "бекон",
+          count: "300г"
         },
         {
-          ingredient: "соус",
-          amount: "300г"
+          description: "соус",
+          count: "300г"
         }
       ],
       steps: [
@@ -169,7 +174,7 @@ export const RECIPES_LIST: IRecipe[] = [
       cuisine: "Европа",
       rating: 5,
       time: 60,
-      author: {id: "13", name:"Cooker"},
+      author: '14',
       typeOfMeal: "обед",
       portionsAmount: 3,
       cost: 22,
@@ -177,20 +182,21 @@ export const RECIPES_LIST: IRecipe[] = [
       urlImg: '/img/6.jpg'
     },
     {
-      id: "13",
+      _id: "13",
       title: "Мясо по французски",
+      private: false,
       ingredients: [
         {
-          ingredient: "картошка",
-          amount: "300г"
+          description: "картошка",
+          count: "300г"
         },
         {
-          ingredient: "мясо",
-          amount: "300г"
+          description: "мясо",
+          count: "300г"
         },
         {
-          ingredient: "соус",
-          amount: "300г"
+          description: "соус",
+          count: "300г"
         },
       ],
       steps: [
@@ -213,7 +219,7 @@ export const RECIPES_LIST: IRecipe[] = [
       cuisine: "Европа",
       rating: 5,
       time: 60,
-      author: {id: "15", name:"Cooker"},
+      author: '4',
       typeOfMeal: "обед",
       portionsAmount: 3,
       cost: 22,

@@ -43,9 +43,14 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
     >
       <CardMedia
         component="img"
-        image={recipe?.urlImg || imgDefaultGB}
+        image={recipe.urlImg
+          // TODO временно изображения с сервера, убрать...
+            ? recipe.urlImg.replace(/\/var\/www\/modul62.ru\/build\//i,'')
+          // ? 'http://modul62.ru/img/' + recipe.urlImg.split('/')[recipe.urlImg?.split('/').length - 1]
+          : imgDefaultGB
+        }
         alt={recipe?.title}
-        sx={{ maxHeight: "100%", maxWidth: 300 }}
+        sx={{ maxHeight: "100%", maxWidth: 300, background: 'gainsboro'}}
       />
       <Box
         sx={{
@@ -64,7 +69,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           action={<ContexMenuDescription recipe={recipe} />}
           title={recipe.title}
         />
-        <Rating sx={{ padding: 2 }} name="size-medium" value={2} readOnly />
+        <Rating sx={{ padding: 1 }} name="size-medium" value={recipe.rating} precision={0.5} readOnly  />
         <CardContent
           sx={{ display: "flex", flexDirection: "column", gridGap: 16 }}
         >
@@ -86,7 +91,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
               <FavoriteIcon />
             </IconButton>
           </Box>
-          <Button size="small" onClick={() => onOpenModal(recipe.id)}>
+          <Button size="small" onClick={() => onOpenModal(recipe._id)}>
             Посмотреть рецепт
           </Button>
         </CardActions>

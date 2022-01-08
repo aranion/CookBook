@@ -1,9 +1,9 @@
+import { RootState } from 'store'
 import { ChipData } from 'models/Search'
 import { SearchActionTypes, ISearchForm, SearchState } from './types'
 import { $api } from "api/api";
 import { Dispatch } from "redux";
 import { RecipeAction, RecipeActionTypes } from '../recipe/types';
-import { RECIPES_LIST } from "mocks/recipesList";
 import { IRecipe } from "models/Recipe";
 
 export const setSearchForm = (form: ISearchForm) => ({
@@ -21,25 +21,30 @@ export const deleteSearchChips = (chip: ChipData) => ({
   payload: chip
 });
 
-export const fetchSearchRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
+export const fetchSearchRecipes = () => async (dispatch: Dispatch<RecipeAction>, getState: () => RootState) => {
   try {
       dispatch({type: RecipeActionTypes.START_RECIPES});
 
       const {data} = await $api.get('/recipes/get');
-      
-      // пока сервер пустой, пусть будет заглушка
+
+      console.log('data: ', data)
+
+      const filter = getState().searchRecipe
+
+      console.log('filter: ', filter)
+
       if(data) {
-          dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
+        dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: search(data, filter)});
       } else {
-          dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
+        dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: []})
       }
+
   } catch (e: any) {
       if (e instanceof Error) dispatch({
           type: RecipeActionTypes.FETCH_RECIPES_ERROR,
           payload: e
       })
-      // TODO поправить payload - убрать RECIPES_LIST
-      dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
+      dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: []})
   }
 }
 
@@ -51,23 +56,23 @@ const search = (data: IRecipe[], filter: SearchState) => {
       return recipe.time <= filter.time
     })
     .filter(recipe => {
-      if(filter.cuisine === '') return true
+      if(filter.cuisine === '' || !recipe.cuisine || !filter.cuisine) return true
       return recipe.cuisine.trim().toLowerCase() === filter.cuisine.trim().toLowerCase()
     })
     .filter(recipe => {
-      if(filter.typeOfMeal === '') return true
+      if(filter.typeOfMeal === '' || !recipe.typeOfMeal || !filter.typeOfMeal) return true
       return recipe.typeOfMeal.trim().toLowerCase() === filter.typeOfMeal.trim().toLowerCase()
     })
     .filter(recipe => {
       if(filter.author === '') return true
-      return recipe.author.name.trim().toLowerCase() === filter.author.trim().toLowerCase()
+      return recipe.author.trim().toLowerCase() === filter.author.trim().toLowerCase()
     })
     .filter(recipe => {
       if(filter.title === '') return true
       
       const filterTitle = filter.title.split('')
 
-      for (let word in filterTitle) {
+      for (let word of filterTitle) {
         const reg = new RegExp(word, 'ig')
         if(recipe.title.match(reg)?.length) return true
       }
@@ -77,14 +82,14 @@ const search = (data: IRecipe[], filter: SearchState) => {
     .filter(recipe => {
       if(!filter.chips.length) return true
 
-      const ingredientsList: string[] = []
+      let ingredientsList = ''
 
       recipe.ingredients.forEach(ingredient => {
-        ingredientsList.push(ingredient.ingredient.toLowerCase())
+        ingredientsList += ` ${ingredient.description.toLowerCase()}`
       })
-        
-      for (let chip in filter.chips) {
-        if(ingredientsList.indexOf(chip.toLowerCase())) return true
+
+      for (let chip of filter.chips) {
+        if(ingredientsList.match(chip.label.toLowerCase())) return true
       }
 
       return false

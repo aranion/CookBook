@@ -1,4 +1,4 @@
-import {SyntheticEvent, ChangeEvent} from 'react';
+import {SyntheticEvent, ChangeEvent, ReactNode} from 'react';
 import styles from "./searchForm.module.scss";
 import Chips from '../Chips';
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +22,7 @@ import { useActions } from "hooks/useActions";
 import { RootState, useAppSelector } from 'store';
 import { SearchState } from "store/search/types";
 import {typeOfMeal as typeOfMealList, kindOfFood as kindOfFoodList, cuisine as cuisineList} from "mocks/list-select"
+import {TSelect} from "components/Simples"
 
 interface PropsType {
   drawerWidth: number, 
@@ -62,12 +63,16 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
 
   const {
     setSearchForm,
+    fetchSearchRecipes,
   } = useActions()
 
   const handleChangeInput = (event: ChangeEvent<HTMLInputElement>, value?: string) => {
 
-      const newValue = event.target.value
+      let newValue = event.target.value
       const name = event.target.name
+
+      if(newValue === 'Другое') newValue = ''
+
       setSearchForm({
         ...form, [name]: newValue
       })
@@ -93,7 +98,19 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
     if(!!handleClose) {
       handleClose();
     }
+    fetchSearchRecipes()
   }
+
+  const renderFormControlLabel = (list: TSelect): Iterable<ReactNode> => 
+    Object.entries(list).map(item => {
+      return <FormControlLabel 
+          value={item[1]} 
+          control={<Radio />} 
+          label={item[1]} 
+          color="primary" 
+          key={item[0]}
+        />
+    })
 
   return (
     <Box
@@ -135,28 +152,19 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
             onChange={handelChangeRating}
           />
         </Box>
-        {/* <Box sx={displayGrid}>
+        <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Тип блюда:</Typography>
           <FormControl>
             <RadioGroup
               sx={checkboxStyle}
-              aria-label="gender"
-              defaultValue="NULL"
+              defaultValue="Другое"
               name="kindOfFood"
               onChange={handleChangeInput}
             >
-              {Object.entries(kindOfFoodList).map(kindOfFood => {
-                return <FormControlLabel 
-                    value={kindOfFood[0]} 
-                    control={<Radio />} 
-                    label={kindOfFood[0] === "NULL" ? "Любые" : kindOfFood[1]} 
-                    color="primary" 
-                    key={kindOfFood[0]}
-                  />
-              })}
+              {renderFormControlLabel(kindOfFoodList)}
             </RadioGroup>
           </FormControl>
-        </Box> */}
+        </Box>
         <Box sx={displayGrid}>
           <Typography variant="body1" color="text.secondary">Название рецепта:</Typography>
           <Paper elevation={0}>
@@ -184,20 +192,11 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
           <FormControl>
             <RadioGroup
               sx={checkboxStyle}
-              aria-label="gender"
-              defaultValue="NULL"
+              defaultValue="Другое"
               name="typeOfMeal"
               onChange={handleChangeInput}
             >
-              {Object.entries(typeOfMealList).map(typeOfMeal => {
-                return <FormControlLabel 
-                    value={typeOfMeal[0]} 
-                    control={<Radio />} 
-                    label={typeOfMeal[0] === "NULL" ? "Любая" : typeOfMeal[1]} 
-                    color="primary" 
-                    key={typeOfMeal[0]}
-                  />
-              })}
+              {renderFormControlLabel(typeOfMealList)}
             </RadioGroup>
           </FormControl>
         </Box>
@@ -206,20 +205,11 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
           <FormControl>
             <RadioGroup
               sx={checkboxStyle}
-              aria-label="gender"
-              defaultValue="NULL"
+              defaultValue="Другое"
               name="cuisine"
               onChange={handleChangeInput}
             >
-              {Object.entries(cuisineList).map(cuisine => {
-                return <FormControlLabel 
-                    value={cuisine[0]} 
-                    control={<Radio />} 
-                    label={cuisine[0] === "NULL" ? "Любая" : cuisine[1]} 
-                    color="primary" 
-                    key={cuisine[0]}
-                  />
-              })}
+              {renderFormControlLabel(cuisineList)}
             </RadioGroup>
           </FormControl>
         </Box>

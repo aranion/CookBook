@@ -6,9 +6,9 @@ export type Action = {
 }
 
 export interface ProfileState {
-    isAuth: boolean
-    user?: IUser
-    error?: Error | string
+    isAuth: boolean;
+    user?: IUser;
+    error?: Error | string;
 }
 
 export enum ProfileActionTypes {

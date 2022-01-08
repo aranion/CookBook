@@ -10,7 +10,7 @@ export const setDescriptionRecipe = (description: string) => ({
     payload: description
 });
 export const setIsPrivatRecipe = (isPrivat:boolean) => ({
-    type: AddRecipeActionTypes.SET_DESCRIPTION_RECIPE,
+    type: AddRecipeActionTypes.SET_IS_PRIVAT_RECIPE,
     payload: isPrivat
 });
 export const addIngredientItem = () => ({

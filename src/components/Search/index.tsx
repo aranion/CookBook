@@ -5,8 +5,12 @@ import { Button, InputBase, IconButton, Paper, Box } from "@mui/material";
 import { useActions } from 'hooks/useActions'
 import styles from "./search.module.scss";
 import { SearchModal } from 'components'
+import { useLocation } from 'react-router-dom';
+import { RouteNames } from 'router/routeList';
 
 export const Search = () => {
+
+  const location = useLocation();
 
   const [ open, setOpen ] = useState(false);
   const [ searchValue, setSearchValue ] = useState<string>("");
@@ -14,7 +18,10 @@ export const Search = () => {
   const { setRecipesFilter } = useActions();
   // const {filter} = useAppSelector(state => state.recipes);
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    if(location.pathname === RouteNames.SEARCH_ADVANCED) return
+    setOpen(true)
+  };
   const handleClose = () => setOpen(false);
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);

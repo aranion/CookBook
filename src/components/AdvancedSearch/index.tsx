@@ -1,11 +1,19 @@
-import { RootState, useAppSelector } from 'store';
+import {RootState, useAppSelector} from 'store';
 import Content from './Content';
+import {useEffect} from "react";
+import { useActions } from "hooks/useActions";
 
 export const AdvancedSearch = () => {
 
-  const {data} = useAppSelector((state:RootState) => state.recipes);
+    const { fetchSearchRecipes } = useActions();
 
-  return (
-    <Content recipes={data}/>
-  );
+    useEffect(() => {
+        fetchSearchRecipes();
+    }, []);
+
+    const {data} = useAppSelector((state: RootState) => state.recipes);
+
+    return (
+        <Content recipes={data}/>
+    );
 };

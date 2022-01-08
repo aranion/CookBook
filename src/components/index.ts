@@ -1,5 +1,5 @@
 export * from "./Header";
-export * from "./LoginForm";
+export * from "./AuthForm";
 export * from "./Modal";
 export * from "./RandomRecipe";
 export * from "./Search";
@@ -14,3 +14,4 @@ export * from "./Loader";
 export * from "./Simples/PrintElem";
 export * from "./Navigation";
 export * from "./AdvancedSearch/SearchForm";
+export * from "./SlideShow";

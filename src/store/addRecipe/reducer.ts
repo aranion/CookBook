@@ -9,8 +9,8 @@ const initialState: AddRecipeState = {
     isPrivat: false,                 
     photoCoverBook: "",                     
     ingredients: [{                         
-      ingredient: "",                            
-      amount: "",    
+      description: "",                            
+      count: "",    
       placeholder: `Ингредиент 1`                       
     }],                        
     steps: [{                               
@@ -33,7 +33,6 @@ const initialState: AddRecipeState = {
 }
 
 export const addRecipeReducer = (state = initialState, action: Action) => {
-  console.log(action.type, action.payload);
     switch (action.type) {
       case AddRecipeActionTypes.SET_TITLE_RECIPE:
             return {
@@ -57,8 +56,8 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
             ...state.inputFields, 
             ingredients: [
               ...state.inputFields.ingredients,
-              { ingredient: "", 
-                amount: '', 
+              { description: "", 
+                count: '', 
                 placeholder: `Ингредиент ${state.inputFields.ingredients.length + 1}` 
               } as Ingredients
             ]
@@ -88,7 +87,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
                 ...state.inputFields.ingredients
                 .map(el => {
                   if(el.placeholder === (action.payload as IngredientInput).placeholder) {
-                    el.ingredient = (action.payload as IngredientInput).value;
+                    el.description = (action.payload as IngredientInput).value;
                   }
                   return el;
                 })
@@ -104,7 +103,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
                 ...state.inputFields.ingredients
                 .map(el => {
                   if(el.placeholder === (action.payload as IngredientInput).placeholder) {
-                    el.amount = (action.payload as IngredientInput).value;
+                    el.count = (action.payload as IngredientInput).value;
                   }
                   return el;
                 })
@@ -207,7 +206,20 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
         } 
       case AddRecipeActionTypes.CLEAN_FORM_RECIPE:
         return {
-          ...initialState
+          ...initialState,
+          inputFields: {
+            ...initialState.inputFields,
+            ingredients: [{                         
+              ingredient: "",                            
+              amount: "",    
+              placeholder: `Ингредиент 1`                       
+            }],
+            steps: [{                               
+              title: "Шаг 1",                            
+              description: "",                      
+              urlImg: "",                                                           
+            }]
+          }
         } 
       default:
           return state

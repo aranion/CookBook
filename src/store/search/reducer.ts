@@ -1,18 +1,15 @@
 import { ChipData } from 'models/Search'
 import { Action, SearchActionTypes, SearchState, ISearchForm } from "./types";
 
-const initialState: SearchState = {
+export const initialState: SearchState = {
   title: '',
   author: '',
   typeOfMeal: '',
   cuisine: '',
-  chips: [
-    { key: '0', label: 'Картофель' },
-    { key: '1', label: 'Форель' },
-    { key: '2', label: 'Петрушка' }
-  ],
+  kindOfFood: '',
+  chips: [],
   time: 0,
-  rating: 4,
+  rating: 0,
 }
 
 export const searchReducer = (state = initialState, action: Action) => {
