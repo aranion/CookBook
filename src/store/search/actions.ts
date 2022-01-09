@@ -27,11 +27,7 @@ export const fetchSearchRecipes = () => async (dispatch: Dispatch<RecipeAction>,
 
       const {data} = await $api.get('/recipes/get');
 
-      console.log('data: ', data)
-
       const filter = getState().searchRecipe
-
-      console.log('filter: ', filter)
 
       if(data) {
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: search(data, filter)});
@@ -48,6 +44,12 @@ export const fetchSearchRecipes = () => async (dispatch: Dispatch<RecipeAction>,
   }
 }
 
+const searchSelect = (recipe: IRecipe, filter: SearchState, selectName: keyof SearchState, recipeName: keyof IRecipe) => {
+  if(filter[selectName] === '' || !filter[selectName]) return true
+  if(!recipe[recipeName]) return false
+  return (recipe[recipeName] as string).trim().toLowerCase() === (filter[selectName] as string).trim().toLowerCase()
+}
+
 const search = (data: IRecipe[], filter: SearchState) => {
   return data
     .filter(recipe => recipe.rating >= filter.rating)
@@ -55,14 +57,9 @@ const search = (data: IRecipe[], filter: SearchState) => {
       if(filter.time === 0) return true
       return recipe.time <= filter.time
     })
-    .filter(recipe => {
-      if(filter.cuisine === '' || !recipe.cuisine || !filter.cuisine) return true
-      return recipe.cuisine.trim().toLowerCase() === filter.cuisine.trim().toLowerCase()
-    })
-    .filter(recipe => {
-      if(filter.typeOfMeal === '' || !recipe.typeOfMeal || !filter.typeOfMeal) return true
-      return recipe.typeOfMeal.trim().toLowerCase() === filter.typeOfMeal.trim().toLowerCase()
-    })
+    .filter(recipe => searchSelect(recipe, filter, 'cuisine', 'cuisine'))
+    .filter(recipe => searchSelect(recipe, filter, 'typeOfMeal', 'typeOfMeal'))
+    .filter(recipe => searchSelect(recipe, filter, 'kindOfFood', 'kindOfFood'))
     .filter(recipe => {
       if(filter.author === '') return true
       return recipe.author.trim().toLowerCase() === filter.author.trim().toLowerCase()
@@ -82,6 +79,8 @@ const search = (data: IRecipe[], filter: SearchState) => {
     .filter(recipe => {
       if(!filter.chips.length) return true
 
+      let count = 0
+
       let ingredientsList = ''
 
       recipe.ingredients.forEach(ingredient => {
@@ -89,8 +88,10 @@ const search = (data: IRecipe[], filter: SearchState) => {
       })
 
       for (let chip of filter.chips) {
-        if(ingredientsList.match(chip.label.toLowerCase())) return true
+        if(ingredientsList.match(chip.label.toLowerCase())) count++
       }
+
+      if(count === filter.chips.length) return true
 
       return false
     })

@@ -1,4 +1,6 @@
-export const searchForm = {
+import { SearchState } from 'store/search/types'
+
+export const clearSearchForm: SearchState = {
   title: '',
   author: '',
   typeOfMeal: '',

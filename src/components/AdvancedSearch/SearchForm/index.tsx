@@ -1,7 +1,7 @@
 import {SyntheticEvent, ChangeEvent, ReactNode} from 'react';
 import styles from "./searchForm.module.scss";
 import Chips from '../Chips';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { RouteNames } from 'router/routeList';
 import { 
   Paper, 
@@ -32,6 +32,7 @@ interface PropsType {
 export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
 
   const router = useNavigate();
+  const location = useLocation();
 
   const displayGrid = 
     drawerWidth > 300 
@@ -94,7 +95,9 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
   }
 
   const handleSearch = () => {
-    router(RouteNames.SEARCH_ADVANCED);
+    if(location.pathname !== RouteNames.SEARCH_ADVANCED) {
+      router(RouteNames.SEARCH_ADVANCED);
+    }
     if(!!handleClose) {
       handleClose();
     }
