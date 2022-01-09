@@ -9,39 +9,46 @@ import { IRecipe } from "models/Recipe";
 import { Loader } from "../../components";
 
 export const Book = () => {
-
   const { id } = useParams();
   const { setIsModal, fetchAllRecipes, fetchDataMemo } = useActions();
-  const { loading, data } = useAppSelector((state) => (state as RootState).book as BookState);
-  const recipes = useAppSelector((state) => (state as RootState).recipes.data as IRecipe[]);
+  const { loading, data } = useAppSelector(
+    (state) => (state as RootState).book as BookState
+  );
+  const recipes = useAppSelector(
+    (state) => (state as RootState).recipes.data as IRecipe[]
+  );
 
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   useEffect(() => {
     // получение с сервера рецептов книги
-    if(!recipes.length) fetchAllRecipes();
+    if (!recipes.length) fetchAllRecipes();
     // получение данных кулинарной книги
-    fetchDataMemo(id);   
+    fetchDataMemo(id);
   }, [recipes, id]);
 
   // Идет загрузка, рендерится прелоадер
-  if(loading) {
-    return <div className={style.pages__center}>
-      <div className={style.container}>
-        <Loader />
+  if (loading) {
+    return (
+      <div className={style.pages__center}>
+        <div className={style.container}>
+          <Loader />
+        </div>
       </div>
-    </div>
+    );
   }
 
   // Книга не найдены, рендерится уведомление
-  if (!data.hasOwnProperty("title") ) {
-    return <div className={style.pages__center}>
-      <div className={style.container}>
-        <h3>Книга не найдена</h3>
+  if (!data.hasOwnProperty("title")) {
+    return (
+      <div className={style.pages__center}>
+        <div className={style.container}>
+          <h3>Книга не найдена</h3>
+        </div>
       </div>
-    </div>
+    );
   }
-  
+
   return (
     <div className={style.pages__center}>
       <div className={style.container}>
@@ -90,8 +97,8 @@ export const Book = () => {
                       </div>
                     </div>
                   </ListItem>
-                );
-              })}
+                  );
+                })}
           </List>
         </div>
       </div>

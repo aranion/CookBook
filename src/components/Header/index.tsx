@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { Navigation } from "components";
 import { RouteNames } from "router/routeList";
 import img from "../../assets/books.png";
-import {$api} from "../../api/api";
 
 export const Header = () => {
   return (
