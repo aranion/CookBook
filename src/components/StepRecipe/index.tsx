@@ -3,10 +3,11 @@ import img from "../../assets/cbDefault.jpg";
 import { StepData } from "../../models/Recipe";
 
 interface PropsType { 
-  step: StepData 
+  step: StepData;
+  index: number;
 }
 
-export const StepRecipe = ({ step }: PropsType) => {
+export const StepRecipe = ({ step, index }: PropsType) => {
   return (
     <div className={styles.step}>
       <img
@@ -15,7 +16,7 @@ export const StepRecipe = ({ step }: PropsType) => {
         alt={step.title}
       />
       <div>
-        <h5 className={styles.step_title}>{step.title}</h5>
+        <h5 className={styles.step_title}>{step.title || `Шаг ${index+1}`}</h5>
         <div>{step.description}</div>
       </div>
     </div>

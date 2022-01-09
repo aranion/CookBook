@@ -58,8 +58,6 @@ export const IngredientList = () => {
                 handleIngredient(e, ingredient.placeholder || "")
               }
               name={`ingredient-${idx}-description`}
-              //конфликт// value={ingredient.name}
-              //конфликт// onChange={handleInput}
               fullWidth={true}
               required={true}
               inputProps={{ "aria-label": "description" }}

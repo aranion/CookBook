@@ -77,6 +77,7 @@
       &-wrapper-img {
         width: 200px;
         height: 200px;
+        background: $backgroundImgDefault;
       }
       &-img {
         object-fit: cover;
@@ -101,7 +102,12 @@
     &__right{
       flex-basis: calc(70% - 10px);
       padding: 10px;
-      
+
+      &-description {
+        margin: 10px 0;
+        color: black;
+      }
+
       &-title {
         width: 100%;
         display: flex;

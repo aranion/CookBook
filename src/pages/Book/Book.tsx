@@ -66,39 +66,37 @@ export const Book = () => {
           <List>
             {recipes &&
               recipes
-                // фильтруем все рецепты и передаем только те которые в книге...
-                .filter((recipe) =>
-                  data.recipesId.indexOf(recipe._id) !== -1 ? false : true
-                )
+                // фильтруем все рецепты и передаем только те которые в книге... 
+                .filter(recipe => data.recipesId.indexOf(recipe._id) !== -1 ? false : true) 
                 .map((recipe) => {
-                  return (
-                    <ListItem
-                      button={true}
-                      key={recipe._id}
-                      onClick={() => onOpen(recipe._id.toString())}
-                    >
-                      <div className={style.item}>
-                        <div className={style.item__photoBox}>
-                          <img src={recipe.urlImg} alt={recipe.title} />
-                        </div>
-                        <div className={style.item__content}>
-                          <h3 className={style.item__name}>{recipe.title}</h3>
-                          <p className={style.item__description}>
-                            {recipe.description}
-                          </p>
-                          <div>
-                            {recipe.ingredients.map((item, i) => (
-                              <Chip
-                                size="small"
-                                label={item.description}
-                                className={style.item__chip}
-                                key={i}
-                              />
-                            ))}
-                          </div>
+                return (
+                  <ListItem 
+                    button={true} 
+                    key={recipe._id} 
+                    onClick={() => onOpen((recipe._id).toString())}
+                  >
+                    <div className={style.item}>
+                      <div className={style.item__photoBox}>
+                        <img src={recipe.urlImg} alt={recipe.title} />
+                      </div>
+                      <div className={style.item__content}>
+                        <h3 className={style.item__name}>{recipe.title}</h3>
+                        <p className={style.item__description}>
+                          {recipe.description}
+                        </p>
+                        <div>
+                          {recipe.ingredients.map((item, i) => (
+                            <Chip
+                              size="small"
+                              label={item.description}
+                              className={style.item__chip}
+                              key={i}
+                            />
+                          ))}
                         </div>
                       </div>
-                    </ListItem>
+                    </div>
+                  </ListItem>
                   );
                 })}
           </List>

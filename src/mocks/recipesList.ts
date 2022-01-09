@@ -227,4 +227,4 @@ export const RECIPES_LIST: IRecipe[] = [
     createdAt: "31.11.21",
     urlImg: "/img/4.jpg",
   },
-];
+]

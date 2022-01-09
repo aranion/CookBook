@@ -9,32 +9,26 @@ import {
   Typography,
   Button,
   Box,
-  Rating,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IRecipe } from "models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { useActions } from "hooks/useActions";
-import { ContexMenuDescription } from "components/Simples";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { ContexMenuDescription, RetingRecipe } from "components/Simples";
 import style from "./recipeCard.module.scss";
-import { $api } from "../../api/api";
 
 export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
   const { setIsModal } = useActions();
-  const dispatch = useDispatch();
-  console.log("рецепт: ", recipe);
-  const [rating, setRating] = useState(Number(recipe.rating));
 
   const onOpenModal = (idRecipe: string) => setIsModal(idRecipe);
+
   const getMinDescription = (value: number): string => {
     let str: string = recipe.description.substring(0, value);
     str += "...";
     return str;
   };
-  useEffect(() => {});
+
   return (
     <Card
       sx={{
@@ -50,9 +44,14 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
     >
       <CardMedia
         component="img"
-        image={recipe?.urlImg || imgDefaultGB}
+        image={recipe.urlImg
+          // TODO временно изображения с сервера, убрать...
+            ? recipe.urlImg.replace(/\/var\/www\/modul62.ru\/build\//i,'')
+          // ? 'http://modul62.ru/img/' + recipe.urlImg.split('/')[recipe.urlImg?.split('/').length - 1]
+          : imgDefaultGB
+        }
         alt={recipe?.title}
-        sx={{ maxHeight: "100%", maxWidth: 300 }}
+        sx={{ maxHeight: "100%", maxWidth: 300, background: 'gainsboro'}}
       />
       <Box
         sx={{
@@ -72,21 +71,8 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           title={recipe.title}
         />
         <div className={style.card__rating}>
-          <Rating
-            name="size-medium"
-            value={rating}
-            precision={0.5}
-            onChange={(event, newValue) => {
-              setRating(Number(newValue));
-              const curRecipe = {
-                id: recipe._id,
-                rating: newValue,
-              };
-              $api.post("/recipes/modify", curRecipe);
-            }}
-          />
+          <RetingRecipe recipe={recipe}/>
         </div>
-
         <CardContent
           sx={{ display: "flex", flexDirection: "column", gridGap: 16 }}
         >

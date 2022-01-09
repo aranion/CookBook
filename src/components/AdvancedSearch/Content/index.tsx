@@ -26,24 +26,23 @@ const ContentAdvancedSearch = ({ recipes }: PropsType) => {
             alignItems: "flex-start",
           }}
         >
-          {recipes.length === 0 ? (
-            <Box
-              sx={{
-                width: "100%",
-                background: "#FFF",
-                fontSize: "20px",
-                minHeight: "20px",
-                textAlign: "center",
-                borderRadius: "16px",
-              }}
-            >
-              Рецепты не найдены...
-            </Box>
-          ) : (
-            recipes.map((recipe) => {
+          {recipes.length === 0 
+            ? <Box
+                sx={{
+                  width: "100%",
+                  background: "#FFF",
+                  fontSize: "20px",
+                  minHeight: "20px",
+                  textAlign: "center",
+                  borderRadius: "16px",
+                }}
+              >
+                Рецепты не найдены...
+              </Box>
+            : recipes.map((recipe) => {
               return <RecipeCard recipe={recipe} key={recipe._id} />;
             })
-          )}
+          }
         </Box>
       </Box>
     </Box>

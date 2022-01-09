@@ -10,6 +10,7 @@ export const LastRecipes = ({ recipes }: PropsType) => {
   if (!recipes || recipes.length === 0)
     return (
       <div className={styles["last-recipes"]}>
+        Рецепты не найдены...
         <Loader />
       </div>
     );

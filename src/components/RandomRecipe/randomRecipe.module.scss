@@ -22,7 +22,7 @@ $widhtLeft: 400px;
     width: 100%;
     display: flex;
     position: relative;
-    background-color: #fff;
+    background: $backgroundImgDefault;
     img {
       object-fit: cover;
       height: 100%;

@@ -1,11 +1,12 @@
-import { LoginForm } from "components";
-import styles from './pages.module.scss';
+import { AuthForm } from "components";
+// import styles from './pages.module.scss';
+import {Box} from "@mui/material";
 
 const Login = () => {
     return (
-        <div className={styles.pages__center}>
-            <LoginForm />
-        </div>
+        <Box sx={{ display: 'flex', m: 'auto'}}>
+            <AuthForm />
+        </Box>
     );
 };
 

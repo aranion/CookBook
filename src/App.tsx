@@ -22,7 +22,7 @@ const Main = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            checkAuth()
+            checkAuth();
         }
     }, [])
 

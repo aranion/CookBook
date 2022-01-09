@@ -4,10 +4,12 @@ import { $auth } from "../api/auth";
 
 export class AuthService {
     static async register(
+        name: string,
         email: string,
         password: string
     ): Promise<AxiosResponse<AuthResponse>> {
         return await $auth.post<AuthResponse>("api/registration", {
+            name,
             email,
             password
         });

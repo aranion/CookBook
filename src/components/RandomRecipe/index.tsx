@@ -3,36 +3,17 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FlatwareIcon from "@mui/icons-material/Flatware";
 import MessageIcon from "@mui/icons-material/Message";
-import { Loader, PrintElem } from "..";
+import { PrintElem } from "..";
 import { Ingredients, IRecipe } from "../../models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import styles from "./randomRecipe.module.scss";
 import { useActions } from "hooks/useActions";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
-interface PropsType {
-  recipes: IRecipe[];
-}
-
-export const RandomRecipe = ({ recipes }: PropsType) => {
+export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
   const { setIsModal } = useActions();
 
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
-
-  const getRandomInt = (min: number, max: number) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
-
-  const recipe: IRecipe = recipes[getRandomInt(0, recipes.length)];
-
-  if (!recipes || recipes.length === 0)
-    return (
-      <div className={styles["recipe-block"]}>
-        <Loader />
-      </div>
-    );
 
   return (
     <div className={styles["recipe-block"]}>
@@ -67,9 +48,7 @@ export const RandomRecipe = ({ recipes }: PropsType) => {
         </div>
       </div>
       <div className={styles["recipe-block__right"]}>
-        <h3 className={styles["recipe-block__header"]}>
-          Случайный/Популярный рецепт
-        </h3>
+        <h3 className={styles["recipe-block__header"]}>Лучшие рецепты</h3>
         <div className={styles["recipe-block__info"]}>
           <div className={styles["heading-container"]}>
             <span className={styles["heading-container__header"]}>
