@@ -2,19 +2,14 @@ import { $api } from "api/api";
 import { Dispatch } from "redux";
 import { RecipeAction, RecipeActionTypes } from './types';
 import { RECIPES_LIST } from "mocks/recipesList";
+import { IRecipeModify } from "models/Recipe";
 
 export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
     try {
         dispatch({type: RecipeActionTypes.START_RECIPES});
 
         const {data} = await $api.get('/recipes/get');
-        console.log(data)
-        // пока сервер пустой, пусть будет заглушка
-        // if(!('name' in data)) {
-        //     dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
-        // } else {
-        //     dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
-        // }
+
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
     } catch (e: any) {
         if (e instanceof Error) dispatch({
@@ -64,6 +59,17 @@ export const deleteRecipe = (id:string) => async (dispatch: Dispatch<RecipeActio
         // TODO нужно сделать проверку успешного удаления с выводом сообщения
         const {data} = await $api.get('/recipes/get');
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
+    } catch (e: any) {
+        if (e instanceof Error) dispatch({
+            type: RecipeActionTypes.FETCH_RECIPES_ERROR,
+            payload: e
+        })
+    }
+}
+export const modifyRecipe = (modifyValues: IRecipeModify) => async (dispatch: Dispatch<RecipeAction>) => {
+    try {
+        $api.post("/recipes/modify", {...modifyValues});
+        dispatch({type: RecipeActionTypes.SET_RECIPES_MODIFY_SUCCESS, payload: modifyValues});
     } catch (e: any) {
         if (e instanceof Error) dispatch({
             type: RecipeActionTypes.FETCH_RECIPES_ERROR,

@@ -61,8 +61,8 @@ const search = (data: IRecipe[], filter: SearchState) => {
     .filter(recipe => searchSelect(recipe, filter, 'typeOfMeal', 'typeOfMeal'))
     .filter(recipe => searchSelect(recipe, filter, 'kindOfFood', 'kindOfFood'))
     .filter(recipe => {
-      if(filter.author === '') return true
-      return recipe.author.trim().toLowerCase() === filter.author.trim().toLowerCase()
+      if(filter.author.name === '' || filter.author.name === undefined) return true
+      return recipe.author?.name.trim().toLowerCase() === filter.author?.name.trim().toLowerCase()
     })
     .filter(recipe => {
       if(filter.title === '') return true

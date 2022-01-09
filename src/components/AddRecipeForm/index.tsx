@@ -18,7 +18,6 @@ export const AddRecipeForm = () => {
   // Перенести в Store
   const [urlImg, setUrlImg] = useState("");
   // const [imgFiles, setImgFiles] = useState<File[]>([]);
-  //
 
   const {
     addRecipe, 

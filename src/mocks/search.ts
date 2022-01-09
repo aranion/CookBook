@@ -1,8 +1,9 @@
+import { IAuthor } from 'models/Recipe'
 import { SearchState } from 'store/search/types'
 
 export const clearSearchForm: SearchState = {
   title: '',
-  author: '',
+  author: {} as IAuthor,
   typeOfMeal: '',
   cuisine: '',
   kindOfFood: '',

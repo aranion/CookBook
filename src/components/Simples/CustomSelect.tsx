@@ -23,6 +23,7 @@ export const CustomSelect = ({list, label, name, selectedValue, setSelectedValue
   const handleChangeSelect = (e: SelectChangeEvent) => {
     setSelectedValue((e.target as any).value);
   }
+  
   return (
     <FormControl fullWidth variant="standard">
       <InputLabel id={name}>

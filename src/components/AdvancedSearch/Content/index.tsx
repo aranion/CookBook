@@ -1,11 +1,11 @@
-import { Box } from '@mui/material';
-import { RecipeCard, SearchForm } from 'components';
+import { Box } from "@mui/material";
+import { RecipeCard, SearchForm } from "components";
 import { IRecipe } from "models/Recipe";
 import { Loader } from "components";
 import { RootState, useAppSelector } from "store";
 
 interface PropsType {
-  recipes: IRecipe[]
+  recipes: IRecipe[];
 }
 
 const ContentAdvancedSearch = ({ recipes }: PropsType) => {
@@ -32,20 +32,19 @@ const ContentAdvancedSearch = ({ recipes }: PropsType) => {
   }
 
   return (
-    <Box sx={{ display: 'flex', height: "100%" }}>
-      <SearchForm drawerWidth={drawerWidth}/>
+    <Box sx={{ display: "flex", height: "100%" }}>
+      <SearchForm drawerWidth={drawerWidth} />
       <Box
         component="main"
         sx={{ width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
-        <Box 
+        <Box
           sx={{
-            p: '16px', 
-            display: 'flex', 
-            flexWrap: 'wrap', 
-            justifyContent: 'space-around',
-            gridGap: '16px',
-            alignItems: 'flex-start'
+            p: "16px",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-around",
+            alignItems: "flex-start",
           }}
         >
           {loading 
@@ -56,6 +55,6 @@ const ContentAdvancedSearch = ({ recipes }: PropsType) => {
       </Box>
     </Box>
   );
-}
+};
 
 export default ContentAdvancedSearch;

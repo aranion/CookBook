@@ -108,7 +108,7 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
 
   const renderFormControlLabel = (list: TSelect): Iterable<ReactNode> => 
     Object.entries(list).map(item => {
-      if (item[1] === '') return
+      if (item[1] === '') return '';
       return <FormControlLabel 
           value={item[1]} 
           control={<Radio />} 
@@ -187,7 +187,7 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
           <Paper elevation={0}>
             <InputBase 
               className={styles.drawer__input}
-              value={author}
+              value={author?.name}
               name="author"
               onChange={handleChangeInput}
             />

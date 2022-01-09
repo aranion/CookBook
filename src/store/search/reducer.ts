@@ -1,9 +1,10 @@
+import { IAuthor } from 'models/Recipe';
 import { ChipData } from 'models/Search'
 import { Action, SearchActionTypes, SearchState, ISearchForm } from "./types";
 
 export const initialState: SearchState = {
   title: '',
-  author: '',
+  author: {} as IAuthor,
   typeOfMeal: '',
   cuisine: '',
   kindOfFood: '',
