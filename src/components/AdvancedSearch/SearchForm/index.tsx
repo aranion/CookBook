@@ -91,6 +91,8 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
       setSearchForm({
         ...form, rating: value
       })
+    } else {
+      setSearchForm({...form, rating: 0})
     }
   }
 
@@ -106,6 +108,7 @@ export const SearchForm = ({drawerWidth, handleClose}: PropsType ) => {
 
   const renderFormControlLabel = (list: TSelect): Iterable<ReactNode> => 
     Object.entries(list).map(item => {
+      if (item[1] === '') return
       return <FormControlLabel 
           value={item[1]} 
           control={<Radio />} 

@@ -1,7 +1,7 @@
 import {TSelect} from "components/Simples"
 
 export const typeOfMeal: TSelect = {
-    // NULL: '',
+    NULL: '',
     BREAKFAST: 'Завтрак',
     LUNCH: 'Обед',
     DINNER: 'Ужин',
@@ -9,14 +9,14 @@ export const typeOfMeal: TSelect = {
     OTHER: 'Другое',
 }
 export const cuisine: TSelect = {
-    // NULL: '',
+    NULL: '',
     SAFOOD: 'Морепродукты',
     MEAT: 'Мясо',
     VEGETARIAN: 'Вегетарианская',
     OTHER: 'Другое',
 }
 export const kindOfFood: TSelect = {
-    // NULL: '',
+    NULL: '',
     SNACK: 'Закуска',
     SALADE: 'Салаты',
     SOUP: 'Супы',
