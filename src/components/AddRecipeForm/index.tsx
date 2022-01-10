@@ -79,7 +79,7 @@ export const AddRecipeForm = () => {
   }
   const handleIsAddRecipe = () => {
     setIsAddRecipe();
-    cleanForm(); 
+    // cleanForm(); // TODO Нужно исправить ошибку с обнулением полей...
   }
   const handleImgUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     const img:  any = e.target.parentNode?.querySelector('img');

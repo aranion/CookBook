@@ -1,10 +1,15 @@
 import { Ingredients, StepData } from "models/Recipe";
-import { Action, AddRecipeState, AddRecipeActionTypes, IngredientInput } from "./types";
+import {
+  Action,
+  AddRecipeState,
+  AddRecipeActionTypes,
+  IngredientInput,
+} from "./types";
 
 const initialState: AddRecipeState = {
   loading: false,
-  inputFields: {                              
-    titleRecipe: "",                        
+  inputFields: {
+    titleRecipe: "",
     description: "",
     isPrivat: false,                 
     photoCoverBook: "",                     
@@ -28,9 +33,9 @@ const initialState: AddRecipeState = {
   dataSelectForm: {
     cuisine: [],
     typeOfMeal: [],
-    kindOfFood: []
-  }
-}
+    kindOfFood: [],
+  },
+};
 
 export const addRecipeReducer = (state = initialState, action: Action) => {
     switch (action.type) {
@@ -205,6 +210,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           }
         } 
       case AddRecipeActionTypes.CLEAN_FORM_RECIPE:
+        debugger
         return {
           ...initialState,
           inputFields: {

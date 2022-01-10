@@ -3,46 +3,46 @@ import { v4 as uuidv4 } from 'uuid';
 import { styled } from '@mui/material/styles';
 import { Box, Chip, Typography, Paper, InputBase, InputAdornment, IconButton } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { CHIPE_DATA } from 'mocks/chipData';
+import { useActions } from "hooks/useActions";
+import { ChipData } from 'models/Search';
+import { RootState, useAppSelector } from 'store';
+import { SearchState } from "store/search/types";
 
-interface ChipData {
-  key: string;
-  label: string;
-}
-
-interface PropsType {
-  chipsLabel: string, 
-  drawerWidth: number
+type ChipsProps = {
+  chipsLabel: string;
+  drawerWidth: number;
 }
 
 const ListItem = styled('li')(({ theme }) => ({
   margin: theme.spacing(0.5),
 }));
 
-const Chips = (props: PropsType) => {
+const Chips: React.FC<ChipsProps> = ({chipsLabel, drawerWidth}) => {
+
+  const chipData: ChipData[] = useAppSelector((state: RootState) => 
+    (state.searchRecipe as SearchState).chips
+  );
+
+  const {setSearchChips, deleteSearchChips} = useActions()
   
-  const { chipsLabel, drawerWidth } = props;
-  // TODO useState('') перенести в store
   const [value, setValue] = useState('');
 
   const handleChange = (event: { target: { value: string } }) => {
-    return setValue(event.target.value);
+    return setValue(event.target.value.trim());
   }
 
   const handleSetChip = () => {
     if(!chipData.filter(chip => chip.label === value).length && value) {
 
-      const newChip = {key: uuidv4(), label: value};
+      const newChip: ChipData = { key: uuidv4(), label: value };
 
-      setChipData(chips => ([...chips, newChip]));
+      setSearchChips(newChip)
       setValue('');
     }
   }
-  // TODO useState перенести в store
-  const [chipData, setChipData] = useState<readonly ChipData[]>(CHIPE_DATA);
 
   const handleDelete = (chipToDelete: ChipData) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    deleteSearchChips(chipToDelete);
   };
 
   const handleMouseDown = (event: React.MouseEvent<HTMLButtonElement>) => {

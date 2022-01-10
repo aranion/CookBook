@@ -1,8 +1,8 @@
-import {IRecipe} from "../../models/Recipe"
+import {IRecipe, IRecipeModify} from "../../models/Recipe"
 
 export type Action = {
     type: RecipeActionTypes
-    payload: any //IRecipe | Error | number | string
+    payload: any // IRecipe | IRecipeModify | Error | number | string   
 }
 
 export interface RecipeState {
@@ -26,6 +26,7 @@ export enum RecipeActionTypes {
     DELETE_RECIPE = '@recipes/DELETE_RECIPE',
     SET_FILTER = '@recipes/SET_FILTER',
     SET_RECIPES_PAGE = '@recipes/SET_RECIPES_PAGE',
+    SET_RECIPES_MODIFY_SUCCESS = '@recipes/SET_RECIPES_MODIFY_SUCCESS',
 }
 
 interface StartRecipeAction {
@@ -35,6 +36,10 @@ interface StartRecipeAction {
 interface FetchRecipeSuccessAction {
     type: RecipeActionTypes.FETCH_RECIPES_SUCCESS;
     payload: IRecipe[];
+}
+interface setRecipeModifySuccessAction {
+    type: RecipeActionTypes.SET_RECIPES_MODIFY_SUCCESS;
+    payload: IRecipeModify;
 }
 interface IsAddRecipeAction {
     type: RecipeActionTypes.IS_ADD_RECIPE
@@ -80,3 +85,4 @@ export type RecipeAction =
     | DeleteRecipeAction
     | SetRecipesPage
     | SetRecipesFilter
+    | setRecipeModifySuccessAction

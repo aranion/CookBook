@@ -1,4 +1,4 @@
-import { IRecipe } from "../../models/Recipe";
+import { IRecipe, IRecipeModify } from "../../models/Recipe";
 import { Action, RecipeState, RecipeActionTypes } from "./types";
 import { API_BASE_URL } from "../../constants/config";
 
@@ -35,6 +35,20 @@ export const recipeReducer = (state = initialState, action: Action) => {
         }
         case RecipeActionTypes.SET_RECIPES_PAGE:
             return {...state, page: action.payload}
+        case RecipeActionTypes.SET_RECIPES_MODIFY_SUCCESS:
+            const arrRecipe = state.data.map((el:any) => {
+                if (el._id === (action.payload as IRecipeModify).id){
+                    Object.keys(action.payload).map(item => {
+                        if(item !== 'id' && item in el) {
+                            el[item] = action.payload[item];    
+                        }
+                        return item;
+                    })
+                }
+                return el;
+            })
+
+            return {...state, data: [...arrRecipe]}
         default:
             return state
     }
@@ -45,7 +59,7 @@ function addData(state: IRecipe[] = [], payload: IRecipe) {
 }
 
 function modifyData(state: IRecipe[] = [], payload: IRecipe) {
-    return [...state.filter(item => item._id !==payload._id), payload]
+    return [...state.filter(item => item._id !== payload._id), payload]
 }
 
 function modifyImg(payload: IRecipe[]): IRecipe[] {

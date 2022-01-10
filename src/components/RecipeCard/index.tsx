@@ -9,18 +9,19 @@ import {
   Typography,
   Button,
   Box,
-  Rating,
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IRecipe } from "models/Recipe";
 import { useActions } from "hooks/useActions";
-import { ContexMenuDescription } from "components/Simples";
+import { ContexMenuDescription, RetingRecipe } from "components/Simples";
+import style from "./recipeCard.module.scss";
 
 export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
   const { setIsModal } = useActions();
 
   const onOpenModal = (idRecipe: string) => setIsModal(idRecipe);
+
   const getMinDescription = (value: number): string => {
     let str: string = recipe.description.substring(0, value);
     str += "...";
@@ -68,8 +69,12 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           action={<ContexMenuDescription recipe={recipe} />}
           title={recipe.title}
         />
-        <Rating sx={{ padding: 1 }} name="size-medium" value={recipe.rating} readOnly />
-        <CardContent sx={{ display: "flex", flexDirection: "column", gridGap: 16 }} >
+        <div className={style.card__rating}>
+          <RetingRecipe recipe={recipe}/>
+        </div>
+        <CardContent
+          sx={{ display: "flex", flexDirection: "column", gridGap: 16 }}
+        >
           <Typography variant="body1" color="text.secondary">
             {recipe?.description.length > 60
               ? getMinDescription(59)
@@ -84,7 +89,7 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
           sx={{ display: "flex", justifyContent: "space-between" }}
         >
           <Box>
-            <IconButton aria-label="add to favorites" >
+            <IconButton aria-label="add to favorites">
               <FavoriteIcon />
             </IconButton>
           </Box>

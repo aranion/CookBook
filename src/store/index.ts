@@ -7,6 +7,7 @@ import { profileReducer } from "./profile/reducer";
 import { modalReducer } from './modal/reducer';
 import { addRecipeReducer } from './addRecipe/reducer';
 import { bookReducer } from './book/reducer';
+import { searchReducer } from './search/reducer'
 
 import * as RecipeActions from './recipe/actions';
 import * as ProfileActions from './profile/actions';
@@ -14,6 +15,7 @@ import * as AddRecipeActions from './addRecipe/actions';
 import * as ModalActions from './modal/actions';
 import * as BookAction from "./book/actions";
 import * as CooknbookAction from "./cookbooks/actions";
+import * as SearchAction from "./search/actions"
 import { cookbooksReducer } from './cookbooks/reducer';
 
 const rootReducer = combineReducers({
@@ -22,7 +24,8 @@ const rootReducer = combineReducers({
     modal: modalReducer,
     addRecipe: addRecipeReducer,
     book: bookReducer,
-    cookbooks: cookbooksReducer
+    cookbooks: cookbooksReducer,
+    searchRecipe: searchReducer,
 });
 const store = createStore(
     rootReducer,
@@ -37,7 +40,8 @@ export const ActionCreators = {
     ...ModalActions,
     ...AddRecipeActions,
     ...BookAction,
-    ...CooknbookAction
+    ...CooknbookAction,
+    ...SearchAction,
 }
 
 export type RootState = ReturnType<typeof rootReducer>;

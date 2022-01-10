@@ -10,7 +10,6 @@ import { Loader } from "../../components";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 
 export const Book = () => {
-
   const { id } = useParams();
   const { setIsModal, fetchAllRecipes, fetchDataMemo } = useActions();
   const { loading, cookbook} = useAppSelector((state) => (state as RootState).book as BookState);
@@ -22,16 +21,18 @@ export const Book = () => {
     // TODO пока не работает отдача рецептов с сервера, получаем все рецепты
     if(!recipes.length) fetchAllRecipes();
     // получение данных кулинарной книги
-    fetchDataMemo(id);   
+    fetchDataMemo(id);
   }, [recipes, id]);
 
   // Идет загрузка, рендерится прелоадер
-  if(loading) {
-    return <div className={style.pages__center}>
-      <div className={style.container}>
-        <Loader />
+  if (loading) {
+    return (
+      <div className={style.pages__center}>
+        <div className={style.container}>
+          <Loader />
+        </div>
       </div>
-    </div>
+    );
   }
   
   // Книга не найдены, рендерится уведомление
@@ -42,7 +43,7 @@ export const Book = () => {
       </div>
     </div>
   }
-  
+
   return (
     <div className={style.pages__center}>
       <div className={style.container}>

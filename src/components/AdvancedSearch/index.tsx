@@ -1,24 +1,16 @@
 import {RootState, useAppSelector} from 'store';
 import Content from './Content';
 import {useEffect} from "react";
-import {$api} from "../../api/api";
+import { useActions } from "hooks/useActions";
 
 export const AdvancedSearch = () => {
 
+    const { fetchSearchRecipes } = useActions();
+
     useEffect(() => {
-        (async () => {
-            await $api.post('recipes/search/advanced', {
-                time: {
-                    $qte: 5,
-                    $lte: 20,
-                },
-                kindOfFood: {
-                    $in: ["Закуски", "Десерты"
-                    ]
-                }
-            })
-        })()
-    }, [])
+        fetchSearchRecipes();
+    }, []);
+
     const {data} = useAppSelector((state: RootState) => state.recipes);
 
     return (

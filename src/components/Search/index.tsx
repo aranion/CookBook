@@ -1,29 +1,41 @@
 import { ChangeEvent, useState} from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { Button, InputBase, IconButton, Paper, Box } from "@mui/material";
-// import {useAppSelector} from "../../store";
 import { useActions } from 'hooks/useActions'
 import styles from "./search.module.scss";
 import { SearchModal } from 'components'
+import { useLocation, useNavigate } from 'react-router-dom';
+import { RouteNames } from 'router/routeList';
+import { clearSearchForm } from 'mocks/search'
 
 export const Search = () => {
+
+  const location = useLocation();
+  const router = useNavigate();
 
   const [ open, setOpen ] = useState(false);
   const [ searchValue, setSearchValue ] = useState<string>("");
 
-  const { setRecipesFilter } = useActions();
-  // const {filter} = useAppSelector(state => state.recipes);
+  const { setSearchForm, fetchSearchRecipes } = useActions();
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    if(location.pathname === RouteNames.SEARCH_ADVANCED) return
+    setSearchForm(clearSearchForm)
+    setOpen(true)
+  };
   const handleClose = () => setOpen(false);
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-      setSearchValue(e.target.value);
+    setSearchValue(e.target.value);
   };
-  const handleSearch = (e: any) => {
-    e.preventDefault();
-    setRecipesFilter(searchValue)
-  };
-
+  const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault()
+    setSearchForm({...clearSearchForm, title: searchValue})
+    fetchSearchRecipes()
+    if(location.pathname !== RouteNames.SEARCH_ADVANCED) {
+      router(RouteNames.SEARCH_ADVANCED);
+    }
+  }
+  
   return (
     <Box className={styles["search-block"]}>
       <Box className={styles["search-block__container"]}>
