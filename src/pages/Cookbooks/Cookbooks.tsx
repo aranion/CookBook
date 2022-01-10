@@ -107,9 +107,9 @@ const Cookbooks = () => {
                             : book.photo || imgDefaultGB
                           } alt={book.title} />
                         </div>
-                        <p className={styles.item__name}>{book.title}</p>
+                        <p className={styles.item__name}>{book.title !== 'Книга 1' ? book.title : 'Избранные рецепты' }</p> 
                         <p className={styles.item__description}>
-                          {book.description}
+                          {book.description !== 'string' ? book.description : 'Здесь находятся понравившиеся рецепты.'}
                         </p>
                         <p className={styles.item__count}>{book.recipesId.length}</p>
                         <p className={styles.item__menu}>
