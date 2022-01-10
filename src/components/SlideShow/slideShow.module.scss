@@ -3,15 +3,31 @@
 $height: 320px;
 $widhtLeft: 400px;
 
-.slide-show-block {
-  background: $backgroundDefault;
-  box-shadow: $boxShadovDefault;
-  border-radius: $borderRadiusDefault;
-  color: $textColor;
-  min-height: $height;
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  overflow: hidden;
+.slide-show {
+  &__header {
+    font-size: 20px;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 auto;
+    padding: 5px;
+    width: 300px;
+    color: $textColor;
+    border-top-left-radius: $borderRadiusDefault;
+    border-top-right-radius: $borderRadiusDefault;
+    background: $backgroundDefault;
+  }
+  &-block {
+    background: $backgroundDefault;
+    box-shadow: $boxShadovDefault;
+    border-radius: $borderRadiusDefault;
+    color: $textColor;
+    min-height: $height;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: hidden;
+  }
 }
+
+

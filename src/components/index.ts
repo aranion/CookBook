@@ -10,7 +10,7 @@ export * from "./DescriptionRecipe";
 export * from "./StepRecipe";
 export * from "./AddRecipeForm";
 export * from "./AdvancedSearch";
-export * from "./Loader";
+export * from "./Simples/Loader";
 export * from "./Simples/PrintElem";
 export * from "./Navigation";
 export * from "./AdvancedSearch/SearchForm";

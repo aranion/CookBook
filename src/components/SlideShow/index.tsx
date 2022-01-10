@@ -11,10 +11,40 @@ export const SlideShow = ({ recipes }: { recipes: IRecipe[] }) => {
       </div>
     );
   return (
-    <Carousel>
-      {recipes.map((recipe, i) => (
-        <RandomRecipe recipe={recipe} key={i} />
-      ))}
-    </Carousel>
+    <div>
+      <h3 className={styles["slide-show__header"]}>Популярные рецепты</h3>
+      <Carousel
+        navButtonsWrapperProps={{   // Move the buttons to the bottom. Unsetting top here to override default style.
+            style: {
+                top: '140px',
+                height: 'auto'
+            }
+        }} 
+        indicatorIconButtonProps={{
+            style: {
+                padding: '5px',    // 1
+                margin:'5px 0'
+            }
+        }}
+        activeIndicatorIconButtonProps={{
+            style: {}
+        }}
+        indicatorContainerProps={{
+            style: {
+              maxWidth: '180px',
+              margin: '0 auto',
+              display: 'flex',
+              justifyContent: 'space-evenly',
+              borderEndEndRadius: '10px',
+              borderEndStartRadius: '10px',
+              background: '#f4f4f4'
+            }
+        }}>
+        {recipes.map((recipe, i) => (
+          <RandomRecipe recipe={recipe} key={i} />
+        ))}
+      </Carousel>
+    </div>
+    
   );
 };

@@ -8,13 +8,7 @@ export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) =>
         dispatch({type: RecipeActionTypes.START_RECIPES});
 
         const {data} = await $api.get('/recipes/get');
-        console.log(data)
-        // пока сервер пустой, пусть будет заглушка
-        // if(!('name' in data)) {
-        //     dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
-        // } else {
-        //     dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
-        // }
+
         dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: data});
     } catch (e: any) {
         if (e instanceof Error) dispatch({
@@ -44,7 +38,9 @@ export const setIsAddRecipe = () => (dispatch: Dispatch<RecipeAction>) => {
 export const addRecipe = (recipeData: any) => async (dispatch: Dispatch<RecipeAction>) => {
     try {
         dispatch({type: RecipeActionTypes.START_RECIPES});
-        const res = await $api.post('recipes/create', recipeData)
+
+        const res = await $api.post('recipes/create', recipeData);
+
         if(res.status === 200) {
             dispatch({type: RecipeActionTypes.IS_ADD_RECIPE});
         }

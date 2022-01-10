@@ -1,5 +1,4 @@
 import { AuthForm } from "components";
-import styles from './pages.module.scss';
 import {Box} from "@mui/material";
 
 const Login = () => {

@@ -3,17 +3,25 @@ import { CookbooksItem } from "store/cookbooks/types";
 export const COOKBOOKS: CookbooksItem[] = [
     {
       photo: "",
-      name: "Избранное",
+      title: "Избранное",
       description: "Понравившиеся рецепты",
-      count: 53,
-      id: "61b8fce2705a4912a41b538c",
+      _id: "61b8fce2705a4912a41b538c",
+      cuisine: "",
+      user: "",
+      updatedAt: "",
+      createdAt: "",
+      recipesId: []
     },
     {
       photo: "",
-      name: "Made in italy",
+      title: "Made in italy",
       description:
         "Самые вкусные рецепты итальянской кухни, разные виды пасты.",
-      count: 15,
-      id: "2",
+      _id: "2",
+      cuisine: "",
+      user: "",
+      updatedAt: "",
+      createdAt: "",
+      recipesId: []
     },
   ]

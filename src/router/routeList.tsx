@@ -6,7 +6,6 @@ import Login from "../pages/Login";
 import MyCookbooks from "pages/Cookbooks/Cookbooks";
 import AddRecipe  from "pages/AddRecipe";
 import {AdvancedSearch} from '../components';
-import Registration from "../pages/Register";
 import { Book } from "../pages/Book/Book";
 
 export enum RouteNames {
@@ -16,7 +15,7 @@ export enum RouteNames {
   COOKBOOKS = '/cookbooks',
   ADD_RECIPE = '/addRecipe',
   LOGIN = '/login',
-  REGISTRATION = '/register', //
+  REGISTRATION = '/register',
   SEARCH_ADVANCED = '/search/advanced',
   PROFILE = '/profile',
 }

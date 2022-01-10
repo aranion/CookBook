@@ -1,5 +1,6 @@
 import { IRecipe } from "../../models/Recipe";
 import { Action, RecipeState, RecipeActionTypes } from "./types";
+import { API_BASE_URL } from "../../constants/config";
 
 const initialState: RecipeState = {
     loading: false,
@@ -17,7 +18,7 @@ export const recipeReducer = (state = initialState, action: Action) => {
         case RecipeActionTypes.IS_ADD_RECIPE:
             return {...state, isAddRecipe: !state.isAddRecipe,}
         case RecipeActionTypes.FETCH_RECIPES_SUCCESS:
-            return {...state, loading: false, data: [...action.payload]}
+            return {...state, loading: false, data: [...modifyImg(action.payload)]}
         case RecipeActionTypes.FETCH_RECIPES_ERROR:
             return {...state, loading: false, error: action.payload}
         case RecipeActionTypes.ADD_RECIPE:
@@ -45,4 +46,11 @@ function addData(state: IRecipe[] = [], payload: IRecipe) {
 
 function modifyData(state: IRecipe[] = [], payload: IRecipe) {
     return [...state.filter(item => item._id !==payload._id), payload]
+}
+
+function modifyImg(payload: IRecipe[]): IRecipe[] {
+    return payload.map(el =>  {
+        el.urlImg = `${API_BASE_URL}/img/${el._id}/urlImg/` + el.urlImg?.split('\\')[el.urlImg.split('\\').length - 1];
+        return el;
+    })
 }

@@ -17,7 +17,7 @@ export const DescriptionRecipe = () => {
   
   const { isModal, idRecipe } = useAppSelector(state => state.modal);
 
-  const recipe: IRecipe = useAppSelector(state => 
+  const recipe: IRecipe | undefined = useAppSelector(state => 
     state.recipes.data.find((el:IRecipe) => 
       el._id === idRecipe
     ));
@@ -120,7 +120,7 @@ export const DescriptionRecipe = () => {
             <div className={styles["modal_body__right-line"]}></div>
             <div className={styles["modal_body__right-author"]}>
               <span className={styles.author}>
-                Автор: <span>{recipe?.author || 'Автор не указан...'}</span>
+                Автор: <span>{recipe?.author?.name || 'Автор не указан...'}</span>
               </span>
               <span>
                 ID: <span>id_{recipe._id}</span>

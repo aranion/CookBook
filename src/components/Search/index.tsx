@@ -19,7 +19,10 @@ export const Search = () => {
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
       setSearchValue(e.target.value);
   };
-  const handleSearch = () => setRecipesFilter(searchValue);
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+    setRecipesFilter(searchValue)
+  };
 
   return (
     <Box className={styles["search-block"]}>
@@ -43,7 +46,7 @@ export const Search = () => {
             type="submit" 
             sx={{ p: 1 }} 
             aria-label="search"
-            onClick={handleSearch}
+            onClick={(e: any) => handleSearch(e)}
           >
             <SearchIcon />
           </IconButton>
