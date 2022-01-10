@@ -5,16 +5,13 @@ $widhtLeft: 400px;
 
 .slide-show {
   &__header {
-    font-size: 20px;
-    font-weight: normal;
+    font-size: 22px;
+    font-weight: bold;
     text-align: center;
     margin: 0 auto;
     padding: 5px;
     width: 300px;
     color: $textColor;
-    border-top-left-radius: $borderRadiusDefault;
-    border-top-right-radius: $borderRadiusDefault;
-    background: $backgroundDefault;
   }
   &-block {
     background: $backgroundDefault;
@@ -29,5 +26,3 @@ $widhtLeft: 400px;
     overflow: hidden;
   }
 }
-
-
