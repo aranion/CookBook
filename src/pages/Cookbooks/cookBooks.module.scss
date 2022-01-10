@@ -62,3 +62,11 @@
 .link {
   flex: 1;
 }
+.addForm {
+  &__wrapper {
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

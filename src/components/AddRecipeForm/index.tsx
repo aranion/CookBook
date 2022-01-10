@@ -45,7 +45,6 @@ export const AddRecipeForm = () => {
     setDescriptionRecipe((e.target as HTMLDataElement).value);
   };
   const handleIsPrivat = (e: React.ChangeEvent<HTMLInputElement>) => {
-    debugger
     setIsPrivatRecipe((e.target as HTMLDataElement).value === "true" ? true : false);
   };
   const handleCost = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,15 +73,18 @@ export const AddRecipeForm = () => {
   const handleAddRecipe = async (e: FormEvent) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement );
-    form.set('author', user!.id); // Добавялет id автора рецепта
+    await form.set('author', user!.id); // Добавялет id автора рецепта
     const result = await addRecipe(form);
     console.log(result);
   }
   const handleIsAddRecipe = () => {
     setIsAddRecipe();
-    cleanForm(); 
+    // cleanForm(); // TODO Нужно исправить ошибку с обнулением полей...
   }
   const handleImgUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const img:  any = e.target.parentNode?.querySelector('img');
+    img.src = URL.createObjectURL((e.target as any).files[0]);
+    img.style.display = "block";
     setUrlImg(e.target.value);
   }
   // @ts-ignore
@@ -113,7 +115,11 @@ export const AddRecipeForm = () => {
           <div className={styles.form__left}>
             <div className={styles["form__left_container"]}>
               <div className={styles["form__left_photoRecipe"]}>
-                <AddPhotoAlternateIcon />
+                {urlImg 
+                  ? ''
+                  : <AddPhotoAlternateIcon />
+                }
+                <img className={styles["form__left_img"]} src="" id="image" alt=' '/>
               </div>
               <Button 
                 sx={{width: '100%', position: 'absolute', bottom: 0 }} 
@@ -123,7 +129,7 @@ export const AddRecipeForm = () => {
               >
                 Загрузить фото
               </Button>
-              <input type="file" hidden name="urlImg" value={urlImg} onChange={handleImgUrlChange}/>
+              <input type="file" hidden id="file" name="urlImg" value={urlImg} onChange={handleImgUrlChange}/>
             </div>
           </div>
           <div className={styles.form__right}>

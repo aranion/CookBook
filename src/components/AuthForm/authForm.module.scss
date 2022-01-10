@@ -1,12 +1,18 @@
 @import '../../constants/_vars.scss';
 
-.center {
+.form {
   background-color: $backgroundDefault;
   background: $backgroundDefault;
   box-shadow: $boxShadovDefault;
   border-radius: $borderRadiusDefault;
-  min-height: 320px;
+  min-height: calc(100px * 3);
   margin: 0px auto 20px;
   padding: 20px;
   box-sizing: border-box;
+  display: 'flex';
+  opacity: 0.8;
+  flex-direction: 'column';
+  justify-content: 'center';
+  align-items: 'center';
+  width: 350px;
 }

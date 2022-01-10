@@ -3,11 +3,15 @@ export type Action = {
   payload?: boolean | Error | number | string | CookbooksItem[]
 }
 export interface CookbooksItem {
-  photo: string,
-  name: string,
+  photo?: string,
+  title: string,
   description: string,
-  count: number,
-  id: string,
+  cuisine: string,
+  user: string,
+  updatedAt: string,
+  createdAt: string,
+  _id: string,
+  recipesId: Array<string>
 }
 
 export interface CookbooksState {
@@ -39,4 +43,4 @@ export type CookbookAction =
   CookbooksActionTypes
   | StartCookbooksAction
   | FetchCookbooksSuccessAction
-  | FetchCookbooksErrorAction
+  | FetchCookbooksErrorAction 

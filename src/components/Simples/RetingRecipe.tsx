@@ -12,7 +12,6 @@ export const RetingRecipe = ({recipe}: Props) => {
 
   const handleRating = (e: React.SyntheticEvent<Element, Event>, id:string,  newValue: number | null) => {
     e.preventDefault();
-    debugger
     modifyRecipe({id, rating: newValue || 0});
   }
 

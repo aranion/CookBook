@@ -11,8 +11,8 @@ export interface StepData {
 }
 
 export interface IAuthor {
-  id: string; // id user - привязка к создателю
-  name: string; // Для отображения инфы
+  id: string;  // id user - привязка к создателю
+  name: string  // Для отображения инфы
 }
 
 export interface IRecipe {

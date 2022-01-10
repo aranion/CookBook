@@ -12,8 +12,10 @@
   &__wrapper {
     max-width: 220px;
     max-height: 220px;
+    min-width: 220px;
     border-radius: 6px;
     overflow: hidden;
+    margin: 0 auto;
     background: $backgroundImgDefault;  
     &_img {
       width: 100%;

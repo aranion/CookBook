@@ -13,7 +13,6 @@ import {
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IRecipe } from "models/Recipe";
-import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { useActions } from "hooks/useActions";
 import { ContexMenuDescription, RetingRecipe } from "components/Simples";
 import style from "./recipeCard.module.scss";
@@ -46,9 +45,9 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
         component="img"
         image={recipe.urlImg
           // TODO временно изображения с сервера, убрать...
-            ? recipe.urlImg.replace(/\/var\/www\/modul62.ru\/build\//i,'')
-          // ? 'http://modul62.ru/img/' + recipe.urlImg.split('/')[recipe.urlImg?.split('/').length - 1]
-          : imgDefaultGB
+            // ? recipe.urlImg.replace(/\/var\/www\/modul62.ru\/build\//i,'')
+          // ? 'http://modul62.ru/img/' + recipe.urlImg.split('\\')[recipe.urlImg?.split('\\').length - 1]
+          // : imgDefaultGB
         }
         alt={recipe?.title}
         sx={{ maxHeight: "100%", maxWidth: 300, background: 'gainsboro'}}

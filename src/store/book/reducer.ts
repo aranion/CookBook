@@ -1,9 +1,9 @@
-import { Action, BookActionTypes, BookItem, BookState } from "./types";
+import { Action, BookActionTypes, BookState } from "./types";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 
 const initialState: BookState = { 
   loading: false,
-  data: {
+  cookbook: {
     title: '',
     _id: '',
     photo: '',
@@ -14,7 +14,8 @@ const initialState: BookState = {
     updatedAt: '',
     user: '',
     __v: 0
-  }
+  },
+  recipes: []
 };
 
 export const bookReducer = (state = initialState, action: Action) => {
@@ -25,12 +26,16 @@ export const bookReducer = (state = initialState, action: Action) => {
       return {
         ...state , 
         loading: false, 
-        data: {
-          ...(action.payload as BookItem), 
-          photo: (action.payload as BookItem).photo !== '' 
-          ? (action.payload as BookItem).photo 
+        cookbook: {
+          ...(action.payload as BookState).cookbook, 
+          photo: (action.payload as BookState).cookbook?.photo !== '' 
+          ? (action.payload as BookState).cookbook?.photo 
           : imgDefaultGB
-        }
+        },
+        recipes: [(action.payload as BookState).recipes.length !== 0 
+          ? (action.payload as BookState).recipes.map(el => el)
+          : []
+        ]
       }
     case BookActionTypes.FETCH_BOOK_ERROR:
       return {...state, loading: false, error: action.payload}

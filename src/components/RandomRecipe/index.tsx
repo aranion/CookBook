@@ -14,6 +14,9 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
   const { setIsModal } = useActions();
 
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
+  const checkValue = (value: string | number | undefined) => {
+    return value !== 0 || value ? value : '-';
+  }
 
   return (
     <div className={styles["recipe-block"]}>
@@ -31,11 +34,11 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
         <div className={styles["recipe-block__meta"]}>
           <div>
             <AccessTimeIcon />
-            <span>{recipe?.time}&nbsp;мин.</span>
+            <span>{checkValue(recipe?.time)}</span>
           </div>
           <div>
             <FlatwareIcon />
-            <span>{recipe?.portionsAmount}</span>
+            <span>{checkValue(recipe?.portionsAmount)}</span>
           </div>
           <div>
             <MessageIcon />
@@ -48,13 +51,16 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
         </div>
       </div>
       <div className={styles["recipe-block__right"]}>
-        <h3 className={styles["recipe-block__header"]}>Лучшие рецепты</h3>
+        {/* <h3 className={styles["recipe-block__header"]}>Лучшие рецепты</h3> */}
         <div className={styles["recipe-block__info"]}>
           <div className={styles["heading-container"]}>
             <span className={styles["heading-container__header"]}>
               {recipe?.title}
             </span>
             <PrintElem recipe={recipe} />
+          </div>
+          <div className={styles["recipe-block__description"]}>
+            {recipe?.description}
           </div>
           <h4 className={styles["info-container_ingredients"]}>Ингредиенты:</h4>
           <ul>

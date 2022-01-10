@@ -1,10 +1,12 @@
+import { IRecipe } from "models/Recipe"
+
 export type Action = {
   type: string
-  payload?: boolean | Error | number | string | BookItem
+  payload?: boolean | Error | number | string | BookItem | BookState
 }
 export interface BookItem {
     title: string,
-    _id: string,
+    _id: string, 
     photo?: string,
     description: string,
     ingredients: string[],
@@ -17,7 +19,8 @@ export interface BookItem {
 
 export interface BookState {
   loading: boolean;
-  data: BookItem
+  cookbook: BookItem;
+  recipes: IRecipe[]
 }
 
 export enum BookActionTypes {

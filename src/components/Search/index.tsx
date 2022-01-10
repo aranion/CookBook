@@ -27,7 +27,6 @@ export const Search = () => {
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
   };
-
   const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
     setSearchForm({...clearSearchForm, title: searchValue})
@@ -36,7 +35,7 @@ export const Search = () => {
       router(RouteNames.SEARCH_ADVANCED);
     }
   }
-
+  
   return (
     <Box className={styles["search-block"]}>
       <Box className={styles["search-block__container"]}>
@@ -59,7 +58,7 @@ export const Search = () => {
             type="submit" 
             sx={{ p: 1 }} 
             aria-label="search"
-            onClick={handleSearch}
+            onClick={(e: any) => handleSearch(e)}
           >
             <SearchIcon />
           </IconButton>

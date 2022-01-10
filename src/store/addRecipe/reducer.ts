@@ -210,6 +210,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           }
         } 
       case AddRecipeActionTypes.CLEAN_FORM_RECIPE:
+        debugger
         return {
           ...initialState,
           inputFields: {

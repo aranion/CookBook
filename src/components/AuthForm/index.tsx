@@ -1,4 +1,4 @@
-import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useActions } from "hooks/useActions";
 import { useLocation, useNavigate } from 'react-router';
@@ -6,15 +6,17 @@ import { Link } from "react-router-dom";
 import { RouteNames } from "../../router/routeList";
 import { useAppSelector } from "../../store";
 import { getError } from "../../store/profile/selectors";
+// import styles from './authForm.module.scss';
 
 export const AuthForm = () => {
 
-        const {pathname} = useLocation();
+        const location = useLocation();
         const navigate = useNavigate();
+        const {login, register} = useActions();
+        const errorAuth = useAppSelector(getError);
 
-        const {login, register} = useActions()
-
-        const errorAuth = useAppSelector(getError)
+        const pathname = location.pathname;
+        const redirection = (location.state as any)?.from.pathname || '/';
 
         const [name, setName] = useState<string>('');
         const [email, setEmail] = useState<string>('');
@@ -37,10 +39,12 @@ export const AuthForm = () => {
 
         const clickHandler = async (e: SyntheticEvent) => {
             e.preventDefault();
-            pathname === "/register" ?
-                await register(name, email, pass)
-                : await login(email, pass);
+            pathname === "/register" 
+                ? await register(name, email, pass)
+                : await login(email, pass); 
 
+            navigate(redirection); //redirection, navigate - для перехода на выбранную страницу после удачного входа
+            
             if ( !(await errorAuth)) navigate(RouteNames.HOME)
             else {
                 setError(state => ({...state, auth: true, msg: "Проверьте email и пароль"}));
@@ -106,21 +110,25 @@ export const AuthForm = () => {
         }, [name, email, pass])
 
         return (
-            <Box sx={{
-                py: 3,
-                px: 8,
-                display: 'flex',
-                backgroundColor: 'white',
-                opacity: 0.8,
-                borderRadius: 3,
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 350
-            }}>
-                <Typography variant="h4">{pathname === "/register" ? "Регистрация" : "Авторизация"}</Typography>
-                {pathname === "/register" &&
-                    (<TextField
+            <form onSubmit={clickHandler} >
+                <Box 
+                    sx={{
+                    py: 3,
+                    px: 8,
+                    display: 'flex',
+                    backgroundColor: 'white',
+                    opacity: 0.8,
+                    borderRadius: 3,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 350,
+                }}>
+                    <Typography variant="h4">
+                        {pathname === "/register" ? "Регистрация" : "Авторизация"}
+                    </Typography>
+                    {pathname === "/register" &&
+                        (<TextField
                             sx={{mt: 2}}
                             error={name ? !/^[a-zA-Zа-яА-Я0-9]*$/.test(name) : false}
                             autoFocus={pathname === "/register"}
@@ -130,56 +138,56 @@ export const AuthForm = () => {
                             value={name}
                             onChange={handleChangeName}
                         />
-                    )}
-                <TextField
-                    sx={{mt: 2}}
-                    error={email ? !/^.*@.*\.\w{2,4}$/.test(email) : false}
-                    autoFocus={pathname !== "/register"}
-                    required
-                    label="Логин" variant="standard"
-                    fullWidth
-                    value={email}
-                    onChange={handleChangeEmail}
-                />
-                <TextField
-                    sx={{mt: 2}}
-                    error={pass ? !/^\w{6,10}$/.test(pass) : false}
-                    type='password' label="Пароль" variant="standard"
-                    required
-                    fullWidth
-                    value={pass}
-                    onChange={handleChangePass}
-                />
-                {pathname === "/register" &&
-                    (<TextField
-                            error={confirmPass !== pass}
-                            sx={{mt: 2}}
-                            type='password' label="Подтвердите пароль" variant="standard"
-                            required={pathname === "/register"}
-                            fullWidth
-                            value={confirmPass}
-                            helperText={confirmPass !== pass ? "Пароли не совпадают" : " "}
-                            onChange={handleChangeConfirmPass}
-                        />
-                    )}
-
-                <Box sx={{pt: 2, display: 'flex', fontSize: '0.8rem'}}
-                     className="error"
-                >
-                    <div>{error.msg ? error.msg : ""}&nbsp;</div>
+                        )}
+                    <TextField
+                        sx={{mt: 2}}
+                        error={email ? !/^.*@.*\.\w{2,4}$/.test(email) : false}
+                        autoFocus={pathname !== "/register"}
+                        required
+                        label="Логин" variant="standard"
+                        fullWidth
+                        value={email}
+                        onChange={handleChangeEmail}
+                    />
+                    <TextField
+                        sx={{mt: 2}}
+                        error={pass ? !/^\w{6,10}$/.test(pass) : false}
+                        type='password' label="Пароль" variant="standard"
+                        required
+                        fullWidth
+                        value={pass}
+                        onChange={handleChangePass}
+                    />
+                    {pathname === "/register" &&
+                        (<TextField
+                                error={confirmPass !== pass}
+                                sx={{mt: 2}}
+                                type='password' label="Подтвердите пароль" variant="standard"
+                                required={pathname === "/register"}
+                                fullWidth
+                                value={confirmPass}
+                                helperText={confirmPass !== pass ? "Пароли не совпадают" : " "}
+                                onChange={handleChangeConfirmPass}
+                            />
+                        )}
+                    <Box 
+                        sx={{pt: 2, display: 'flex', fontSize: '0.8rem'}}
+                        className="error"
+                    >
+                        <div>{error.msg ? error.msg : ""}&nbsp;</div>
+                    </Box>
+                    <Button
+                        sx={{mt: 2, mb: 2}}
+                        disabled={ !Object.values(valid).every(val => val === true)}
+                        variant="outlined" color="primary"
+                        fullWidth
+                        type="submit"
+                    >
+                        {pathname === "/register" ? "Регистрация" : "Войти"}
+                    </Button>
+                    {pathname === "/login" && (<Link to={RouteNames.REGISTRATION}>Регистрация</Link>)}
                 </Box>
-                <Button
-                    sx={{mt: 2, mb: 2}}
-                    disabled={ !Object.values(valid).every(val => val === true)}
-                    variant="outlined" color="primary"
-                    fullWidth
-                    onClick={clickHandler}>
-                    {pathname === "/register" ? "Регистрация" : "Войти"}
-                </Button>
-                {pathname === "/login" && (<Link to={RouteNames.REGISTRATION}>Регистрация</Link>)}
-            </Box>
-
-
+            </form>
         );
     }
 ;

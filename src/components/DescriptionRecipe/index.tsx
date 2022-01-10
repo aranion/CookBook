@@ -16,9 +16,13 @@ import { ContexMenuDescription, RetingRecipe } from "components/Simples";
 export const DescriptionRecipe = () => {
   const { isModal, idRecipe } = useAppSelector((state) => state.modal);
 
-  const recipe: IRecipe = useAppSelector((state) =>
-    state.recipes.data.find((el: IRecipe) => el._id === idRecipe)
-  );
+  // const recipe: IRecipe = useAppSelector((state) =>
+  //   state.recipes.data.find((el: IRecipe) => el._id === idRecipe)
+  // );
+  const recipe: IRecipe | undefined = useAppSelector(state => 
+    state.recipes.data.find((el:IRecipe) => 
+      el._id === idRecipe
+    ));
   // TODO ПЕРЕДЕЛАТЬ получение recipe т.к. нет свзяи со сторе(создается новый масcив, не происходит отрисовка измениня)
   // const recipe: IRecipe = useAppSelector((state) => {
   //   if (idRecipe === '' ) return;
@@ -32,6 +36,8 @@ export const DescriptionRecipe = () => {
   // }
   
   const { setIsModal } = useActions();
+
+  
 
   const onClose = () => setIsModal("");
 
@@ -136,8 +142,7 @@ export const DescriptionRecipe = () => {
             <div className={styles["modal_body__right-line"]}></div>
             <div className={styles["modal_body__right-author"]}>
               <span className={styles.author}>
-                Автор:
-                <span> {recipe?.author?.name || "Автор не указан..."}</span>
+                Автор: <span>{recipe?.author?.name || 'Автор не указан...'}</span>
               </span>
               <span>
                 ID: <span>id_{recipe._id}</span>

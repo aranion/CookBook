@@ -1,5 +1,6 @@
 import { IRecipe, IRecipeModify } from "../../models/Recipe";
 import { Action, RecipeState, RecipeActionTypes } from "./types";
+import { API_BASE_URL } from "../../constants/config";
 
 const initialState: RecipeState = {
     loading: false,
@@ -11,20 +12,19 @@ const initialState: RecipeState = {
 
 export const recipeReducer = (state = initialState, action: Action) => {
     console.log(action.type, action.payload);
-    
     switch (action.type) {
         case RecipeActionTypes.START_RECIPES:
             return {...state, loading: true}
         case RecipeActionTypes.IS_ADD_RECIPE:
             return {...state, isAddRecipe: !state.isAddRecipe,}
         case RecipeActionTypes.FETCH_RECIPES_SUCCESS:
-            return {...state, loading: false, data: [...action.payload]}
+            return {...state, loading: false, data: [...modifyImg(action.payload)]}
         case RecipeActionTypes.FETCH_RECIPES_ERROR:
             return {...state, loading: false, error: action.payload}
         case RecipeActionTypes.ADD_RECIPE:
             return {...state, data: addData(state.data, action.payload as IRecipe)}
         case RecipeActionTypes.MODIFY_RECIPE:
-            return {...state, data: modifyData(state.data, action.payload as IRecipeModify)}
+            return {...state, data: modifyData(state.data, action.payload as IRecipe)}
         case RecipeActionTypes.SET_FILTER:
             return {...state, filter: action.payload}
         case RecipeActionTypes.DELETE_RECIPE: {
@@ -58,6 +58,13 @@ function addData(state: IRecipe[] = [], payload: IRecipe) {
     return [...state, payload]
 }
 
-function modifyData(state: IRecipe[] = [], payload: IRecipeModify) {
-    return [...state.filter(item => item._id !== payload.id), payload]
+function modifyData(state: IRecipe[] = [], payload: IRecipe) {
+    return [...state.filter(item => item._id !== payload._id), payload]
+}
+
+function modifyImg(payload: IRecipe[]): IRecipe[] {
+    return payload.map(el =>  {
+        el.urlImg = `${API_BASE_URL}/img/${el._id}/urlImg/` + el.urlImg?.split('\\')[el.urlImg.split('\\').length - 1];
+        return el;
+    })
 }

@@ -39,7 +39,9 @@ export const setIsAddRecipe = () => (dispatch: Dispatch<RecipeAction>) => {
 export const addRecipe = (recipeData: any) => async (dispatch: Dispatch<RecipeAction>) => {
     try {
         dispatch({type: RecipeActionTypes.START_RECIPES});
-        const res = await $api.post('recipes/create', recipeData)
+
+        const res = await $api.post('recipes/create', recipeData);
+
         if(res.status === 200) {
             dispatch({type: RecipeActionTypes.IS_ADD_RECIPE});
         }
