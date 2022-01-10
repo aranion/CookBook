@@ -3,7 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import FlatwareIcon from "@mui/icons-material/Flatware";
 import MessageIcon from "@mui/icons-material/Message";
-import { PrintElem } from "..";
+import { PrintDownloadElem } from "..";
 import { Ingredients, IRecipe } from "../../models/Recipe";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import styles from "./randomRecipe.module.scss";
@@ -14,6 +14,7 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
   const { setIsModal } = useActions();
 
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
+
   const checkValue = (value: string | number | undefined) => {
     return value !== 0 || value ? value : '-';
   }
@@ -24,10 +25,10 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
         <img
           // TODO 'src' тут заглушка для показа фотографий не с сервера, необходимо убрать при работе на сервере
           src={
-            recipe.urlImg
-              ? "/img/" +
-                recipe.urlImg.split("/")[recipe.urlImg?.split("/").length - 1]
-              : imgDefaultGB
+            recipe.urlImg || imgDefaultGB
+              // ? "/img/" +
+              //   recipe.urlImg.split("/")[recipe.urlImg?.split("/").length - 1]
+              // : imgDefaultGB
           }
           alt={recipe?.title}
         />
@@ -51,13 +52,12 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
         </div>
       </div>
       <div className={styles["recipe-block__right"]}>
-        {/* <h3 className={styles["recipe-block__header"]}>Лучшие рецепты</h3> */}
         <div className={styles["recipe-block__info"]}>
           <div className={styles["heading-container"]}>
             <span className={styles["heading-container__header"]}>
               {recipe?.title}
             </span>
-            <PrintElem recipe={recipe} />
+            <PrintDownloadElem recipe={recipe} isPtint={true}/>
           </div>
           <div className={styles["recipe-block__description"]}>
             {recipe?.description}

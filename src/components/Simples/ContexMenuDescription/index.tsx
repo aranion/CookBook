@@ -2,7 +2,7 @@ import { IconButton } from "@mui/material";
 import { useState } from "react";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
-import { PrintElem } from "components";
+import { PrintDownloadElem } from "components";
 import ShareIcon from '@mui/icons-material/Share';
 import { IRecipe } from "models/Recipe";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -41,7 +41,8 @@ export const ContexMenuDescription = ({recipe}:{recipe:IRecipe}) => {
           }
           <AddIcon />
           <ShareIcon />
-          <PrintElem recipe={recipe} />
+          <PrintDownloadElem recipe={recipe} isPtint={true}/>
+          <PrintDownloadElem recipe={recipe} isPtint={false}/>
         </div>
       }
       <IconButton

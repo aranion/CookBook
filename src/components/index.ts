@@ -11,7 +11,7 @@ export * from "./StepRecipe";
 export * from "./AddRecipeForm";
 export * from "./AdvancedSearch";
 export * from "./Simples/Loader";
-export * from "./Simples/PrintElem";
+export * from "./Simples/PrintDownloadElem";
 export * from "./Navigation";
 export * from "./AdvancedSearch/SearchForm";
 export * from "./SlideShow";

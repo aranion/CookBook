@@ -1,21 +1,26 @@
 import PrintIcon from "@mui/icons-material/Print";
 import { IRecipe } from "models/Recipe";
 import styles from "./print.module.scss";
+import DownloadIcon from '@mui/icons-material/Download';
 
 const pdfMake = require("pdfmake/build/pdfmake.js");
 const pdfFonts = require("pdfmake/build/vfs_fonts.js");
 
-export const PrintElem = ({ recipe }: { recipe: IRecipe }) => {
+export const PrintDownloadElem = ({ recipe, isPtint }: { recipe: IRecipe, isPtint: boolean }) => {
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
+  
   function buildPDF() {
     const content = arraizeData(recipe);
     const docDefinition = {
       content,
       styles: css,
     };
-    pdfMake.createPdf(docDefinition).download(`CookBook - ${recipe.title}`);
-  }
+    if(isPtint) {
+      pdfMake.createPdf(docDefinition).print();
+    } else {
+      pdfMake.createPdf(docDefinition).download(`CookBook - ${recipe.title}`);
+    }
+  } 
 
   function arraizeData(data: IRecipe) {
     const { time, author, typeOfMeal, portionsAmount } = data;
@@ -97,7 +102,7 @@ export const PrintElem = ({ recipe }: { recipe: IRecipe }) => {
   return (
     <div className={styles.print}>
       <span onClick={buildPDF}>
-        <PrintIcon />
+        {isPtint ? <PrintIcon /> :<DownloadIcon /> }
       </span>
     </div>
   );
