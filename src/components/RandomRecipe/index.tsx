@@ -64,11 +64,16 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
           </div>
           <h4 className={styles["info-container_ingredients"]}>Ингредиенты:</h4>
           <ul>
-            {recipe?.ingredients.map((item: Ingredients, i: number) => (
-              <li key={i}>
-                {item.description} - {item.count}
-              </li>
-            ))}
+            {recipe?.ingredients.map((item: Ingredients, i: number) => {
+                if (i < 7) {
+                  return <li key={i}>
+                    {item.description} - {item.count}
+                  </li>
+                }
+                return ''
+              }
+            )}
+            { recipe?.ingredients.length > 7 ? <li>...</li> : ''}
           </ul>
         </div>
         <div className={styles["recipe-block__right_added"]}>

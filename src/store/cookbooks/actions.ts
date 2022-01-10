@@ -52,3 +52,33 @@ export const deleteBook = (id:string) => async (dispatch: Dispatch<CookbookActio
       })
   }
 }
+export const addRecipeInBook = (idBook:string, idRecipe: string) => async (dispatch: Dispatch<CookbookAction>) => {
+  try {
+    // dispatch({type: CookbooksActionTypes.START_COOKBOOKS});
+      const res = await $api.post(`/cookbook/${idBook}/recipe-add/${idRecipe}`);
+      console.log(res);
+
+    //   const { data } = await $api.get(`/cookbook/get`);
+    //   dispatch({type: CookbooksActionTypes.FETCH_COOKBOOKS_SUCCESS, payload: [data] });
+  } catch (e: any) {
+      if (e instanceof Error) dispatch({
+          type: CookbooksActionTypes.FETCH_COOKBOOKS_ERROR,
+          payload: e
+      })
+  }
+}
+export const deleteRecipeInBook = (idBook:string, idRecipe: string) => async (dispatch: Dispatch<CookbookAction>) => {
+  try {
+    // dispatch({type: CookbooksActionTypes.START_COOKBOOKS});
+      const res = await $api.post(`/cookbook/${idBook}/recipe-delete/${idRecipe}`);/////sssssssss тут
+      console.log(res);
+
+    //   const { data } = await $api.get(`/cookbook/get`);
+    //   dispatch({type: CookbooksActionTypes.FETCH_COOKBOOKS_SUCCESS, payload: [data] });
+  } catch (e: any) {
+      if (e instanceof Error) dispatch({
+          type: CookbooksActionTypes.FETCH_COOKBOOKS_ERROR,
+          payload: e
+      })
+  }
+}

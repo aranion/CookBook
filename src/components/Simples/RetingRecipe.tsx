@@ -13,6 +13,7 @@ export const RetingRecipe = ({recipe}: Props) => {
   const handleRating = (e: React.SyntheticEvent<Element, Event>, id:string,  newValue: number | null) => {
     e.preventDefault();
     modifyRecipe({id, rating: newValue || 0});
+    // modifyRecipe({id:"61dc3b1b254a87e9ad0a5a91", urlImg: "/t5.jpg"});
   }
 
   return (

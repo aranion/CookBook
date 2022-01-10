@@ -48,11 +48,11 @@ export const Book = () => {
     <div className={style.pages__center}>
       <div className={style.container}>
         <div className={style.book__left}>
-          <h1 className={style.title}>{cookbook.title}</h1>
+          <h1 className={style.title}>{cookbook.title !== 'Книга 1' ? cookbook.title : 'Избранные рецепты'}</h1>
           <div className={style.book__cover}>
-            <img src={cookbook.photo || imgDefaultGB} alt={cookbook.title} />
+            <img src={cookbook.photo  !== 'c:ddd' ? cookbook.photo  : imgDefaultGB } alt={cookbook.title} />
           </div>
-          <p className={style.book__description}>{cookbook.description}</p>
+          <p className={style.book__description}>{ cookbook.description !== 'string' ? cookbook.description : 'Здесь находятся понравившиеся рецепты.'}</p>
         </div>
         <div className={style.book__right}>
           <h2 className={style.book__header}>
@@ -73,7 +73,7 @@ export const Book = () => {
                       >
                         <div className={style.item}>
                           <div className={style.item__photoBox}>
-                            <img src={recipe.urlImg} alt={recipe.title} />
+                            <img src={recipe.urlImg || imgDefaultGB} alt={recipe.title} />
                           </div>
                           <div className={style.item__content}>
                             <h3 className={style.item__name}>{recipe.title}</h3>
