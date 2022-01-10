@@ -67,6 +67,7 @@ export const AddRecipeForm = () => {
   };
 
   const resetForm = () => {
+    setUrlImg('') // TODO перенести в стор
     cleanForm();  
   };
 
@@ -79,7 +80,8 @@ export const AddRecipeForm = () => {
   }
   const handleIsAddRecipe = () => {
     setIsAddRecipe();
-    // cleanForm(); // TODO Нужно исправить ошибку с обнулением полей...
+    setUrlImg(''); // TODO перенести в стор
+    cleanForm();
   }
   const handleImgUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     const img:  any = e.target.parentNode?.querySelector('img');

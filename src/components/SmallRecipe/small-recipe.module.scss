@@ -2,6 +2,7 @@
 
 .small-recipe {
   color: $textColor;
+  max-width: 220px;
   cursor: pointer;
   &:not(:last-child) {
     margin-right: 10px;
@@ -31,6 +32,10 @@
     line-height: 23px;
     text-align: center;
     margin: 10px auto;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
   &__info {
     display: flex;

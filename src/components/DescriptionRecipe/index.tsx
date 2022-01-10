@@ -78,13 +78,13 @@ export const DescriptionRecipe = () => {
               <img
                 className={styles["modal_body__left-img"]}
                 // TODO 'src' тут заглушка для показа фотографий не с сервера, необходимо убрать при работе на сервере
-                src={
-                  recipe.urlImg
-                    ? "/img/" +
-                      recipe.urlImg?.split("/")[
-                        recipe.urlImg?.split("/").length - 1
-                      ]
-                    : imgDefaultGB
+                src={ recipe.urlImg || imgDefaultGB
+                  // recipe.urlImg
+                  //   ? "/img/" +
+                  //     recipe.urlImg?.split("/")[
+                  //       recipe.urlImg?.split("/").length - 1
+                  //     ]
+                  //   : imgDefaultGB
                 }
                 alt={recipe.title}
               />
