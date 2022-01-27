@@ -10,7 +10,7 @@ import { useActions } from "hooks/useActions";
 import { CookbooksState } from "store/cookbooks/types";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { ProfileState } from "store/profile/types";
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
 const Cookbooks = () => {
  // TODO ВСЕ ПЕРЕДЕЛАТЬ...
@@ -52,9 +52,9 @@ const Cookbooks = () => {
     console.log(e.target.value);
     setTitleBook(e.target.value);
   }
-  const handleDeleteBook = (id:string) => {
+  // const handleDeleteBook = (id:string) => {
 
-  }
+  // }
 
   if(loading) {
     return <div className={styles.pages__center}>
@@ -119,7 +119,7 @@ const Cookbooks = () => {
                         </p>
                       </div>
                     </Link>
-                    <DeleteIcon onClick={() => handleDeleteBook(book._id)}/>
+                    {/* <DeleteIcon onClick={() => handleDeleteBook(book._id)}/> */}
                   </ListItem>
                 );
               })}

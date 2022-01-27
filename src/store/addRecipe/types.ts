@@ -4,17 +4,21 @@ export interface IngredientInput {
     value: string,
     placeholder: string 
   }
+export interface StepImg {
+    img: string,
+    id: number
+}
 
 export type Action = {
     type: string
-    payload?: boolean | Error | number | string | IngredientInput | StepData
+    payload?: boolean | Error | number | string | IngredientInput | StepData | StepImg
 }
 
 export interface InputFields {
     titleRecipe: string,                        
     description: string,    
     isPrivat: boolean,                    
-    photoCoverBook: string,                     
+    urlImg: string,                     
     ingredients: Ingredients[],                        
     steps: StepData[],                                     
     cost: number,                               
@@ -53,6 +57,8 @@ export enum AddRecipeActionTypes {
     SET_TYPE_CUISINE_RECIPE='@addRecipe/SET_TYPE_CUISINE_RECIPE',
     SET_TYPE_OF_MEAL_RECIPE='@addRecipe/SET_TYPE_OF_MEAL_RECIPE',
     SET_KIND_OF_FOOD_RECIPE='@addRecipe/SET_KIND_OF_FOOD_RECIPE',
+    SET_URL_IMG_RECIPE='@addRecipe/SET_URL_IMG_RECIPE',
+    SET_URL_IMG_STEP_RECIPE='@addRecipe/SET_URL_IMG_STEP_RECIPE',
     CLEAN_FORM_RECIPE='@addRecipe/CLEAN_FORM_RECIPE',
 }
 

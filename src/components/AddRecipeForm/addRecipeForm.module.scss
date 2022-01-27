@@ -39,8 +39,8 @@
     padding: 0 12px;
     box-sizing: border-box;
     &_container {
-      width: 250px;
-      min-height: 250px;
+      width: 300px;
+      min-height: 300px;
       position: relative;
       margin: 0 auto;
     }
@@ -60,6 +60,10 @@
       margin: auto;
       position: absolute;
     }
+    li {
+      padding: 0;
+      padding-bottom: 3px;
+    }
   }
   &__right {
     display: flex;
@@ -73,8 +77,11 @@
       margin-bottom: 20px;
     }
     &_description {
-      h4 {
-        margin: 0;
+      margin-bottom: 15px;
+    }
+    &_steps {
+      li {
+        padding: 10px 0;
       }
     }
   }

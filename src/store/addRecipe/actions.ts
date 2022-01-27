@@ -1,5 +1,5 @@
 import { StepData } from 'models/Recipe';
-import { AddRecipeActionTypes, IngredientInput } from './types'
+import { AddRecipeActionTypes, IngredientInput, StepImg } from './types'
 
 export const setInpuTitleRecipe = (title: string) => ({
     type: AddRecipeActionTypes.SET_TITLE_RECIPE,
@@ -62,6 +62,14 @@ export const setTypeOfMeal = (typeOfMale: string) => ({
 export const setKindOfFood = (kindOfFood: string) => ({
     type: AddRecipeActionTypes.SET_KIND_OF_FOOD_RECIPE,
     payload: kindOfFood,
+});
+export const setUrlImg = (urlImg: string) => ({
+    type: AddRecipeActionTypes.SET_URL_IMG_RECIPE,
+    payload: urlImg,
+});
+export const setUrlImgStep = ({img, id}: StepImg ) => ({
+    type: AddRecipeActionTypes.SET_URL_IMG_STEP_RECIPE,
+    payload: { img, id },
 });
 export const cleanForm = () => ({
     type: AddRecipeActionTypes.CLEAN_FORM_RECIPE

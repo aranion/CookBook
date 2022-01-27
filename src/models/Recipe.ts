@@ -7,7 +7,7 @@ export interface Ingredients {
 export interface StepData {
   title: string;
   description: string;
-  urlImg?: string;
+  img?: string;
 }
 
 export interface IAuthor {
