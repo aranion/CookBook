@@ -1,4 +1,4 @@
-import { IRecipe, IRecipeModify } from "../../models/Recipe";
+import { IRecipe, IRecipeModify, StepData } from "../../models/Recipe";
 import { Action, RecipeState, RecipeActionTypes } from "./types";
 import { API_BASE_URL } from "../../constants/config";
 
@@ -65,6 +65,20 @@ function modifyData(state: IRecipe[] = [], payload: IRecipe) {
 function modifyImg(payload: IRecipe[]): IRecipe[] {
     return payload.map(el =>  {
         el.urlImg = `${API_BASE_URL}/img/${el._id}/urlImg/` + el.urlImg?.split('\\')[el.urlImg.split('\\').length - 1];
+        el.steps = [...modifyImgSteps(el.steps)];
+        return el;
+    })
+}
+function modifyImgSteps(payload: StepData[]): StepData[] {
+    return payload.map(el =>  {
+        const imgArr = el.img?.split('\\');
+
+        if(imgArr && imgArr[imgArr?.length - 1].indexOf('.') === -1) {
+          el.img = '';
+        } else {
+          el.img = `${API_BASE_URL}/` + imgArr?.slice(imgArr?.indexOf('img')).join('/');
+        }
+
         return el;
     })
 }

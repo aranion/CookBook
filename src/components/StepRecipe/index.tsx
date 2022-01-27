@@ -12,7 +12,7 @@ export const StepRecipe = ({ step, index }: PropsType) => {
     <div className={styles.step}>
       <img
         className={styles.step_img}
-        src={step.urlImg || img}
+        src={step.img || img}
         alt={step.title}
       />
       <div>

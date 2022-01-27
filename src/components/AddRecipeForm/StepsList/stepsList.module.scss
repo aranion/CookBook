@@ -10,18 +10,34 @@
   &__right {
     flex-basis: 60%;
   }
-  &__heading {
-    margin: 0;
-  }
-  &__steps {
-    display: flex;
-    flex-direction: column;
-    &-number {
-      margin: 0;
-    }
-  }
+
   &__stepDescription {
     flex: 2;
     margin: 0 12px;
+  }
+}
+
+.steps {
+  &__container {
+    width: 125px;
+    height: 125px;
+    position: relative;
+    margin: 0 auto;
+  }
+  &__photoStep {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    background-color: #c4c4c4;
+  }
+  &__img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    position: absolute;
   }
 }

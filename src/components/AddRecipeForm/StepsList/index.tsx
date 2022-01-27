@@ -1,36 +1,30 @@
-import { ChangeEvent, useState } from "react";
-import { Button, IconButton, Input, List, ListItem } from "@mui/material";
+import { ChangeEvent } from "react";
+import { Button, IconButton, List, ListItem, TextField } from "@mui/material";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./stepsList.module.scss";
 import { StepData } from "models/Recipe";
-import { RootState, useAppSelector } from "store";
-import { AddRecipeState } from "store/addRecipe/types";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useActions } from "hooks/useActions";
 
-export const StepsList = () => {
+interface Props {
+  steps: StepData[];
+}
 
-  // TODO переделать на STORE
-  const [ urlImgStep, setUrlImgStep ] = useState("");
+export const StepsList = ({steps}: Props) => {
 
-  const { addStep, delStep, setStepDescription } = useActions();
-  
-  const steps: StepData[] = useAppSelector((state: RootState) => 
-    (state.addRecipe as AddRecipeState).inputFields.steps
-  );
+  const { addStep, delStep, setStepDescription, setUrlImgStep } = useActions();
 
-  const addStepItem = () => {
-    addStep();
-  };
-  const deleteStepItem = (value: string) => {
-    delStep(value);
-  };
+  const addStepItem = () => addStep();
+  const deleteStepItem = (value: string) => delStep(value);
   const handleStepItem = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, title: string) => {
     setStepDescription({description: (e.target as HTMLInputElement).value, title});
   };
-
-  const handleUrlImgStepChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUrlImgStep(e.target.value)
+  const handleUrlImgStepChange = (e: ChangeEvent<HTMLInputElement>, idElem: string, id:number) => {
+    const img: any = e.target.parentNode?.querySelector(`#${idElem}`);
+    img.src = URL.createObjectURL((e.target as any).files[0]);
+    img.style.display = "block";
+    setUrlImgStep({img: e.target.value, id});
   }
   // @ts-ignore
   const handleBtn = (e: MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -40,38 +34,50 @@ export const StepsList = () => {
   return (
     <>
       <List>
-
         {steps.map((step, idx) => (
           <ListItem key={step.title}>
-            <p className={styles['cooking__steps-number']}>{step.title}:</p>
-            <Input
+            <TextField
               className={styles.cooking__stepDescription}
               name={`step-${idx}-description`}
               value={step.description}
+              label={step.title}
               onChange={(e) => handleStepItem(e, step.title)}
               placeholder={"Описание"}
+              multiline
+              rows={4}
+              variant="outlined"
               inputProps={{ "aria-label": "description" }}
               required
             />
             <IconButton onClick={() => deleteStepItem(step.title)}>
               <DeleteIcon />
             </IconButton>
-            <Button
-              variant="contained"
-              color="primary"
-              size={"small"}
-              endIcon={<AddIcon />}
-              onClick={handleBtn}
-            >
-              Фото
-            </Button>
-            <input
+
+            <div className={styles["steps__container"]}>
+              <div className={styles["steps__photoStep"]}>
+                {step.img
+                  ? ''
+                  : <AddPhotoAlternateIcon />
+                }
+                <img className={styles["steps__img"]} src="" id={`urlImgStep-${idx}`} alt=' '/>
+              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                size={"small"}
+                endIcon={<AddIcon />}
+                onClick={handleBtn}
+                sx={{width: '100%', position: 'absolute', bottom: 0 }} 
+              >
+                Фото
+              </Button>
+              <input
                 type="file"
                 hidden
                 name={`urlImgStep-${idx}`}
-                value={urlImgStep}
-                onChange={handleUrlImgStepChange}
+                onChange={ (e) => handleUrlImgStepChange(e, `urlImgStep-${idx}`, idx)}
             />
+            </div>
           </ListItem>
         ))}
       </List>

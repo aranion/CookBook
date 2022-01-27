@@ -1,23 +1,19 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Input,  Radio, RadioGroup, TextareaAutosize, TextField } from "@mui/material";
+import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { useAppSelector } from "store";
 import { AddRecipeState} from "store/addRecipe/types";
 import { useActions } from "hooks/useActions";
-import { useState, ChangeEvent, FormEvent} from "react";
+import { ChangeEvent, FormEvent} from "react";
 import { StepsList } from "./StepsList";
 import { IngredientList } from "./IngredientList";
 import { CustomSelect} from '../Simples';
 import styles from "./addRecipeForm.module.scss";
-// TODO заглушка
-// после в БД надо создать списки, которые будем загружать и выводить
+// TODO создать списки typeOfMeal, cuisine, kindOfFood в БД
 import { typeOfMeal, cuisine, kindOfFood } from '../../mocks/list-select';
 import { RecipeState } from "store/recipe/types";
 import { ProfileState } from "store/profile/types";
 
 export const AddRecipeForm = () => {
-  // Перенести в Store
-  const [urlImg, setUrlImg] = useState("");
-  // const [imgFiles, setImgFiles] = useState<File[]>([]);
 
   const {
     addRecipe, 
@@ -31,12 +27,13 @@ export const AddRecipeForm = () => {
     setKindOfFood, 
     setTypeCuisine,
     setTypeOfMeal,
-    setIsAddRecipe
+    setIsAddRecipe,
+    setUrlImg,
   } = useActions(); 
 
-  const {inputFields} = useAppSelector(state => (state.addRecipe as AddRecipeState));
-  const {isAddRecipe} = useAppSelector(state => (state.recipes as RecipeState));
-  const {user} = useAppSelector(state => (state.profile as ProfileState));
+  const { inputFields } = useAppSelector(state => (state.addRecipe as AddRecipeState));
+  const { isAddRecipe } = useAppSelector(state => (state.recipes as RecipeState));
+  const { user } = useAppSelector(state => (state.profile as ProfileState));
 
   const handleTitleRecipe = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInpuTitleRecipe((e.target as HTMLDataElement).value);
@@ -67,7 +64,6 @@ export const AddRecipeForm = () => {
   };
 
   const resetForm = () => {
-    setUrlImg('') // TODO перенести в стор
     cleanForm();  
   };
 
@@ -80,8 +76,7 @@ export const AddRecipeForm = () => {
   }
   const handleIsAddRecipe = () => {
     setIsAddRecipe();
-    setUrlImg(''); // TODO перенести в стор
-    cleanForm();
+    resetForm();
   }
   const handleImgUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
     const img:  any = e.target.parentNode?.querySelector('img');
@@ -117,7 +112,7 @@ export const AddRecipeForm = () => {
           <div className={styles.form__left}>
             <div className={styles["form__left_container"]}>
               <div className={styles["form__left_photoRecipe"]}>
-                {urlImg 
+                {inputFields.urlImg 
                   ? ''
                   : <AddPhotoAlternateIcon />
                 }
@@ -131,14 +126,16 @@ export const AddRecipeForm = () => {
               >
                 Загрузить фото
               </Button>
-              <input type="file" hidden id="file" name="urlImg" value={urlImg} onChange={handleImgUrlChange}/>
+              <input type="file" hidden id="file" name="urlImg" value={inputFields.urlImg} onChange={handleImgUrlChange}/>
             </div>
           </div>
           <div className={styles.form__right}>
             <div className={styles.form__right_title}>
-              <Input
-                placeholder={"Название рецепта"}
+              <TextField
+                placeholder={"Введите название рецепта"}
                 name="title"
+                label='Название рецепта'
+                variant="standard"
                 value={inputFields.titleRecipe}
                 required={true}
                 onChange={handleTitleRecipe}
@@ -147,14 +144,17 @@ export const AddRecipeForm = () => {
               />
             </div>
             <div className={styles.form__right_description}>
-              <TextareaAutosize
-                minRows={1}
+              <TextField
                 required={true}
                 name="description"
+                label='Описание'
+                multiline
+                fullWidth
+                rows={5}
+                variant="outlined"
                 value={inputFields.description}
                 onChange={handleDescription}
                 placeholder="Введите информацию о рецепте..."
-                style={{ width: "100%", height: 130, border: '1px solid grey', resize: 'none', boxSizing: "border-box"}}
               />
             </div>
             <div>
@@ -176,12 +176,16 @@ export const AddRecipeForm = () => {
         </div>
         <div className={styles.form__row}>
           <div className={`${styles.form__left} ${styles.cooking__left}`}>
-            <IngredientList />
+            <IngredientList 
+              ingredients={inputFields.ingredients}
+            />
           </div>
           <div className={`${styles.form__right} ${styles.cooking__right}`}>
-            <h4 className={styles.cooking__heading}>Процесс приготовления:</h4>
-            <div className={styles.cooking__steps}>
-              <StepsList />
+            <h4>Процесс приготовления:</h4>
+            <div className={styles.form__right_steps}>
+              <StepsList 
+                steps={inputFields.steps}
+              /> 
             </div>
           </div>
         </div>

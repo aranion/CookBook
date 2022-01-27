@@ -4,6 +4,7 @@ import {
   AddRecipeState,
   AddRecipeActionTypes,
   IngredientInput,
+  StepImg,
 } from "./types";
 
 const initialState: AddRecipeState = {
@@ -12,16 +13,26 @@ const initialState: AddRecipeState = {
     titleRecipe: "",
     description: "",
     isPrivat: false,                 
-    photoCoverBook: "",                     
+    urlImg: "",                     
     ingredients: [{                         
       description: "",                            
       count: "",    
       placeholder: `Ингредиент 1`                       
+    },
+    {                         
+      description: "",                            
+      count: "",    
+      placeholder: `Ингредиент 2`                       
+    },
+    {                         
+      description: "",                            
+      count: "",    
+      placeholder: `Ингредиент 3`                       
     }],                        
     steps: [{                               
       title: "Шаг 1",                            
       description: "",                      
-      urlImg: "",                                                           
+      img: "",                                                           
     }],                                     
     cost: 0,                               
     persons: 0,                            
@@ -207,6 +218,31 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           inputFields: {
             ...state.inputFields, 
             kindOfFood: action.payload
+          }
+        } 
+      case AddRecipeActionTypes.SET_URL_IMG_RECIPE:
+        return {
+          ...state,
+          inputFields: {
+            ...state.inputFields, 
+            urlImg: action.payload
+          }
+        } 
+      case AddRecipeActionTypes.SET_URL_IMG_STEP_RECIPE:
+        console.log(action.payload);
+        return {
+          ...state,
+          inputFields: {
+            ...state.inputFields, 
+            steps: [
+              ...state.inputFields.steps.map( (step, i) => {
+                  if (i === (action.payload as StepImg).id) {
+                    const imgArr = (action.payload as StepImg).img.split('\\');
+                    step.img = imgArr[imgArr.length - 1];
+                  }
+                  return step;
+              } ),
+            ]
           }
         } 
       case AddRecipeActionTypes.CLEAN_FORM_RECIPE:

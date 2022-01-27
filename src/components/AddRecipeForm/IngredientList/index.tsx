@@ -1,16 +1,14 @@
-import { Button, IconButton, Input, List, ListItem } from "@mui/material";
+import { Button, IconButton, List, ListItem, TextField } from "@mui/material";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
-import { RootState, useAppSelector } from "store";
-import { AddRecipeState } from "store/addRecipe/types";
 import { Ingredients } from "models/Recipe";
 import { useActions } from "hooks/useActions";
 
-export const IngredientList = () => {
-  const ingredients: Ingredients[] = useAppSelector(
-    (state: RootState) =>
-      (state.addRecipe as AddRecipeState).inputFields.ingredients
-  );
+interface Props {
+  ingredients: Ingredients[];
+}
+
+export const IngredientList = ({ingredients}: Props) => {
 
   const {
     addIngredientItem,
@@ -51,19 +49,25 @@ export const IngredientList = () => {
       <List>
         {ingredients.map((ingredient, idx) => (
           <ListItem key={ingredient.placeholder}>
-            <Input
+            <TextField
               placeholder={ingredient.placeholder}
               value={ingredient.description}
+              size="small"
               onChange={(e) =>
                 handleIngredient(e, ingredient.placeholder || "")
               }
+              variant="standard"
+              label={ingredient.placeholder}
               name={`ingredient-${idx}-description`}
               fullWidth={true}
               required={true}
               inputProps={{ "aria-label": "description" }}
             />
-            <Input
-              placeholder={"Объем"}
+            <TextField
+              placeholder="Объем"
+              variant="standard"
+              label="Объем"
+              size="small"
               name={`ingredient-${idx}-count`}
               required={true}
               value={ingredient.count}
