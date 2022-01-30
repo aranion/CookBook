@@ -53,12 +53,27 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
       case AddRecipeActionTypes.SET_TITLE_RECIPE:
             return {
                 ...state,
-                inputFields: {...state.inputFields, titleRecipe: action.payload}
+                inputFields: {
+                  ...state.inputFields, 
+                  titleRecipe: 
+                    state.inputFields.titleRecipe.length < 60 
+                      ? (action.payload as string).length >= 60
+                        ? (action.payload as string).substring(0,60)
+                        : action.payload
+                      : state.inputFields.titleRecipe 
+                }
         }
       case AddRecipeActionTypes.SET_DESCRIPTION_RECIPE:
             return {
                 ...state,
-                inputFields: {...state.inputFields, description: action.payload}
+                inputFields: {
+                  ...state.inputFields, 
+                  description: 
+                    state.inputFields.description.length < 250 
+                      ? (action.payload as string).length >= 250
+                        ? (action.payload as string).substring(0,250)
+                        : action.payload
+                      : state.inputFields.description}
         }
       case AddRecipeActionTypes.SET_IS_PRIVAT_RECIPE:
             return {
@@ -102,8 +117,15 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
               ingredients: [
                 ...state.inputFields.ingredients
                 .map(el => {
-                  if(el.placeholder === (action.payload as IngredientInput).placeholder) {
-                    el.description = (action.payload as IngredientInput).value;
+                  debugger
+                  if(el.placeholder 
+                    === (action.payload as IngredientInput).placeholder
+                    && el.description.length < 40) {
+                      if((action.payload as IngredientInput).value.length >= 40) {
+                        el.description = (action.payload as IngredientInput).value.substring(0,40);
+                      } else{
+                        el.description = (action.payload as IngredientInput).value;
+                      }
                   }
                   return el;
                 })
@@ -118,8 +140,15 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
               ingredients: [
                 ...state.inputFields.ingredients
                 .map(el => {
-                  if(el.placeholder === (action.payload as IngredientInput).placeholder) {
-                    el.count = (action.payload as IngredientInput).value;
+                  if(el.placeholder 
+                    === (action.payload as IngredientInput).placeholder 
+                    && el.count.length < 7
+                  ) {
+                    if ((action.payload as IngredientInput).value.length >= 7) {
+                      el.count = (action.payload as IngredientInput).value.substring(0,7);
+                    } else {
+                      el.count = (action.payload as IngredientInput).value;
+                    }
                   }
                   return el;
                 })
@@ -164,8 +193,12 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
             steps: [
               ...state.inputFields.steps
               .map(el => {
-                if(el.title === (action.payload as StepData).title) {
-                  el.description = (action.payload as StepData).description;
+                if(el.title === (action.payload as StepData).title && el.description.length < 350) {
+                  if((action.payload as StepData).description.length >=350) {
+                    el.description = (action.payload as StepData).description.substring(0,350);
+                  } else {
+                    el.description = (action.payload as StepData).description;
+                  }
                 }
                 return el;
               })
@@ -177,7 +210,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           ...state,
           inputFields: {
             ...state.inputFields, 
-            cost: action.payload
+            cost: (action.payload as number) <= 9999 ? action.payload : state.inputFields.cost
           }
         }
       case AddRecipeActionTypes.SET_COOKING_TIME_RECIPE:
@@ -185,7 +218,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           ...state,
           inputFields: {
             ...state.inputFields, 
-            cookingTime: action.payload
+            cookingTime: (action.payload as number) <= 360 ? action.payload : state.inputFields.cookingTime
           }
         }
       case AddRecipeActionTypes.SET_PERSONS_RECIPE:
@@ -193,7 +226,7 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           ...state,
           inputFields: {
             ...state.inputFields, 
-            persons: action.payload
+            persons: (action.payload as number) <= 50 ? action.payload : state.inputFields.persons
           }
         }
       case AddRecipeActionTypes.SET_TYPE_CUISINE_RECIPE:
@@ -229,7 +262,6 @@ export const addRecipeReducer = (state = initialState, action: Action) => {
           }
         } 
       case AddRecipeActionTypes.SET_URL_IMG_STEP_RECIPE:
-        console.log(action.payload);
         return {
           ...state,
           inputFields: {
