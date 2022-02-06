@@ -28,7 +28,8 @@
     flex-direction: column;
     box-sizing: border-box;
     overflow: hidden;
-    box-shadow: $boxShadovDefault, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: $boxShadowDefault,
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: slide-in;

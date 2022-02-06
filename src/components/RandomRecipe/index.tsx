@@ -23,13 +23,7 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
     <div className={styles["recipe-block"]}>
       <div className={styles["recipe-block__left"]}>
         <img
-          // TODO 'src' тут заглушка для показа фотографий не с сервера, необходимо убрать при работе на сервере
-          src={
-            recipe.urlImg || imgDefaultGB
-              // ? "/img/" +
-              //   recipe.urlImg.split("/")[recipe.urlImg?.split("/").length - 1]
-              // : imgDefaultGB
-          }
+          src={ recipe.urlImg || imgDefaultGB }
           alt={recipe?.title}
         />
         <div className={styles["recipe-block__meta"]}>
@@ -57,7 +51,7 @@ export const RandomRecipe = ({ recipe }: { recipe: IRecipe }) => {
             <span className={styles["heading-container__header"]}>
               {recipe?.title}
             </span>
-            <PrintDownloadElem recipe={recipe} isPtint={true}/>
+            <PrintDownloadElem recipe={recipe} isPrint={true}/>
           </div>
           <div className={styles["recipe-block__description"]}>
             {recipe?.description}

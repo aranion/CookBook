@@ -1,11 +1,11 @@
 @import "../../constants/_vars.scss";
 
 $height: 320px;
-$widhtLeft: 400px;
+$widthLeft: 400px;
 
 .recipe-block {
   background: $backgroundDefault;
-  box-shadow: $boxShadovDefault;
+  box-shadow: $boxShadowDefault;
   border-radius: $borderRadiusDefault;
   color: $textColor;
   min-height: $height;
@@ -18,7 +18,7 @@ $widhtLeft: 400px;
     border-top-left-radius: $borderRadiusDefault;
     border-bottom-left-radius: $borderRadiusDefault;
     height: $height;
-    max-width: $widhtLeft;
+    max-width: $widthLeft;
     width: 100%;
     display: flex;
     position: relative;
@@ -59,7 +59,7 @@ $widhtLeft: 400px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    width: calc(100% - $widhtLeft);
+    width: calc(100% - $widthLeft);
     min-width: 320px;
     padding: $paddingDefault;
     box-sizing: border-box;

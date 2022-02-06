@@ -11,8 +11,7 @@ export const Header = () => {
   return (
     <div>
       <div className={styles.container}>
-        {/* <Link className={styles.header__logo} to={RouteNames.HOME}> */}
-        <Link className={styles.header__logo} to='http://modul62.ru/'>
+        <Link className={styles.header__logo} to={RouteNames.HOME}>
           <img className={styles.header__logo_img} src={img} alt='logo'/>
           <h2 className={styles.header__logo_name}>
             Cook<span>Book</span>

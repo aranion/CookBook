@@ -8,7 +8,6 @@ import { getIsAuth } from 'store/profile/selectors';
 export const AppRouter = () => {
     const isAuth = useAppSelector(getIsAuth);
     const location = useLocation();
-    // const navigate = useNavigate();
 
     if (!isAuth) return <Suspense fallback={<div>Загрузка...</div>}>
         <Routes>

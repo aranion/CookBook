@@ -1,4 +1,4 @@
 export * from './CustomSelect';
-export * from './ContexMenuDescription';
+export * from './ContextMenuDescription';
 export * from './PrintDownloadElem';
-export * from './RetingRecipe';
+export * from './RatingRecipe';

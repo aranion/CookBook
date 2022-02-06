@@ -1,7 +1,7 @@
 import { $api } from "api/api";
 import { Dispatch } from "redux";
 import { RecipeAction, RecipeActionTypes } from './types';
-import { RECIPES_LIST } from "mocks/recipesList";
+// import { RECIPES_LIST } from "mocks/recipesList";
 import { IRecipeModify } from "models/Recipe";
 
 export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) => {
@@ -17,7 +17,7 @@ export const fetchAllRecipes = () => async (dispatch: Dispatch<RecipeAction>) =>
             payload: e
         })
         // TODO поправить payload - убрать RECIPES_LIST
-        dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
+        // dispatch({type: RecipeActionTypes.FETCH_RECIPES_SUCCESS, payload: RECIPES_LIST})
     }
 }
 

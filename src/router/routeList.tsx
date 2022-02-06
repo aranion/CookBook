@@ -7,12 +7,15 @@ import MyCookbooks from "pages/Cookbooks/Cookbooks";
 import AddRecipe  from "pages/AddRecipe";
 import {AdvancedSearch} from '../components';
 import { Book } from "../pages/Book/Book";
+import { Description } from "@material-ui/icons";
 
 export enum RouteNames {
   HOME = '/',
   NOT_FOUND = '/*',
   RECIPES = '/recipes',
   COOKBOOKS = '/cookbooks',
+  COOKBOOKS_ID = '/cookbooks',
+  DESCRIPTION = '/description',
   ADD_RECIPE = '/addRecipe',
   LOGIN = '/login',
   REGISTRATION = '/register',
@@ -58,7 +61,7 @@ export const routeList: IRoute[] = [
   },
   {
     title: "Книга с рецептами",
-    path: "/cookbooks/:id",
+    path: RouteNames.COOKBOOKS_ID + '/:id',
     component: <Book />,
     private: true,
     menu: false,
@@ -81,6 +84,13 @@ export const routeList: IRoute[] = [
     title: "Расширенный поиск",
     path: RouteNames.SEARCH_ADVANCED,
     component: <AdvancedSearch />,
+    private: false,
+    menu: false,
+  },
+  {
+    title: "Описание рецепта",
+    path: RouteNames.DESCRIPTION + '/:id',
+    component: <Description />,
     private: false,
     menu: false,
   },

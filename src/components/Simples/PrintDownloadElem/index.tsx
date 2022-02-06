@@ -6,7 +6,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 const pdfMake = require("pdfmake/build/pdfmake.js");
 const pdfFonts = require("pdfmake/build/vfs_fonts.js");
 
-export const PrintDownloadElem = ({ recipe, isPtint }: { recipe: IRecipe, isPtint: boolean }) => {
+export const PrintDownloadElem = ({ recipe, isPrint }: { recipe: IRecipe, isPrint: boolean }) => {
   pdfMake.vfs = pdfFonts.pdfMake.vfs;
   
   function buildPDF() {
@@ -15,7 +15,7 @@ export const PrintDownloadElem = ({ recipe, isPtint }: { recipe: IRecipe, isPtin
       content,
       styles: css,
     };
-    if(isPtint) {
+    if(isPrint) {
       pdfMake.createPdf(docDefinition).print();
     } else {
       pdfMake.createPdf(docDefinition).download(`CookBook - ${recipe.title}`);
@@ -102,7 +102,7 @@ export const PrintDownloadElem = ({ recipe, isPtint }: { recipe: IRecipe, isPtin
   return (
     <div className={styles.print}>
       <span onClick={buildPDF}>
-        {isPtint ? <PrintIcon /> :<DownloadIcon /> }
+        {isPrint ? <PrintIcon /> :<DownloadIcon /> }
       </span>
     </div>
   );

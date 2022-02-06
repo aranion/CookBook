@@ -14,7 +14,7 @@ export const SlideShow = ({ recipes }: { recipes: IRecipe[] }) => {
     <div>
       <h3 className={styles["slide-show__header"]}>Популярные рецепты</h3>
       <Carousel
-        navButtonsWrapperProps={{   // Move the buttons to the bottom. Unsetting top here to override default style.
+        navButtonsWrapperProps={{   
             style: {
                 top: '140px',
                 height: 'auto'
