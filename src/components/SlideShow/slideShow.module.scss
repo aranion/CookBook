@@ -1,7 +1,7 @@
 @import "../../constants/_vars.scss";
 
 $height: 320px;
-$widhtLeft: 400px;
+$widthLeft: 400px;
 
 .slide-show {
   &__header {
@@ -15,7 +15,7 @@ $widhtLeft: 400px;
   }
   &-block {
     background: $backgroundDefault;
-    box-shadow: $boxShadovDefault;
+    box-shadow: $boxShadowDefault;
     border-radius: $borderRadiusDefault;
     color: $textColor;
     min-height: $height;

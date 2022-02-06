@@ -25,7 +25,9 @@ export const Search = () => {
   };
   const handleClose = () => setOpen(false);
   const handleChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value);
+    if(e.target.value.length < 100) {
+      setSearchValue(e.target.value);
+    }
   };
   const handleSearch = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()

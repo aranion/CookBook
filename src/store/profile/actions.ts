@@ -3,7 +3,7 @@ import {API_BASE_URL} from "constants/config";
 import {AuthResponse} from "models/AuthResponse";
 import {Dispatch} from "redux";
 import {AuthService} from "services/authService";
-import {ProfileActionTypes, ProfileAction} from './types'
+import {ProfileActionTypes, ProfileAction, ErrorInputFields, ValidInputFields} from './types'
 
 export const login = (email: string, password: string) => async (dispatch: Dispatch<ProfileAction>) => {
     try {
@@ -22,12 +22,6 @@ export const login = (email: string, password: string) => async (dispatch: Dispa
             type: ProfileActionTypes.LOGIN_PROFILE_ERROR,
             payload: e
         })
-        // // "черный вход", при ошибке с сервера"
-        // dispatch({
-        //     type: ProfileActionTypes.LOGIN_PROFILE_SUCCESS,
-        //     payload: {} as IUser
-        // })
-        // // ....
     }
 }
 
@@ -84,3 +78,28 @@ export const checkAuth = () => async (dispatch: Dispatch<ProfileAction>) => {
         })
     }
 }
+
+export const setName = (name: string) => ({
+    type: ProfileActionTypes.SET_NAME_PROFILE_FORM,
+    payload: name
+});
+export const setEmail = (email: string) => ({
+    type: ProfileActionTypes.SET_EMAIL_PROFILE_FORM,
+    payload: email
+});
+export const setPass = (pass: string) => ({
+    type: ProfileActionTypes.SET_PASS_PROFILE_FORM,
+    payload: pass
+});
+export const setConfirmPass = (confirmPass: string) => ({
+    type: ProfileActionTypes.SET_CONFIRM_PASS_PROFILE_FORM,
+    payload: confirmPass
+});
+export const setError = (error: ErrorInputFields) => ({
+    type: ProfileActionTypes.SET_ERROR_PROFILE_FORM,
+    payload: error
+});
+export const setValid = (valid: ValidInputFields) => ({
+    type: ProfileActionTypes.SET_VALID_PROFILE_FORM,
+    payload: valid
+});

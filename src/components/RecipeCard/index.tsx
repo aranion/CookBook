@@ -14,7 +14,7 @@ import { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { IRecipe } from "models/Recipe";
 import { useActions } from "hooks/useActions";
-import { ContexMenuDescription, RetingRecipe } from "components/Simples";
+import { ContextMenuDescription, RatingRecipe } from "components/Simples";
 import style from "./recipeCard.module.scss";
 import { useEffect } from "react";
 import { RootState, useAppSelector } from "store";
@@ -47,13 +47,13 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
     if( books[0].recipesId.find(el => el === idRecipe)) {
       deleteRecipeInBook(idBook,  idRecipe); // если рецепт уже создан в книге, удалить
     } else {
-      addRecipeInBook(idBook, idRecipe); // если рецепт в книге нет, сождать
+      addRecipeInBook(idBook, idRecipe); // если рецепт в книге нет, создать
     } 
 
-    toogleIsFavorite(idRecipe);
+    toggleIsFavorite(idRecipe);
   }
 
-  const toogleIsFavorite = (idRecipe: string) => {
+  const toggleIsFavorite = (idRecipe: string) => {
     if( books[0].recipesId.find(el => el === idRecipe)) {
       setIsFavorite(false);
     } else {
@@ -76,13 +76,8 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
     >
       <CardMedia
         component="img"
-        image={recipe.urlImg
-          // TODO временно изображения с сервера, убрать...
-            // ? recipe.urlImg.replace(/\/var\/www\/modul62.ru\/build\//i,'')
-          // ? 'http://modul62.ru/img/' + recipe.urlImg.split('\\')[recipe.urlImg?.split('\\').length - 1]
-          // : imgDefaultGB
-        }
-        alt={recipe?.title}
+        image={ recipe.urlImg }
+        alt={ recipe?.title }
         sx={{ maxHeight: "100%", maxWidth: 300, background: 'gainsboro'}}
       />
       <Box
@@ -99,11 +94,11 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
               {(recipe?.author?.name) ? (recipe?.author?.name as string)[0] : 'A'}
             </Avatar>
           }
-          action={<ContexMenuDescription recipe={recipe} />}
+          action={<ContextMenuDescription recipe={recipe} />}
           title={recipe.title}
         />
         <div className={style.card__rating}>
-          <RetingRecipe recipe={recipe}/>
+          <RatingRecipe recipe={recipe}/>
         </div>
         <CardContent
           sx={{ display: "flex", flexDirection: "column", gridGap: 16 }}
@@ -126,9 +121,12 @@ export const RecipeCard = ({ recipe }: { recipe: IRecipe }) => {
               <FavoriteIcon htmlColor={ isFavorite || books[0].recipesId.find(el => el === recipe._id) ? '#d56600' : ''} />
             </IconButton>
           </Box>
-          <Button size="small" onClick={() => onOpenModal(recipe._id)}>
-            Посмотреть рецепт
-          </Button>
+            <Button
+            size="small" 
+            onClick={() => onOpenModal(recipe._id)}
+            >
+              Посмотреть рецепт
+            </Button>
         </CardActions>
       </Box>
     </Card>

@@ -6,13 +6,14 @@ import { PrintDownloadElem } from "components";
 import ShareIcon from '@mui/icons-material/Share';
 import { IRecipe } from "models/Recipe";
 import DeleteIcon from '@mui/icons-material/Delete';
-import styles from './contexMenu.module.scss';
+import styles from './contextMenu.module.scss';
 import AddIcon from '@mui/icons-material/Add';
 import { useActions } from "hooks/useActions";
 import { useAppSelector } from "store";
 import { ProfileState } from "store/profile/types";
 
-export const ContexMenuDescription = ({recipe}:{recipe:IRecipe}) => {
+export const ContextMenuDescription = ({recipe}:{recipe:IRecipe}) => {
+console.log('recipe', recipe);
 
   const [ isVisible, setVisible] = useState(true);
 
@@ -32,7 +33,7 @@ export const ContexMenuDescription = ({recipe}:{recipe:IRecipe}) => {
       {isVisible ||  
         <div className={styles['context-menu__actions']}>
           {
-            profile.isAuth  // УБРАТЬ когда можно будет сравнивать id пользователя и id рецепта
+            profile.isAuth  // УБРАТЬ когда можно будет сравнивать id автора и id автора в рецепте
             // profile.user?.id === recipe._id 
             && <div>
                    <DeleteIcon onClick={() => handleDeleteRecipe(recipe._id)}/>
@@ -41,8 +42,8 @@ export const ContexMenuDescription = ({recipe}:{recipe:IRecipe}) => {
           }
           <AddIcon />
           <ShareIcon />
-          <PrintDownloadElem recipe={recipe} isPtint={true}/>
-          <PrintDownloadElem recipe={recipe} isPtint={false}/>
+          <PrintDownloadElem recipe={recipe} isPrint={true}/>
+          <PrintDownloadElem recipe={recipe} isPrint={false}/>
         </div>
       }
       <IconButton

@@ -28,6 +28,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "server": "cd ./server/ && npm start",
     "start": "env-cmd -f .env.dev react-scripts start",
     "start:prod": "env-cmd -f .env.prod react-scripts start",
     "build:staging": "env-cmd -f .env.dev react-scripts build",

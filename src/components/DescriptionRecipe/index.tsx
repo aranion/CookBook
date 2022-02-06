@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import styles from "./DescriptionRecipe.module.scss";
 import imgDefaultGB from "../../assets/cbDefault.jpg";
 import { Loader, StepRecipe } from "../";
@@ -11,33 +11,15 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import { ContexMenuDescription, RetingRecipe } from "components/Simples";
+import { ContextMenuDescription, RatingRecipe } from "components/Simples";
 
 export const DescriptionRecipe = () => {
   const { isModal, idRecipe } = useAppSelector((state) => state.modal);
+  const recipes: IRecipe[] = useAppSelector(state => state.recipes.data);
 
-  // const recipe: IRecipe = useAppSelector((state) =>
-  //   state.recipes.data.find((el: IRecipe) => el._id === idRecipe)
-  // );
-  const recipe: IRecipe | undefined = useAppSelector(state => 
-    state.recipes.data.find((el:IRecipe) => 
-      el._id === idRecipe
-    ));
-  // TODO ПЕРЕДЕЛАТЬ получение recipe т.к. нет свзяи со сторе(создается новый масcив, не происходит отрисовка измениня)
-  // const recipe: IRecipe = useAppSelector((state) => {
-  //   if (idRecipe === '' ) return;
-  //   const index = state.recipes.data.findIndex((el: IRecipe) => el._id === idRecipe);
-  //   if (index !== undefined && index !== -1) {
-  //     // return state.recipes.data.find((el: IRecipe) => el._id === idRecipe);
-  //     debugger  
-  //     return state.recipes.data[index];
-  //   }
-  //   return '';
-  // }
-  
+  const recipe: IRecipe = recipes[recipes.findIndex((el:IRecipe) => el._id === idRecipe)];
+
   const { setIsModal } = useActions();
-
-  
 
   const onClose = () => setIsModal("");
 
@@ -51,7 +33,7 @@ export const DescriptionRecipe = () => {
   };
 
   // c помощью useEffect цепляем обработчик к нажатию клавиш. (ESC)
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener("keydown", onKeydown);
     return () => document.removeEventListener("keydown", onKeydown);
   });
@@ -77,20 +59,12 @@ export const DescriptionRecipe = () => {
             <div className={styles["modal_body__left-wrapper-img"]}>
               <img
                 className={styles["modal_body__left-img"]}
-                // TODO 'src' тут заглушка для показа фотографий не с сервера, необходимо убрать при работе на сервере
-                src={ recipe.urlImg || imgDefaultGB
-                  // recipe.urlImg
-                  //   ? "/img/" +
-                  //     recipe.urlImg?.split("/")[
-                  //       recipe.urlImg?.split("/").length - 1
-                  //     ]
-                  //   : imgDefaultGB
-                }
-                alt={recipe.title}
+                src={ recipe.urlImg || imgDefaultGB }
+                alt={ recipe.title }
               />
             </div>
             <div className={styles["modal_body__left-rating"]}>
-              <RetingRecipe recipe={recipe}/>
+              <RatingRecipe recipe={recipe}/>
             </div>
             <div>
               <h4 className={styles["modal_body__left-title"]}>
@@ -137,7 +111,7 @@ export const DescriptionRecipe = () => {
           <div className={styles.modal_body__right}>
             <div className={styles["modal_body__right-title"]}>
               <h3>{recipe.title}</h3>
-              <ContexMenuDescription recipe={recipe} />
+              <ContextMenuDescription recipe={recipe} />
             </div>
             <div className={styles["modal_body__right-line"]}></div>
             <div className={styles["modal_body__right-author"]}>

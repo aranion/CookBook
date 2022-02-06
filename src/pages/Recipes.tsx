@@ -9,7 +9,7 @@ import { RecipeState } from 'store/recipe/types';
 
 const Recipes = () => {
 
-    const { fetchAllRecipes } = useActions();    // action Store recipe
+    const { fetchAllRecipes } = useActions();
 
     const recipes = useAppSelector((state) =>{ 
         return state.recipes.data.filter((item: IRecipe) =>
@@ -19,7 +19,7 @@ const Recipes = () => {
     const { loading, maxItemsPage, data } = useAppSelector(state => (state.recipes as RecipeState));
 
     useEffect(() => {
-        if(!recipes.length) fetchAllRecipes();   // получает рецепты и сразу пишет в стор
+        if(!recipes.length) fetchAllRecipes();   // получает рецепты
     },[recipes.length ])
 
     return (

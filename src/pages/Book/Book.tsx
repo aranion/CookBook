@@ -18,13 +18,11 @@ export const Book = () => {
   const onOpen = (idRecipe: string) => setIsModal(idRecipe);
 
   useEffect(() => {
-    // TODO пока не работает отдача рецептов с сервера, получаем все рецепты
     if(!recipes.length) fetchAllRecipes();
     // получение данных кулинарной книги
     fetchDataMemo(id);
   }, [recipes, id]);
 
-  // Идет загрузка, рендерится прелоадер
   if (loading) {
     return (
       <div className={style.pages__center}>
@@ -62,7 +60,6 @@ export const Book = () => {
             {recipes &&
               recipes
                 // фильтруем все рецепты и передаем только те которые в книге... 
-                // .filter(recipe => cookbook.recipesId.indexOf(recipe._id) !== -1 ? false : true) 
                 .map((recipe) => {
                   if (cookbook.recipesId.indexOf(recipe._id) !== -1 ) {
                     return (
